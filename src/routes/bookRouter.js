@@ -8,15 +8,18 @@ module.exports = (Book) => {
             book.save();
             res.status(201).send(book);
         })
-        .get((req, res) => {
-            Book.find((err, books) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.json(books);
-                }
+        .get(
+            (req, res) =>{
+            // you can use   let query=req.query; see restful ws with node and express jonathan mills
+                Book.find({}).populate('author').exec(
+                    (err, books) => {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.json(books);
+                        }
+                    });
             });
-        });
     bookRouter.route('/:bookId')
         .get((req, res) => {
             Book.findById(req.params.bookId, (err, book) => {
