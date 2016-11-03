@@ -9,13 +9,16 @@ module.exports = (Author) => {
             res.status(201).send(author);
         })
         .get((req, res) => {
-            Author.find((err, authors) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.json(authors);
-                }
-            });
+          let populateQuery =[{path:'comments.commenter'}];//
+        // you can use   let query=req.query; see restful ws with node and express jonathan mills
+            Author.find({}).populate(populateQuery).exec(
+                (err, authors) => {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        res.json(authors);
+                    }
+                });
         });
     authorRouter.route('/:authorId')
         .get((req, res) => {

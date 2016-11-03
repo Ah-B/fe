@@ -8,18 +8,15 @@ module.exports = (User) => {
             user.save();
             res.status(201).send(user);
         })
-        .get(
-            (req, res) =>{
-            // you can use   let query=req.query; see restful ws with node and express jonathan mills
-                User.find({}).populate('author').exec(
-                    (err, users) => {
-                        if (err) {
-                            res.status(500).send(err);
-                        } else {
-                            res.json(users);
-                        }
-                    });
+        .get((req, res) => {
+            User.find((err, users) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.json(users);
+                }
             });
+        });
     userRouter.route('/:userId')
         .get((req, res) => {
             User.findById(req.params.userId, (err, user) => {

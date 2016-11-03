@@ -10,8 +10,9 @@ module.exports = (Book) => {
         })
         .get(
             (req, res) =>{
+              let populateQuery =[{path:'author'},{path:'comments.commenter'}];//
             // you can use   let query=req.query; see restful ws with node and express jonathan mills
-                Book.find({}).populate('author').exec(
+                Book.find({}).populate(populateQuery).exec(
                     (err, books) => {
                         if (err) {
                             res.status(500).send(err);

@@ -10,7 +10,11 @@ let authorModel = new Schema({
     rating: Number,
     imageUrl: String,
     comments: [{
-            type: String
-        }] //TODO to be replaced by comments array
+        text: String,
+        commenter: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }]
 });
 module.exports = mongoose.model('Author', authorModel);

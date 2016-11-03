@@ -14,8 +14,13 @@ let bookModel = new Schema({
     imageUrl: String,
     rating: Number,
     comments: [{
-            type: String
-        }] //TODO to be replaced by comments array
+        text: String,
+        commenter: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }]
+
 });
 
 module.exports = mongoose.model('Book', bookModel);
