@@ -9,9 +9,10 @@ module.exports = (Author) => {
             res.status(201).send(author);
         })
         .get((req, res) => {
-          let populateQuery =[{path:'comments.commenter'}];//
-        // you can use   let query=req.query; see restful ws with node and express jonathan mills
-            Author.find({}).populate(populateQuery).exec(
+  // you can use   let query=req.query; see restful ws with node and express jonathan mills
+        //let populateQuery =[{path:'comments.commenter'}];//
+        //Author.find({}).populate(populateQuery).exec(
+        Author.find({}).exec(
                 (err, authors) => {
                     if (err) {
                         res.status(500).send(err);

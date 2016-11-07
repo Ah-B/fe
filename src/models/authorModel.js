@@ -8,13 +8,13 @@ let authorModel = new Schema({
     birthDate: Date,
     deathDate: Date,
     rating: Number,
-    imageUrl: String,
+    imageUrl: String/*,
     comments: [{
         text: String,
         commenter: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         }
-    }]
+    }]*/
 });
 module.exports = mongoose.model('Author', authorModel);
