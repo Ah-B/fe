@@ -2,6 +2,13 @@ const express = require('express');
 let authorRouter = express.Router();
 
 module.exports = (Author) => {
+    let populateQuery = [{
+        'path': 'books',
+    }, {
+        'path': 'ratings.rater',
+    }, {
+        'path': 'comments.commenter'
+    }];
     authorRouter.route('/')
         .post((req, res) => {
             let author = new Author(req.body);
@@ -9,26 +16,18 @@ module.exports = (Author) => {
             res.status(201).send(author);
         })
         .get((req, res) => {
-          let populateQuery = [{
-            'path':'books',
-              }, {
-                'path': 'ratings.rater',
-              }, {
-                  'path': 'comments.commenter'
-              }];
             Author.find({}).populate(populateQuery).exec(
                 (err, authors) => {
                     if (err) {
                         res.status(500).send(err);
                     } else {
                         res.json(authors);
-
                     }
                 });
         });
     authorRouter.route('/:authorId')
         .get((req, res) => {
-            Author.findById(req.params.authorId, (err, author) => {
+            Author.findById(req.params.authorId).populate(populateQuery).exec((err, author) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
@@ -52,15 +51,15 @@ module.exports = (Author) => {
                     res.status(500).send(err);
                 } else {
                     for (let p in req.body) {
-                      /*  Patching an array of books
-                      if(p=="books"){
-                          let bookList = author.books;
-                          let addition = {
-                            "book" : req.body.book
+                        /*  Patching an array of books
+                        if(p=="books"){
+                            let bookList = author.books;
+                            let addition = {
+                              "book" : req.body.book
+                            }
+                            bookList.push(addition);
                           }
-                          bookList.push(addition);
-                        }
-                        else {*/
+                          else {*/
                         author[p] = req.body[p];
                         //}
                     }

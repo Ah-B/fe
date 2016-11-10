@@ -2,6 +2,13 @@ const express = require('express');
 let bookRouter = express.Router();
 
 module.exports = (Book) => {
+  let populateQuery = [{
+      'path': 'author'
+  }, {
+      'path': 'ratings.rater'
+  }, {
+      'path': 'comments.commenter'
+  }];
     bookRouter.route('/')
         .post((req, res) => {
             let book = new Book(req.body);
@@ -18,28 +25,22 @@ module.exports = (Book) => {
                   }]; //
                   // you can use   let query=req.query; see restful ws with node and express jonathan mills
                   */
-                let populateQuery = [{
-                        'path': 'author'
-                    }, {
-                        'path': 'ratings.rater'
-                    }, {
-                        'path': 'comments.commenter'
-                    }];
 
-                    Book.find().populate(populateQuery).exec(
-                        (err, books) => {
-                            if (err) {
-                                res.status(500).send(err);
-                            } else {
-                                res.json(books);
 
-                            }
-                        });
+                Book.find({}).populate(populateQuery).exec(
+                    (err, books) => {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.json(books);
+
+                        }
+                    });
             });
 
     bookRouter.route('/:bookId')
         .get((req, res) => {
-            Book.findById(req.params.bookId, (err, book) => {
+            Book.findById(req.params.bookId).populate(populateQuery).exec((err, book) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
@@ -98,22 +99,30 @@ module.exports = (Book) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                  //unique ratings
-                    for (rater of book.ratings) {
-                        //  if (rater.)
+                    let unique = true;
+                    //Look for unique ratings
+                    for (let rating of book.ratings) {
+                        if (rating.rater == req.params.userId) {
+                            unique = false;
+                        }
                     }
-
-                    let rating = {
-                        "rate": req.body.rate,
-                        "rater": req.params.userId
+                    if (unique == true) {
+                        let rating = {
+                            "rate": req.body.rate,
+                            "rater": req.params.userId
+                        };
+                        console.log(req.body);
+                        let rates = book.ratings;
+                        rates.push(rating);
+                        book.ratings = rates;
+                        book.save();
+                        res.json(book);
+                    } else {
+                        res.status(200).send('already rated');
                     }
-                    console.log(req.body);
-                    let rates = book.rating;
-                    rates.push(rating);
-                    book.rating = rates;
-                    book.save();
-                    res.json(book);
                 }
+
+
             });
         });
 

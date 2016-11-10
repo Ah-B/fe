@@ -2,6 +2,9 @@ const express = require('express');
 let userRouter = express.Router();
 
 module.exports = (User) => {
+    let populateQuery = [{
+        'path': 'library.book'
+    }];
     userRouter.route('/')
         .post((req, res) => {
             let user = new User(req.body);
@@ -9,18 +12,17 @@ module.exports = (User) => {
             res.status(201).send(user);
         })
         .get((req, res) => {
-            User.find((err, users) => {
+            User.find({}).populate(populateQuery).exec((err, users) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
                     res.json(users);
-
                 }
             });
         });
     userRouter.route('/:userId')
         .get((req, res) => {
-            User.findById(req.params.userId, (err, user) => {
+            User.findById(req.params.userId).populate(populateQuery).exec((err, user) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
