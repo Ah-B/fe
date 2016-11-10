@@ -12,7 +12,21 @@ let bookModel = new Schema({
     genre: String,
     pdfUrl: String,
     imageUrl: String,
-    rating: Number
+    ratings: [{
+        rate: Number,
+        rater: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }],
+    comments: [{
+        text: String,
+        date: Date,
+        commenter: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }]
 });
 
 module.exports = mongoose.model('Book', bookModel);

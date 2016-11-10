@@ -9,21 +9,34 @@ module.exports = (Book) => {
             res.status(201).send(book);
         })
         .get(
-            (req, res) =>{
-              //let populateQuery =[{path:'author'}];
-            let populateQuery =[{path:'author'},{path:'comment.user'}];//
+            (req, res) => {
+                /*  //let populateQuery =[{path:'author'}];
+                  let populateQuery = [{
+                      path: 'author'
+                  }, {
+                      path: 'comment.user'
+                  }]; //
+                  // you can use   let query=req.query; see restful ws with node and express jonathan mills
+                  */
+                let populateQuery = [{
+                        'path': 'author'
+                    }, {
+                        'path': 'ratings.rater'
+                    }, {
+                        'path': 'comments.commenter'
+                    }];
 
-            // you can use   let query=req.query; see restful ws with node and express jonathan mills
-                Book.find({}).populate(populateQuery).exec(
-                    (err, books) => {
-                        if (err) {
-                            res.status(500).send(err);
-                        } else {            console.log(req.body);
+                    Book.find().populate(populateQuery).exec(
+                        (err, books) => {
+                            if (err) {
+                                res.status(500).send(err);
+                            } else {
+                                res.json(books);
 
-                            res.json(books);
-                        }
-                    });
+                            }
+                        });
             });
+
     bookRouter.route('/:bookId')
         .get((req, res) => {
             Book.findById(req.params.bookId, (err, book) => {
@@ -49,10 +62,55 @@ module.exports = (Book) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                  console.log(req.body);
+                    console.log(req.body);
                     for (let p in req.body) {
                         book[p] = req.body[p];
                     }
+                    console.log(req.body);
+                    book.save();
+                    res.json(book);
+                }
+            });
+        });
+    bookRouter.route('/comment/:bookId/:userId')
+        .patch((req, res) => {
+            Book.findById(req.params.bookId, (err, book) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    let comment = {
+                        "text": req.body.text,
+                        "date": req.body.date,
+                        "commenter": req.params.userId
+                    }
+                    console.log(req.params);
+                    let comments = book.comment;
+                    comments.push(comment);
+                    book.comment = comments;
+                    book.save();
+                    res.json(book);
+                }
+            });
+        });
+    bookRouter.route('/rate/:bookId/:userId')
+        .patch((req, res) => {
+            Book.findById(req.params.bookId, (err, book) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                  //unique ratings
+                    for (rater of book.ratings) {
+                        //  if (rater.)
+                    }
+
+                    let rating = {
+                        "rate": req.body.rate,
+                        "rater": req.params.userId
+                    }
+                    console.log(req.body);
+                    let rates = book.rating;
+                    rates.push(rating);
+                    book.rating = rates;
                     book.save();
                     res.json(book);
                 }

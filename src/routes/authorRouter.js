@@ -9,15 +9,20 @@ module.exports = (Author) => {
             res.status(201).send(author);
         })
         .get((req, res) => {
-  // you can use   let query=req.query; see restful ws with node and express jonathan mills
-        //let populateQuery =[{path:'comments.commenter'}];//
-        //Author.find({}).populate(populateQuery).exec(
-        Author.find({}).exec(
+          let populateQuery = [{
+            'path':'books',
+              }, {
+                'path': 'ratings.rater',
+              }, {
+                  'path': 'comments.commenter'
+              }];
+            Author.find({}).populate(populateQuery).exec(
                 (err, authors) => {
                     if (err) {
                         res.status(500).send(err);
                     } else {
                         res.json(authors);
+
                     }
                 });
         });
@@ -47,8 +52,38 @@ module.exports = (Author) => {
                     res.status(500).send(err);
                 } else {
                     for (let p in req.body) {
+                      /*  Patching an array of books
+                      if(p=="books"){
+                          let bookList = author.books;
+                          let addition = {
+                            "book" : req.body.book
+                          }
+                          bookList.push(addition);
+                        }
+                        else {*/
                         author[p] = req.body[p];
+                        //}
                     }
+                    author.save();
+                    res.json(author);
+                }
+            });
+        });
+    authorRouter.route('/comment/:authorId/:userId')
+        .patch((req, res) => {
+            Author.findById(req.params.authorId, (err, author) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    let comment = {
+                        "text": req.body.text,
+                        "date": req.body.date,
+                        "commenter": req.params.userId
+                    }
+                    console.log(req.params);
+                    let comments = author.comment;
+                    comments.push(comment);
+                    author.comment = comments;
                     author.save();
                     res.json(author);
                 }
