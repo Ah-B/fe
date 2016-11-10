@@ -53,6 +53,58 @@ module.exports = (User) => {
                 }
             });
         });
-
+    //Add a new book to personal library
+    userRouter.route('/addToLibrary/:userId/:bookId')
+        .patch((req, res) => {
+            User.findById(req.params.userId, (err, user) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    let entry = {
+                        "book": req.params.bookId,
+                        "lastPage": 1,
+                        "lastReadDate": new Date()
+                    }
+                    user.library.push(entry);
+                    user.save();
+                    res.send("book added to library");
+                }
+            });
+        });
+    //add Library data last read and date
+    userRouter.route('/addLibraryData/:userId/:bookId')
+        .patch((req, res) => {
+            User.findById(req.params.userId, (err, user) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    for (lib of user.library) {
+                        if (lib.book == req.params.bookId) {
+                            lib.lastPage = req.body.lastPage;
+                            lib.lastReadDate = req.body.lastReadDate;
+                            user.save();
+                            res.send("data updated")
+                        }
+                    }
+                }
+            });
+        });
+    //add habit
+    userRouter.route('/addHabit/:userId')
+        .patch((req, res) => {
+            User.findById(req.params.userId, (err, user) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    let habitData = {
+                        "date": req.body.date,
+                        "pagesRead": req.body.pagesRead
+                    };
+                    user.habits.push(habitData);
+                    user.save();
+                    res.send("data updated");
+                }
+            });
+        });
     return userRouter;
 }
