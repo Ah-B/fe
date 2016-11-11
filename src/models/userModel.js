@@ -5,6 +5,8 @@ let userModel = new Schema({
     fName: String,
     lName: String,
     birthDate: Date,
+    email: String,
+    username : String,
     adress: String,
     signDate: Date,
     password: String,
@@ -16,11 +18,11 @@ let userModel = new Schema({
         lastPage: Number,
         lastReadDate: Date
     }],
-    habits : [{
-      date : Date,
-      pagesRead : Number
-    }]
-    //TODO reading habits will be an object array containing {date:date,pageRead:number}
+    habits: [{
+            date: Date,
+            pagesRead: Number
+        }]
+        //TODO reading habits will be an object array containing {date:date,pageRead:number}
 
 });
 
