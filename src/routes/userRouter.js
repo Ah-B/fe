@@ -1,4 +1,6 @@
-const express = require('express');
+const express = require('express'),
+isAuthenticated = require('../config/passport/isAuthenticated');
+
 let userRouter = express.Router();
 
 module.exports = (User) => {
@@ -11,7 +13,7 @@ module.exports = (User) => {
             user.save();
             res.status(201).send(user);
         })
-        .get((req, res) => {
+        .get(isAuthenticated,(req, res) => {
             User.find({}).populate(populateQuery).exec((err, users) => {
                 if (err) {
                     res.status(500).send(err);
@@ -21,7 +23,7 @@ module.exports = (User) => {
             });
         });
     userRouter.route('/:userId')
-        .get((req, res) => {
+        .get(isAuthenticated,(req, res) => {
             User.findById(req.params.userId).populate(populateQuery).exec((err, user) => {
                 if (err) {
                     res.status(500).send(err);

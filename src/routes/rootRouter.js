@@ -8,9 +8,6 @@ authorRouter = require('./authorRouter')(authorModel),
 userModel = require('../models/userModel'),
 userRouter = require('./userRouter')(userModel);
 
-
-
-
 let mainRouter = express.Router();
 
 module.exports = (app) => {

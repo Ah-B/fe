@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require('express'),
+isAuthenticated = require('../config/passport/isAuthenticated');
 let bookRouter = express.Router();
-
 module.exports = (Book) => {
   let populateQuery = [{
       'path': 'author'
@@ -9,13 +9,15 @@ module.exports = (Book) => {
   }, {
       'path': 'comments.commenter'
   }];
+
+
     bookRouter.route('/')
         .post((req, res) => {
             let book = new Book(req.body);
             book.save();
             res.status(201).send(book);
         })
-        .get(
+        .get(isAuthenticated,
             (req, res) => {
                 /*  //let populateQuery =[{path:'author'}];
                   let populateQuery = [{
@@ -39,7 +41,7 @@ module.exports = (Book) => {
             });
 
     bookRouter.route('/:bookId')
-        .get((req, res) => {
+        .get(isAuthenticated,(req, res) => {
             Book.findById(req.params.bookId).populate(populateQuery).exec((err, book) => {
                 if (err) {
                     res.status(500).send(err);

@@ -1,18 +1,20 @@
 const express = require('express'),
     mongodb = require('mongodb').MongoClient,
-    dblink = require('../config/db.js');
+    dblink = require('../config/db.js'),
+    isAuthenticated = require('../config/passport/isAuthenticated');
+
 let interfaceRouter = express.Router();
 let passport = require('passport');
 
-let isAuthenticated = (req, res, next) => {
-    // if user is authenticated in the session, call the next() to call the next request handler
-    // Passport adds this method to request object. A middleware is allowed to add properties to
-    // request and response objects
-    if (req.isAuthenticated())
-        return next();
-    // if the user is not authenticated then redirect him to the login page
-    res.redirect('/');
-}
+
+
+interfaceRouter.get('/', (req, res) => {
+  if (req.isAuthenticated()){
+    res.render('index');
+  } else {
+    res.render('homePage');
+    }
+});
 
 
 interfaceRouter.route('/auth/signIn')
@@ -22,7 +24,7 @@ interfaceRouter.route('/auth/signIn')
     .post(passport.authenticate('local', {
         failureRedirect: '/auth/error'
     }), function(req, res) {
-        res.redirect('/profile');
+        res.redirect('/');
     });
 
 
@@ -45,7 +47,7 @@ interfaceRouter.route('/auth/signUp')
             };
             collection.insert(user, (err, results) => {
                 req.login(results.ops[0], () => {
-                    res.redirect('/profile');
+                    res.redirect('/');
                 });
             });
         });
@@ -61,15 +63,14 @@ interfaceRouter.route('/auth/logout')
         res.redirect('/');
     });
 
-interfaceRouter.get('/', (req, res) => {
-    res.send('Helloworld Homepage')
-});
 
 
-interfaceRouter.route('/profile')
-    .get(isAuthenticated, (req, res) => {
-        res.json(req.user);
-    });
+//
+// interfaceRouter.route('/profile')
+//     .get(isAuthenticated, (req, res) => {
+//         //res.json(req.user);
+//         res.render('index');
+//     });
 
 
 module.exports = interfaceRouter;
