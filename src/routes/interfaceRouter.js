@@ -7,13 +7,14 @@ let interfaceRouter = express.Router();
 let passport = require('passport');
 
 
-
+//TODO Authentification commenté pour tester la partie frontend a decommenter a la fin+ /config/passport/isAuthenticated
 interfaceRouter.get('/', (req, res) => {
-  if (req.isAuthenticated()){
-    res.render('index');
-  } else {
-    res.render('homePage');
-    }
+  // if (req.isAuthenticated()){
+  //   res.render('index');
+  // } else {
+  //   res.render('homePage');
+  //   }
+res.render('index');
 });
 
 
@@ -52,7 +53,6 @@ interfaceRouter.route('/auth/signUp')
             });
         });
     });
-
 interfaceRouter.route('/auth/error')
     .get((req, res) => {
         res.send('error please check check credentials');
