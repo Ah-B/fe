@@ -10,15 +10,9 @@ let authorModel = new Schema({
     books: [{
             type: Schema.Types.ObjectId,
             ref: 'Book'
-    
+
     }],
-    ratings: [{
-        rate: Number,
-        rater: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    }],
+    ratings: [Number],
     comments: [{
         text: String,
         date: Date,

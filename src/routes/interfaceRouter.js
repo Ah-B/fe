@@ -9,23 +9,34 @@ let passport = require('passport');
 
 //TODO Authentification commenté pour tester la partie frontend a decommenter a la fin+ /config/passport/isAuthenticated
 interfaceRouter.get('/', (req, res) => {
-  // if (req.isAuthenticated()){
-  //   res.render('profile');
-  // } else {
-  //   res.render('homePage');
-  //   }
-res.render('profile');
+    if (req.isAuthenticated()) {
+        res.render('profile');
+    } else {
+        res.render('homePage');
+    }
 });
 
 interfaceRouter.get('/authors', (req, res) => {
-res.render('authors');
+    if (req.isAuthenticated()) {
+        res.render('authors', {
+            currentUser: req.user._id
+        });
+    } else {
+        res.render('homePage');
+    }
 });
 interfaceRouter.get('/author/:authorId', (req, res) => {
-res.render('author',{query : req.params.authorId});
+    if (req.isAuthenticated()) {
+        res.render('author', {query: req.params.authorId,
+            currentUser: req.user._id
+        });
+    } else {
+        res.render('homePage');
+    }
 });
 
 interfaceRouter.get('/books', (req, res) => {
-res.render('books');
+    res.render('books');
 });
 
 
@@ -49,11 +60,11 @@ interfaceRouter.route('/auth/signUp')
         mongodb.connect(dblink.url, (err, db) => {
             let collection = db.collection('users');
             let user = {
-                fName : req.body.fName,
-                lName : req.body.lName,
-                email : req.body.email,
-                adress : req.body.adress,
-                birthDate : req.body.birthDate,
+                fName: req.body.fName,
+                lName: req.body.lName,
+                email: req.body.email,
+                adress: req.body.adress,
+                birthDate: req.body.birthDate,
                 username: req.body.userName,
                 password: req.body.password
             };

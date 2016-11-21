@@ -6,8 +6,6 @@ module.exports = (Author) => {
     let populateQuery = [{
         'path': 'books',
     }, {
-        'path': 'ratings.rater',
-    }, {
         'path': 'comments.commenter'
     }];
     authorRouter.route('/')
@@ -70,25 +68,48 @@ module.exports = (Author) => {
             });
         });
     authorRouter.route('/comment/:authorId/:userId')
-        .patch((req, res) => {
+        .post((req, res) => {
             Author.findById(req.params.authorId, (err, author) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
                     let comment = {
                         "text": req.body.text,
-                        "date": req.body.date,
+                        "date": new Date().toISOString(),
                         "commenter": req.params.userId
                     }
                     console.log(req.params);
-                    let comments = author.comment;
+                    let comments = author.comments;
                     comments.push(comment);
-                    author.comment = comments;
+                    author.comments = comments;
                     author.save();
-                    res.json(author);
+
+                    res.sendStatus(200)
                 }
             });
         });
+
+        authorRouter.route('/rate/:authorId/:userId')
+            .post((req, res) => {
+                Author.findById(req.params.authorId, (err, author) => {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        let rating = req.body.rating;
+                        console.log(req.params);
+                        let ratings = author.ratings;
+                        ratings.push(rating);
+                        author.ratings = ratings;
+                        author.save();
+                        //Does make problems with browser back button
+                        //res.redirect('back');
+                        // res.redirect(req.get('referer'));
+                        res.sendStatus(200)
+
+
+                    }
+                });
+            });
 
     return authorRouter;
 }
