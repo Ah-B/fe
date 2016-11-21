@@ -10,11 +10,22 @@ let passport = require('passport');
 //TODO Authentification commenté pour tester la partie frontend a decommenter a la fin+ /config/passport/isAuthenticated
 interfaceRouter.get('/', (req, res) => {
   // if (req.isAuthenticated()){
-  //   res.render('index');
+  //   res.render('profile');
   // } else {
   //   res.render('homePage');
   //   }
-res.render('index');
+res.render('profile');
+});
+
+interfaceRouter.get('/authors', (req, res) => {
+res.render('authors');
+});
+interfaceRouter.get('/author/:authorId', (req, res) => {
+res.render('author',{query : req.params.authorId});
+});
+
+interfaceRouter.get('/books', (req, res) => {
+res.render('books');
 });
 
 
@@ -69,7 +80,7 @@ interfaceRouter.route('/auth/logout')
 // interfaceRouter.route('/profile')
 //     .get(isAuthenticated, (req, res) => {
 //         //res.json(req.user);
-//         res.render('index');
+//         res.render('profile');
 //     });
 
 

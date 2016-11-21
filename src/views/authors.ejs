@@ -1,0 +1,24 @@
+<% layout('boilerplate') -%>
+    <div ng-controller="authorsController">
+        <h1>authors page</h1>
+        <br>
+
+        <div class="container">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" ng-model="search.fName" placeholder="Search name..." />
+                <select class="form-control" ng-model="authorOrder"  ng-init="fName">
+                                            <option  value="fName">Name(ASC)</option>
+                                            <option value="-fName">Name(DEC)</option>
+                </select>
+
+            </div>
+            <div class="row">
+                <div ng-repeat="author in authors| filter : search | orderBy: authorOrder" class="thumbnail">
+                  <a  href="/author/{{author._id}}">
+                    <h3>author:</h3>
+                    <h5>{{author.fName}}</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>

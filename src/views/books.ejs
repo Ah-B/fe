@@ -1,0 +1,20 @@
+<% layout('boilerplate') -%>
+    <div ng-controller="bookController">
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        <h1>Title</h1></td>
+                    <td>
+                        <h1>Author</h1></td>
+                    <td>
+                        <h1>Ratings</h1></td>
+                </tr>
+            </thead>
+
+            <tr ng-repeat="book in books">
+                <td>{{book.title}}</td>
+                <td>{{book.author.fName}}</td>
+            </tr>
+        </table>
+    </div>

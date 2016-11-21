@@ -1,0 +1,24 @@
+<% layout('boilerplate') -%>
+
+    <div ng-controller="profileController">
+        <h1>Profile</h1>
+        <p>Hello {{user.fName}}</p>
+
+
+        <h1>Library</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div ng-repeat="book in user.library" class="thumbnail">
+                        <h3>book:</h3>
+                        <h5>{{book.book.title}}</h5>
+                        <h3>CurrentPage</h3>
+                        <h5>{{book.lastPage}}</h5>
+                        <h3>Last Read</h3>{{book.lastReadDate}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>

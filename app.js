@@ -5,11 +5,14 @@ cookieParser = require('cookie-parser'),
 session = require('express-session'),
 passport = require('passport'),
 mongoose = require('mongoose'),
+engine = require('ejs-mate'),
 port = process.env.PORT || 3000;
 
 
 const app = express();
+
 app.use(express.static('public'));
+
 
 app.use(bodyParser.urlencoded({
     extended: true
@@ -24,6 +27,7 @@ mongoose.connect(dbConfig.url);
 
 
 //AUTHENTICATION
+app.engine('ejs', engine);
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -42,6 +46,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 require('./src/config/passport/passport')(app);
 const rootRouter = require('./src/routes/rootRouter.js')(app);
 
