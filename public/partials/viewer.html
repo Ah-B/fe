@@ -1,0 +1,16 @@
+<form class="navbar-form navbar-left" ng-class="getNavStyle(scroll)">
+    <button class="btn btn-default" ng-click="goPrevious()"><</span></button>
+    <button class="btn btn-default" ng-click="goNext()">></span></button>
+    <span>Page: </span>
+    <div class="form-group">
+        <input type="text" min=1 ng-model="pageNum" class="form-control" placeholder="Search">
+        <span> / {{pageCount}}</span>
+    </div>
+    <div class="form-group">
+        <span>Document URL: </span>
+        <input type="text" min=1 ng-model="pdfUrl" class="form-control" placeholder="Book">
+    </div>
+    <button type="button" class="btn btn-default" onclick="hideReader()">Close</button>
+</form>
+
+<canvas id="pdf"></canvas>

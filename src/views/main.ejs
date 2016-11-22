@@ -1,14 +1,27 @@
+<div id="wrapper">
+
 <% layout('boilerplate') -%>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">Booker</a>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Booker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/books">Books</a></li>
+                <li><a href="/authors">Authors</a></li>
+            </ul>
         </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/books">Books</a></li>
-            <li><a href="/authors">Authors</a></li>
-        </ul>
+    </nav>
+  </div>
+
+    <div ng-controller="readerController">
+        <div id="reader">
+            <div class="wrapper">
+                <h1>{{pdfName}}</h1>
+                <ng-pdf template-url="partials/viewer.html" canvasid="pdf" scale="page-fit" page=1></ng-pdf>
+            </div>
+        </div>
     </div>
-</nav>
+    <button type="button" id="showReaderButton" onclick="showReader()">Read now</button>
