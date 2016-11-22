@@ -6,7 +6,7 @@ let userModel = new Schema({
     lName: String,
     birthDate: Date,
     email: String,
-    username : String,
+    username: String,
     adress: String,
     signDate: Date,
     password: String,
@@ -19,11 +19,9 @@ let userModel = new Schema({
         lastReadDate: Date
     }],
     habits: [{
-            date: Date,
-            pagesRead: Number
-        }]
-        //TODO reading habits will be an object array containing {date:date,pageRead:number}
-
+        date: Date,
+        pagesRead: Number
+    }]
 });
 
 module.exports = mongoose.model('User', userModel);

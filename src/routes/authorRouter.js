@@ -83,7 +83,6 @@ module.exports = (Author) => {
                     comments.push(comment);
                     author.comments = comments;
                     author.save();
-
                     res.sendStatus(200)
                 }
             });

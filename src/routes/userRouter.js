@@ -1,5 +1,5 @@
 const express = require('express'),
-isAuthenticated = require('../config/passport/isAuthenticated');
+    isAuthenticated = require('../config/passport/isAuthenticated');
 
 let userRouter = express.Router();
 
@@ -13,7 +13,7 @@ module.exports = (User) => {
             user.save();
             res.status(201).send(user);
         })
-        .get(isAuthenticated,(req, res) => {
+        .get(isAuthenticated, (req, res) => {
             User.find({}).populate(populateQuery).exec((err, users) => {
                 if (err) {
                     res.status(500).send(err);
@@ -23,7 +23,7 @@ module.exports = (User) => {
             });
         });
     userRouter.route('/:userId')
-        .get(isAuthenticated,(req, res) => {
+        .get(isAuthenticated, (req, res) => {
             User.findById(req.params.userId).populate(populateQuery).exec((err, user) => {
                 if (err) {
                     res.status(500).send(err);
@@ -57,25 +57,42 @@ module.exports = (User) => {
         });
     //Add a new book to personal library
     userRouter.route('/addToLibrary/:userId/:bookId')
-        .patch((req, res) => {
+        .post((req, res) => {
             User.findById(req.params.userId, (err, user) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    let entry = {
-                        "book": req.params.bookId,
-                        "lastPage": 1,
-                        "lastReadDate": new Date()
+                    let unique = true;
+                    for (book of user.library) {
+                        if (book.book == req.params.bookId) {
+                            unique = false;
+                            console.log(unique);
+                        }
                     }
-                    user.library.push(entry);
-                    user.save();
-                    res.send("book added to library");
+                    if (unique === true) {
+                        let entry = {
+                            "book": req.params.bookId,
+                            "lastPage": 1,
+                            "lastReadDate": new Date()
+                        }
+                        user.library.push(entry);
+                        user.save();
+                        res.json({
+                            "type" : "message",
+                            "content" : "This book was added successfully in your library"
+                        })
+                    } else {
+                        res.json({
+                            "type" : "message",
+                            "content" : "This book is already in you personal library"
+                        })
+                    }
                 }
             });
         });
     //add Library data last read and date
     userRouter.route('/addLibraryData/:userId/:bookId')
-        .patch((req, res) => {
+        .post((req, res) => {
             User.findById(req.params.userId, (err, user) => {
                 if (err) {
                     res.status(500).send(err);
@@ -85,7 +102,7 @@ module.exports = (User) => {
                             lib.lastPage = req.body.lastPage;
                             lib.lastReadDate = req.body.lastReadDate;
                             user.save();
-                            res.send("data updated")
+                            res.sendStatus(200);
                         }
                     }
                 }
@@ -93,7 +110,7 @@ module.exports = (User) => {
         });
     //add habit
     userRouter.route('/addHabit/:userId')
-        .patch((req, res) => {
+        .post((req, res) => {
             User.findById(req.params.userId, (err, user) => {
                 if (err) {
                     res.status(500).send(err);
@@ -104,7 +121,7 @@ module.exports = (User) => {
                     };
                     user.habits.push(habitData);
                     user.save();
-                    res.send("data updated");
+                    res.sendStatus(200);
                 }
             });
         });

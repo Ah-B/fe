@@ -1,4 +1,4 @@
-<% layout('boilerplate') -%>
+<!-- <% layout('boilerplate') -%>
     <div ng-controller="bookController">
         <table>
             <thead>
@@ -17,4 +17,49 @@
                 <td>{{book.author.fName}}</td>
             </tr>
         </table>
+    </div> -->
+<% layout('boilerplate') -%>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Booker</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li class="active"><a href="/books">Books</a></li>
+            <li><a href="/authors">Authors</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <div ng-controller="booksController">
+        <h1>books page</h1>
+        <br>
+
+        <div class="container">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" ng-model="search.title" placeholder="Search name..." />
+                <select class="form-control" ng-model="bookOrder" ng-init="title">
+                                                <option  value="title">Name(ASC)</option>
+                                                <option value="-title">Name(DEC)</option>
+                                                <option  value="date">Date(ASC)</option>
+                                                <option  value="-date">Date(DEC)</option>
+                    </select>
+
+                <!-- <select class="form-control" ng-model="bookGenreOrder"  ng-init="title">
+                                                <option  value="title">Name(ASC)</option>
+                                                <option value="-title">Name(DEC)</option>
+                    </select> -->
+            </div>
+            <div class="row">
+                <div ng-repeat="book in books| filter : search | orderBy: bookOrder" class="thumbnail">
+                    <a href="/book/{{book._id}}">
+                        <h3>book:</h3>
+                        <h5>{{book.title}}</h5>
+                        <h5>{{book.date}}</h5>
+                </div>
+            </div>
+
+        </div>
     </div>

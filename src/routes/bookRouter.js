@@ -1,14 +1,12 @@
 const express = require('express'),
-isAuthenticated = require('../config/passport/isAuthenticated');
+    isAuthenticated = require('../config/passport/isAuthenticated');
 let bookRouter = express.Router();
 module.exports = (Book) => {
-  let populateQuery = [{
-      'path': 'author'
-  }, {
-      'path': 'ratings.rater'
-  }, {
-      'path': 'comments.commenter'
-  }];
+    let populateQuery = [{
+        'path': 'author'
+    }, {
+        'path': 'comments.commenter'
+    }];
 
 
     bookRouter.route('/')
@@ -17,8 +15,7 @@ module.exports = (Book) => {
             book.save();
             res.status(201).send(book);
         })
-        .get(isAuthenticated,
-            (req, res) => {
+        .get((req, res) => {
                 /*  //let populateQuery =[{path:'author'}];
                   let populateQuery = [{
                       path: 'author'
@@ -41,7 +38,7 @@ module.exports = (Book) => {
             });
 
     bookRouter.route('/:bookId')
-        .get(isAuthenticated,(req, res) => {
+        .get((req, res) => {
             Book.findById(req.params.bookId).populate(populateQuery).exec((err, book) => {
                 if (err) {
                     res.status(500).send(err);
@@ -76,55 +73,44 @@ module.exports = (Book) => {
             });
         });
     bookRouter.route('/comment/:bookId/:userId')
-        .patch((req, res) => {
+        .post((req, res) => {
             Book.findById(req.params.bookId, (err, book) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
                     let comment = {
                         "text": req.body.text,
-                        "date": req.body.date,
+                        "date": new Date().toISOString(),
                         "commenter": req.params.userId
                     }
                     console.log(req.params);
-                    let comments = book.comment;
+                    let comments = book.comments;
                     comments.push(comment);
                     book.comment = comments;
                     book.save();
-                    res.json(book);
+                    res.sendStatus(200);
                 }
             });
         });
     bookRouter.route('/rate/:bookId/:userId')
-        .patch((req, res) => {
+        .post((req, res) => {
             Book.findById(req.params.bookId, (err, book) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    let unique = true;
-                    //Look for unique ratings
-                    for (let rating of book.ratings) {
-                        if (rating.rater == req.params.userId) {
-                            unique = false;
-                        }
-                    }
-                    if (unique == true) {
-                        let rating = {
-                            "rate": req.body.rate,
-                            "rater": req.params.userId
-                        };
-                        console.log(req.body);
-                        let rates = book.ratings;
-                        rates.push(rating);
-                        book.ratings = rates;
-                        book.save();
-                        res.json(book);
-                    } else {
-                        res.status(200).send('already rated');
-                    }
+                    let rating = req.body.rating;
+                    console.log(req.params);
+                    let ratings = book.ratings;
+                    ratings.push(rating);
+                    book.ratings = ratings;
+                    book.save();
+                    // res.json({
+                    //     "type" : "message",
+                    //     "content" : "This book was added successfully in your library"
+                    // })
+
+
                 }
-
-
             });
         });
 

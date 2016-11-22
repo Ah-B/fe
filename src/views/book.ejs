@@ -1,0 +1,48 @@
+<% layout('boilerplate') -%>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Booker</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li class="active"><a href="/books">Books</a></li>
+                <li><a href="/authors">Authors</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>'">
+        <h1>{{book.title}}</h1>
+        <button type="submit" class="btn btn-success"ng-click="addToLibrary()">Add to Personal Library</button>
+        <img src="" />
+        <h3>Author : <a href="/author/{{book.author._id}}">{{book.author.fName}}{{book.author.lName}}</a></h3>
+        <h3>Date : {{book.date}}</h3>
+        <h3>Genre : {{book.genre}}</h3>
+
+
+
+        <h1>rating:{{rating}}</h1>
+        <form ng-submit="rate()">
+            <input ng-model="ratingModel">
+            </input>
+            <button type="submit" class="btn btn-success">
+            rate!
+            </button>
+        </form>
+        <div ng-repeat="comment in comments" class="thumbnail">
+            <h2>{{comment.commenter.fName}} {{comment.commenter.lName}}</h2>
+            <h6>{{comment.date}}</h6>
+            <h2>{{comment.text}}</h2>
+        </div>
+        <h2>add comment</h2>
+
+        <form ng-submit="comment()">
+            <textarea id='text' ng-model="commentModel">
+          </textarea >
+          <button type="submit" class="btn btn-success">
+              Submit!
+              </button>
+        </form>
+</div>

@@ -1,12 +1,3 @@
-app.controller('authorsController', function($scope, $http) {
-    $scope.authorOrder = "fName";
-
-    $http.get('/api/author/').success(function(data) {
-        $scope.authors = data;
-        console.log(data);
-    });
-});
-
 app.controller('authorController', function($scope, $http) {
 
     $scope.comment = function() {
@@ -64,6 +55,7 @@ app.controller('authorController', function($scope, $http) {
             $scope.rating = average / count;
             $scope.books = $scope.author.books;
             $scope.comments = $scope.author.comments;
+            console.log($scope.author);
 
 
         });

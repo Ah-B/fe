@@ -29,28 +29,48 @@
         </form>
     </div> -->
 
-        <!-- <h1><%-query%></h1> -->
-        <div ng-controller="authorController" ng-init="authorId = '<%-query%>';currentUser='<%-currentUser%>'">
-          <h1>{{author.fName}}{{author.lName}}</h1>
-
-          <h1>rating:{{rating}}</h1>
-          <form ng-submit="rate()">
-              <input ng-model="ratingModel">
-            </input >
-                <button type="submit" class="btn btn-success">
-                    rate!
-                    </button>
-              </form>
-            <div ng-repeat="comment in comments">
-                <h2>{{comment.commenter.fName}} {{comment.commenter.lName}}</h2>
-                <span>{{comment.date}}</span>
-                <span>{{comment.text}}</span>
+    <!-- <h1><%-query%></h1> -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Booker</a>
             </div>
-            <h2>add comment</h2>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/books">Books</a></li>
+                <li class="active"><a href="/authors">Authors</a></li>
+            </ul>
+        </div>
+    </nav>
 
-            <form ng-submit="comment()">
-                <textarea id='text' ng-model="commentModel">
-                  </textarea >
+
+    <div ng-controller="authorController" ng-init="authorId = '<%-query%>';currentUser='<%-currentUser%>'">
+        <h1>{{author.fName}}{{author.lName}}</h1>
+        <h1>Other books</h1>
+        <div ng-repeat="book in author.books"  class="thumbnail">
+            <h6>Title :<a href="/book/{{book._id}}">{{book.title}}</a></h6>
+            <h6>Date: {{book.date}}</h6>
+            <h6>Genre : {{book.genre}}</h6>
+        </div>
+        <h1>rating:{{rating}}</h1>
+        <form ng-submit="rate()">
+            <input ng-model="ratingModel">
+            </input>
+            <button type="submit" class="btn btn-success">
+                    rate!
+            </button>
+        </form>
+        <div ng-repeat="comment in comments">
+            <h2>{{comment.commenter.fName}} {{comment.commenter.lName}}</h2>
+            <span>{{comment.date}}</span>
+            <span>{{comment.text}}</span>
+        </div>
+        <h2>add comment</h2>
+
+        <form ng-submit="comment()">
+            <textarea id='text' ng-model="commentModel">
+            </textarea >
                   <button type="submit" class="btn btn-success">
 		                  Submit!
 		                  </button>

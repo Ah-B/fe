@@ -1,6 +1,10 @@
 app.controller('profileController', function($scope, $http) {
-  $http.get('/api/user/'+'582442494f038324f4dfbf50').success(function(data){
-    $scope.user = data;
-    console.log(data);
-  });
+    $scope.$watch('currentUser', function() {
+        console.log($scope.currentUser);
+
+        $http.get('/api/user/' + $scope.currentUser).success(function(data) {
+            $scope.user = data;
+            console.log(data);
+        });
+    });
 });

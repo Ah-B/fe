@@ -10,12 +10,21 @@ let passport = require('passport');
 //TODO Authentification commenté pour tester la partie frontend a decommenter a la fin+ /config/passport/isAuthenticated
 interfaceRouter.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('profile');
+        res.render('main');
     } else {
         res.render('homePage');
     }
 });
 
+interfaceRouter.get('/profile', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('profile', {
+            currentUser: req.user._id
+        });
+    } else {
+        res.render('homePage');
+    }
+});
 interfaceRouter.get('/authors', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('authors', {
@@ -27,7 +36,8 @@ interfaceRouter.get('/authors', (req, res) => {
 });
 interfaceRouter.get('/author/:authorId', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('author', {query: req.params.authorId,
+        res.render('author', {
+            query: req.params.authorId,
             currentUser: req.user._id
         });
     } else {
@@ -36,9 +46,25 @@ interfaceRouter.get('/author/:authorId', (req, res) => {
 });
 
 interfaceRouter.get('/books', (req, res) => {
-    res.render('books');
+    if (req.isAuthenticated()) {
+        res.render('books', {
+            currentUser: req.user._id
+        });
+    } else {
+        res.render('homePage');
+    }
 });
 
+interfaceRouter.get('/book/:bookId', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('book', {
+            query: req.params.bookId,
+            currentUser: req.user._id
+        });
+    } else {
+        res.render('homePage');
+    }
+});
 
 interfaceRouter.route('/auth/signIn')
     .get((req, res) => {
@@ -84,15 +110,6 @@ interfaceRouter.route('/auth/logout')
         req.logout();
         res.redirect('/');
     });
-
-
-
-//
-// interfaceRouter.route('/profile')
-//     .get(isAuthenticated, (req, res) => {
-//         //res.json(req.user);
-//         res.render('profile');
-//     });
 
 
 module.exports = interfaceRouter;

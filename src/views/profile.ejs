@@ -1,6 +1,20 @@
 <% layout('boilerplate') -%>
 
-    <div ng-controller="profileController">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Booker</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/profile">Profile</a></li>
+            <li><a href="/books">Books</a></li>
+            <li><a href="/authors">Authors</a></li>
+        </ul>
+    </div>
+</nav>
+    <div ng-controller="profileController" ng-init="currentUser='<%-currentUser%>'">
         <h1>Profile</h1>
         <p>Hello {{user.fName}}</p>
 
