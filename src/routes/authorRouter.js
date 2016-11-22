@@ -120,13 +120,6 @@ module.exports = (Author) => {
                         });
                     }
                 }
-                // let rating = req.body.rating;
-                // console.log(req.params);
-                // let ratings = author.ratings;
-                // ratings.push(rating);
-                // author.ratings = ratings;
-                // author.save();
-                // res.sendStatus(200)
             });
         });
 

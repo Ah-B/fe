@@ -12,7 +12,13 @@ let bookModel = new Schema({
     genre: String,
     pdfUrl: String,
     imageUrl: String,
-    ratings: [Number],
+    ratings: [{
+        rating: Number,
+        rater: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }],
     comments: [{
         text: String,
         date: Date,

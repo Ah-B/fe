@@ -92,27 +92,40 @@ module.exports = (Book) => {
                 }
             });
         });
-    bookRouter.route('/rate/:bookId/:userId')
-        .post((req, res) => {
-            Book.findById(req.params.bookId, (err, book) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    let rating = req.body.rating;
-                    console.log(req.params);
-                    let ratings = book.ratings;
-                    ratings.push(rating);
-                    book.ratings = ratings;
-                    book.save();
-                    // res.json({
-                    //     "type" : "message",
-                    //     "content" : "This book was added successfully in your library"
-                    // })
-
-
-                }
+        bookRouter.route('/rate/:bookId/:userId')
+            .post((req, res) => {
+                Book.findById(req.params.bookId, (err, book) => {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        let unique = true;
+                        for (ratingData of book.ratings) {
+                            if (ratingData.rater == req.params.userId) {
+                                unique = false;
+                            }
+                        }
+                        if (unique === true) {
+                            let ratings = book.ratings;
+                            let newRating = {
+                                "rating": req.body.rating,
+                                "rater": req.params.userId
+                            };
+                            ratings.push(newRating);
+                            book.ratings = ratings;
+                            book.save();
+                            res.json({
+                                "type": "successMessage",
+                                "content": "This book was rated successfully"
+                            });
+                        } else {
+                            res.json({
+                                "type": "errorMessage",
+                                "content": "You can rate a book only once"
+                            });
+                        }
+                    }
+                });
             });
-        });
 
     return bookRouter;
 }

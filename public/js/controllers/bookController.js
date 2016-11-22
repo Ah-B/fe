@@ -29,10 +29,12 @@ app.controller('bookController', function($scope, $http) {
             }
         }
 
-        $http(req).then(function(){
-          location.reload();
+        $http(req).then(function(message) {
+            console.log(message.data);
+            if (message.data.type === "successMessage") {
+                location.reload();
+            }
         });
-
     }
     $scope.addToLibrary = function(){
       var req = {
@@ -53,13 +55,16 @@ app.controller('bookController', function($scope, $http) {
         console.log($scope.currentUser);
         $http.get('/api/book/' + $scope.bookId).success(function(data) {
             $scope.book = data;
+            console.log(  $scope.book);
             var average = 0;
             var count = 0;
             for (rate of $scope.book.ratings) {
-                average = average + rate;
+                average = average + rate.rating;
                 count++;
             }
             $scope.rating = average / count;
+            console.log($scope.rating);
+
             $scope.comments = $scope.book.comments;
 
         });
