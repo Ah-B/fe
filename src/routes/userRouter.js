@@ -78,12 +78,12 @@ module.exports = (User) => {
                         user.library.push(entry);
                         user.save();
                         res.json({
-                            "type" : "message",
+                            "type" : "successMessage",
                             "content" : "This book was added successfully in your library"
                         })
                     } else {
                         res.json({
-                            "type" : "message",
+                            "type" : "errorMessage",
                             "content" : "This book is already in you personal library"
                         })
                     }

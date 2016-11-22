@@ -3,7 +3,7 @@ app.controller('authorController', function($scope, $http) {
     $scope.comment = function() {
         var req = {
             method: 'POST',
-            url: '/api/author/comment/'+$scope.authorId+'/'+$scope.currentUser,
+            url: '/api/author/comment/' + $scope.authorId + '/' + $scope.currentUser,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -12,8 +12,8 @@ app.controller('authorController', function($scope, $http) {
             }
         }
 
-        $http(req).then(function(){
-          location.reload();
+        $http(req).then(function() {
+            location.reload();
 
         });
 
@@ -21,7 +21,7 @@ app.controller('authorController', function($scope, $http) {
     $scope.rate = function() {
         var req = {
             method: 'POST',
-            url: '/api/author/rate/'+$scope.authorId+'/'+$scope.currentUser,
+            url: '/api/author/rate/' + $scope.authorId + '/' + $scope.currentUser,
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -30,10 +30,13 @@ app.controller('authorController', function($scope, $http) {
             }
         }
 
-        $http(req).then(function(){
-          location.reload();
-
+        $http(req).then(function(message) {
+            console.log(message.data);
+            if (message.data.type === "successMessage") {
+                location.reload();
+            }
         });
+
 
     }
 
@@ -49,7 +52,7 @@ app.controller('authorController', function($scope, $http) {
             var average = 0;
             var count = 0;
             for (rate of $scope.author.ratings) {
-                average = average + rate;
+                average = average + rate.rating;
                 count++;
             }
             $scope.rating = average / count;

@@ -8,11 +8,17 @@ let authorModel = new Schema({
     deathDate: Date,
     imageUrl: String,
     books: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Book'
+        type: Schema.Types.ObjectId,
+        ref: 'Book'
 
     }],
-    ratings: [Number],
+    ratings: [{
+        rating: Number,
+        rater: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }],
     comments: [{
         text: String,
         date: Date,

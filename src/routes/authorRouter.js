@@ -1,5 +1,5 @@
 const express = require('express'),
-isAuthenticated = require('../config/passport/isAuthenticated');
+    isAuthenticated = require('../config/passport/isAuthenticated');
 let authorRouter = express.Router();
 
 module.exports = (Author) => {
@@ -14,7 +14,7 @@ module.exports = (Author) => {
             author.save();
             res.status(201).send(author);
         })
-        .get(isAuthenticated,(req, res) => {
+        .get(isAuthenticated, (req, res) => {
             Author.find({}).populate(populateQuery).exec(
                 (err, authors) => {
                     if (err) {
@@ -25,7 +25,7 @@ module.exports = (Author) => {
                 });
         });
     authorRouter.route('/:authorId')
-        .get(isAuthenticated,(req, res) => {
+        .get(isAuthenticated, (req, res) => {
             Author.findById(req.params.authorId).populate(populateQuery).exec((err, author) => {
                 if (err) {
                     res.status(500).send(err);
@@ -88,27 +88,47 @@ module.exports = (Author) => {
             });
         });
 
-        authorRouter.route('/rate/:authorId/:userId')
-            .post((req, res) => {
-                Author.findById(req.params.authorId, (err, author) => {
-                    if (err) {
-                        res.status(500).send(err);
-                    } else {
-                        let rating = req.body.rating;
-                        console.log(req.params);
+    authorRouter.route('/rate/:authorId/:userId')
+        .post((req, res) => {
+            Author.findById(req.params.authorId, (err, author) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    let unique = true;
+                    for (ratingData of author.ratings) {
+                        if (ratingData.rater == req.params.userId) {
+                            unique = false;
+                        }
+                    }
+                    if (unique === true) {
                         let ratings = author.ratings;
-                        ratings.push(rating);
+                        let newRating = {
+                            "rating": req.body.rating,
+                            "rater": req.params.userId
+                        };
+                        ratings.push(newRating);
                         author.ratings = ratings;
                         author.save();
-                        //Does make problems with browser back button
-                        //res.redirect('back');
-                        // res.redirect(req.get('referer'));
-                        res.sendStatus(200)
-
-
+                        res.json({
+                            "type": "successMessage",
+                            "content": "This author was rated successfully"
+                        });
+                    } else {
+                        res.json({
+                            "type": "errorMessage",
+                            "content": "You can rate an author only once"
+                        });
                     }
-                });
+                }
+                // let rating = req.body.rating;
+                // console.log(req.params);
+                // let ratings = author.ratings;
+                // ratings.push(rating);
+                // author.ratings = ratings;
+                // author.save();
+                // res.sendStatus(200)
             });
+        });
 
     return authorRouter;
 }
