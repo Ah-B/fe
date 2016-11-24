@@ -19,7 +19,7 @@ let userModel = new Schema({
         lastReadDate: Date
     }],
     habits: [{
-        date: Date,
+        time: Number,
         pagesRead: Number
     }]
 });

@@ -116,7 +116,7 @@ module.exports = (User) => {
                     res.status(500).send(err);
                 } else {
                     let habitData = {
-                        "date": req.body.date,
+                        "time": req.body.time,
                         "pagesRead": req.body.pagesRead
                     };
                     user.habits.push(habitData);

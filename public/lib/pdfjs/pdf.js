@@ -274,7 +274,6 @@ function info(msg) {
     console.log('Info: ' + msg);
   }
 }
-
 // Non-fatal warnings.
 function warn(msg) {
   if (PDFJS.verbosity >= PDFJS.VERBOSITY_LEVELS.warnings) {
@@ -9173,5 +9172,3 @@ if (!PDFJS.workerSrc && typeof document !== 'undefined') {
     return pdfJsSrc && pdfJsSrc.replace(/\.js$/i, '.worker.js');
   })();
 }
-
-
