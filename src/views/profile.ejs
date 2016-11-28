@@ -1,51 +1,43 @@
 <% layout('boilerplate') -%>
 
-        <nav class="navbar navbar-default ui">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/">Booker</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li class="active"><a href="/profile">Profile</a></li>
-                    <li><a href="/books">Books</a></li>
-                    <li><a href="/authors">Authors</a></li>
-                </ul>
+    <nav class="navbar navbar-default ui">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Booker</a>
             </div>
-        </nav>
-
-
-        <div ng-controller="readerController" ng-init="currentUser='<%-currentUser%>'">
-            <div id="reader">
-                <div class="wrapper">
-                    <h1>{{pdfName}}</h1>
-                    <ng-pdf template-url="partials/viewer.html" canvasid="pdf" scale="page-fit" page=1></ng-pdf>
-                </div>
-            </div>
-
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/profile">Profile</a></li>
+                <li><a href="/books">Books</a></li>
+                <li><a href="/authors">Authors</a></li>
+            </ul>
+        </div>
+    </nav>
 
 
 
-            <div ng-controller="profileController" ng-init="currentUser='<%-currentUser%>'" class="ui">
-                <h1>Profile</h1>
-                <p>Hello {{user.fName}}</p>
-                <h1>Pages Read : {{readingHabitsPages}}</h1>
-                <h1>Time Reading : {{readingHabitsTime}}</h1>
-                <h1>Library</h1>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div ng-repeat="book in user.library" class="thumbnail">
-                                <h3>book:</h3>
-                                <h5>{{book.book.title}}</h5>
-                                <h3>CurrentPage</h3>
-                                <h5>{{book.lastPage}}</h5>
-                                <h3>Last Read</h3>{{book.lastReadDate}}
-                                <button type="button" id="showReaderButton" ng-click="ngReaderStart(book.book.pdfUrl,book.book.title,book.book._id,book.lastPage)" onclick="showReader()">Start reading</button>
-                            </div>
-                        </div>
+
+
+
+
+    <div ng-controller="profileController" ng-init="currentUser='<%-currentUser%>'" class="ui">
+        <h1>Profile</h1>
+        <p>Hello {{user.fName}}</p>
+        <h1>Pages Read : {{readingHabitsPages}}</h1>
+        <h1>Time Reading : {{readingHabitsTime}}</h1>
+        <h1>Library</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div ng-repeat="book in user.library" class="thumbnail">
+                        <h3>book Title: {{book.book.title}}</h3>
+                        <h3>Current Page :{{book.lastPage}}</h3>
+                        <h5>  <a href="/libbook/{{book.book._id}}/{{book.lastPage}}">{{book.book.title}}</a></h5>
+                        <h3>book image</h3>
                     </div>
                 </div>
-
             </div>
         </div>
+
+
+    </div>

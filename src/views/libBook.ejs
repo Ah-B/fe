@@ -1,0 +1,29 @@
+<% layout('boilerplate') -%>
+
+
+
+    <!-- <h1>user</h1>
+    <%-currentUser%>
+
+        <h1>libbook</h1>
+        <%-libbook%> -->
+        <%-currentUser%>
+    <div ng-controller="readerController" ng-init="currentUser='<%-currentUser%>';currentBookId='<%-libbook%>'">
+
+
+        <h1>{{currentBook.book.title}}</h1>
+
+        <h3>CurrentPage</h3>
+        <h5>{{currentBook.lastPage}}</h5>
+        <h3>Last Read date: </h3>{{currentBook.lastReadDate}}
+
+        <div id="reader">
+            <div class="wrapper">
+                <h1>{{pdfName}}</h1>
+                <ng-pdf template-url="/partials/viewer.html" canvasid="pdf" scale="page-fit" page=<%-currentPage%> ></ng-pdf>
+            </div>
+        </div>
+        <button type="button" id="showReaderButton" ng-click="ngReaderStart(currentBook.book.pdfUrl,currentBook.book.title,currentBook.book._id,currentBook.lastPage)" onclick="showReader()">Start reading</button>
+
+
+    </div>

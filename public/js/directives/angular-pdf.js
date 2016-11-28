@@ -40,6 +40,7 @@
                 var httpHeaders = scope.httpHeaders;
                 var pdfDoc = null;
                 var pageToDisplay = isFinite(attrs.page) ? parseInt(attrs.page) : 1;
+                // var pageToDisplay =parseInt(attrs.page);
                 var pageFit = attrs.scale === 'page-fit';
                 var scale = attrs.scale > 0 ? attrs.scale : 1;
                 var canvasid = attrs.canvasid || 'pdf-canvas';

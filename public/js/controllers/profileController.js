@@ -6,12 +6,12 @@ app.controller('profileController', function($scope, $http) {
             $scope.user = data;
             console.log(data);
             for (habit of $scope.user.habits) {
-              console.log(habit.pagesRead);
+              // console.log(habit.pagesRead);
               $scope.readingHabitsPages= $scope.readingHabitsPages+habit.pagesRead;
               $scope.readingHabitsTime= $scope.readingHabitsTime+habit.time;
             }
         }).then(function(){
-          console.log("test");
+          // console.log("test");
           $scope.readingHabitsTime= $scope.readingHabitsTime+habit.time;
 
         });

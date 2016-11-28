@@ -1,31 +1,34 @@
 app.controller('readerController', function($scope, $http) {
 
+    $scope.$watch(['currentUser', 'currentBookId'], function() {
+        $http.get('/api/user/' + $scope.currentUser).success(function(data) {
+            $scope.user = data;
+            for (book of data.library) {
+                if (book.book._id === $scope.currentBookId) {
+                    $scope.currentBook = book;
+                }
+            }
 
-    // $http.get('/api/book/58244bba79f4dc2a5c9423f3').success(function(data) {
-    //   $scope.pdfUrl=data.pdfUrl;
-    //   console.log(data);
-    //
-    // });
-    // $scope.pdfUrl=data.pdfUrl;
-    //$scope.bookName = "book2";
-    //$scope.pdfUrl = 'pdf/' + $scope.bookName + '.pdf';
-    $scope.$watch(['currentUser'], function() {
+            // console.log($scope.user);
+            // console.log($scope.currentBook);
+            // // $scope.currentPage=$scope.currentBook.lastPage;
+            $scope.currentPageCounter = $scope.currentBook.lastPage;
+            // console.log($scope.page);
+        });
     });
+    //$scope.scroll = 0;
+    //$scope.current = 1;
 
-    $scope.scroll = 0;
-    $scope.current = 1;
     $scope.pagesReadCounter = 1;
     $scope.startTime;
     $scope.ngReaderStop = function() {
         console.log("**************** Reader Stopped : //Substract Dates + //Get counter ****************");
         var startTime = $scope.startTime;
         var endTime = moment();
-        console.log("End time " + endTime.format("HH:mm"));
         //var duration = endTime.diff(startTime, 'minutes');
         var duration = endTime.diff(startTime, 'seconds');
+        console.log("End time " + endTime.format("HH:mm") + "Duration: " + duration + "Pages Read : " + $scope.pagesReadCounter);
 
-        console.log("Duration: " + duration);
-        console.log("Pages Read : " + $scope.pagesReadCounter);
         //POST to DB:User:habits
         var reqHabit = {
             method: 'POST',
@@ -46,14 +49,16 @@ app.controller('readerController', function($scope, $http) {
             },
             data: {
                 time: duration,
-                lastPage: $scope.pagesReadCounter,
+                lastPage: $scope.currentPageCounter,
                 lastReadDate: endTime
             }
         };
-        $http(reqLib, reqHabit).then(function() {
-            console.log("habit added");
+        $http(reqLib).then(function() {
+            // console.log("lib request ok");
+        });
+        $http(reqHabit).then(function() {
             $scope.pagesReadCounter = 1;
-            location.reload();
+            window.location = "/profile";
         });
 
 
@@ -63,13 +68,12 @@ app.controller('readerController', function($scope, $http) {
         $scope.pdfName = name;
         $scope.bookId = id;
         $scope.startTime = moment();
-        $scope.myPage = lastPage;
-        console.log("lastpage"+lastPage);
-        console.log("**************** Reader Started : //Add Date + //Start counter **************** ");
+
         console.log("Start time " + $scope.startTime.format("HH:mm"));
     };
     $scope.pageFinished = function() {
         $scope.pagesReadCounter++;
+        $scope.currentPageCounter++;
     }
 
     $scope.getNavStyle = function(scroll) {

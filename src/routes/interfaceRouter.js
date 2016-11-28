@@ -25,6 +25,17 @@ interfaceRouter.get('/profile', (req, res) => {
         res.render('homePage');
     }
 });
+interfaceRouter.get('/libbook/:bookId/:currentPage', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('libBook', {
+            currentUser: req.user._id,
+            libbook : req.params.bookId,
+            currentPage : req.params.currentPage
+        });
+    } else {
+        res.render('homePage');
+    }
+});
 interfaceRouter.get('/authors', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('authors', {
