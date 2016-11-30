@@ -70,7 +70,9 @@ interfaceRouter.get('/book/:bookId', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('book', {
             query: req.params.bookId,
-            currentUser: req.user._id
+            currentUser: req.user._id,
+            userFName: req.user.fName,
+            userLName: req.user.lName
         });
     } else {
         res.render('homePage');

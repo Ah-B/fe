@@ -1,4 +1,7 @@
 <% layout('boilerplate') -%>
+    <script type="text/javascript" src="/js/utility/chat.js"></script>
+
+
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -14,9 +17,16 @@
     </nav>
 
     <div ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>'">
+
+
+
+
+
+
         <h1>{{book.title}}</h1>
-        <button type="submit" class="btn btn-success"ng-click="addToLibrary()">Add to Personal Library</button>
+        <button type="submit" class="btn btn-success" ng-click="addToLibrary()">Add to Personal Library</button>
         <img src="" />
+        <button class="btn btn-success" id="chatStart" name="button">Start Chatting</button>
         <h3>Author : <a href="/author/{{book.author._id}}">{{book.author.fName}}{{book.author.lName}}</a></h3>
         <h3>Date : {{book.date}}</h3>
         <h3>Genre : {{book.genre}}</h3>
@@ -45,4 +55,22 @@
               Submit!
               </button>
         </form>
+
+
+
+        <div class="chatRoom">
+          <h1>ChatRoom</h1>
+          <div id="messages">
+            <div id="writing"></div>
+          </div>
+          <input id="message" type="text" maxlength="14" name="name" value="" placeholder="message">
+          <button type="button" name="button" id="send">Send Message</button>
+          <button type="button" name="button" id="stop">stop</button>
+
+          <script type="text/javascript">
+            initChat('<%-query%>','<%-userFName%>','<%-userLName%>');
+          </script>
+        </div>
+
+
 </div>

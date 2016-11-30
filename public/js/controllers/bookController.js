@@ -50,11 +50,11 @@ app.controller('bookController', function($scope, $http) {
     }
 
     $scope.$watch(['bookId', 'currentUser'], function() {
-        console.log($scope.bookId);
-        console.log($scope.currentUser);
+        //console.log($scope.bookId);
+      //  console.log($scope.currentUser);
         $http.get('/api/book/' + $scope.bookId).success(function(data) {
             $scope.book = data;
-            console.log($scope.book);
+            //console.log($scope.book);
             var average = 0;
             var count = 0;
             for (rate of $scope.book.ratings) {
@@ -62,7 +62,7 @@ app.controller('bookController', function($scope, $http) {
                 count++;
             }
             $scope.rating = average / count;
-            console.log($scope.rating);
+          //  console.log($scope.rating);
 
             $scope.comments = $scope.book.comments;
         });

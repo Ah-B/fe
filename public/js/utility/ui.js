@@ -6,5 +6,4 @@
 
         function hideReader() {
             $('#reader').addClass('zoomOut');
-            $('.ui').toggle();
         };
