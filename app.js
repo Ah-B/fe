@@ -18,22 +18,37 @@ app.use(express.static('public'));
 //SOCKET IO CHAT
 let server = require('http').createServer(app);
 let io = socket(server);
+let numUsers = 0;
+let users = [];
 
 io.on('connection', function(socket) {
 
-    socket.on('subscribe', function(data) {
 
+    socket.on('subscribe', function(data) {
+        numUsers++;
+        users.push(data.userName);
+        console.log(users);
+        console.log("users count ", numUsers);
         console.log("User " + data.userName + " has joined room " + data.room);
+        //io.sockets.in(data.room).emit('message', users, numUsers);
         socket.join(data.room);
+        io.sockets.in(data.room).emit('joined', data.userName, users, numUsers);
+
     })
     socket.on('send', function(data) {
         console.log('sending message');
         io.sockets.in(data.room).emit('message', data);
     });
 
-    socket.on('unsubscribe', function(room) {
-        console.log('leaving room', room);
-        socket.leave(room);
+    socket.on('unsubscribe', function(data) {
+        numUsers--;
+        let index = users.indexOf(data.userName);
+        if (index > -1) {
+            users.splice(index, 1);
+        }
+        console.log("users count ", numUsers);
+        io.sockets.in(data.room).emit('leaving', data, numUsers);
+        socket.leave(data.room);
     })
 
     socket.on('focusIn', function(data) {
