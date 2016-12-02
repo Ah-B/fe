@@ -49,7 +49,9 @@ interfaceRouter.get('/author/:authorId', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('author', {
             query: req.params.authorId,
-            currentUser: req.user._id
+            currentUser: req.user._id,
+            userFName: req.user.fName,
+            userLName: req.user.lName
         });
     } else {
         res.render('homePage');

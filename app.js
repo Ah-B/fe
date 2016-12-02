@@ -77,7 +77,7 @@ io.on('connection', function(socket) {
         console.log("remaining users", users);
         console.log("users count ", numUsers);
 
-        io.sockets.in(data.room).emit('leaving', data, numUsers);
+        io.sockets.in(data.room).emit('leaving', data, numUsers,users);
         socket.leave(data.room);
     })
 

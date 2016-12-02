@@ -60,7 +60,12 @@ function initChat(roomId, userFName, userLName) {
         });
     };
 
-    socket.on('leaving', function(data, numUsers) {
+    socket.on('leaving', function(data, numUsers, users) {
+        $('#connectedUsers').empty();
+        for (user of users) {
+            $('#connectedUsers').append("<p>" + user.userName + "</p>")
+        }
+
         $('#notice').html("<p>" + data.userName + " has left the discussion </p>");
 
         if (numUsers == 1) {
@@ -69,14 +74,6 @@ function initChat(roomId, userFName, userLName) {
             $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
         }
     });
-
-    // $(window).unload(function() {
-    //     socket.emit('unsubscribe', {
-    //         userName: userName,
-    //         room: room
-    //     });
-    // });
-
 
     socket.on('message', function(data) {
         console.log(data);
