@@ -7,3 +7,9 @@
         function hideReader() {
             $('#reader').addClass('zoomOut');
         };
+
+        $(window).onbeforeunload = function () {
+            var message = 'Important: Please click on \'Save\' button to leave this page.';
+            alert(message);
+
+        };

@@ -31,3 +31,6 @@
     z-index: 100;
     opacity: 0;
 }
+#connectedUsers{
+  color: red;
+}

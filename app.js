@@ -18,19 +18,36 @@ app.use(express.static('public'));
 //SOCKET IO CHAT
 let server = require('http').createServer(app);
 let io = socket(server);
-let numUsers = 0;
+//let numUsers = 0;
 let users = [];
 
 io.on('connection', function(socket) {
 
 
     socket.on('subscribe', function(data) {
-        numUsers++;
-        users.push(data.userName);
+        //numUsers++;
+        let unique = true;
+        for (user of users) {
+            if (user.userName == data.userName && user.room == data.room) {
+                unique = false;
+            }
+        }
+        if (unique) {
+            users.push({
+                userName: data.userName,
+                room: data.room
+            });
+        }
+        let numUsers = 0;
+        for (user of users) {
+            if (user.room == data.room) {
+                numUsers++;
+            }
+        }
         console.log(users);
-        console.log("users count ", numUsers);
-        console.log("User " + data.userName + " has joined room " + data.room);
-        //io.sockets.in(data.room).emit('message', users, numUsers);
+        // console.log("users count ", numUsers);
+        // console.log("User " + data.userName + " has joined room " + data.room);
+
         socket.join(data.room);
         io.sockets.in(data.room).emit('joined', data.userName, users, numUsers);
 
@@ -41,12 +58,25 @@ io.on('connection', function(socket) {
     });
 
     socket.on('unsubscribe', function(data) {
-        numUsers--;
-        let index = users.indexOf(data.userName);
-        if (index > -1) {
-            users.splice(index, 1);
+        let numUsers = 0;
+        let index = 0;
+
+        for (user of users) {
+            if (user.userName == data.userName && user.room == data.room) {
+                index = users.indexOf(user);
+                users.splice(index, 1);
+            }
         }
+
+        for (user of users) {
+            if (user.room == data.room) {
+                numUsers++;
+            }
+        }
+
+        console.log("remaining users", users);
         console.log("users count ", numUsers);
+
         io.sockets.in(data.room).emit('leaving', data, numUsers);
         socket.leave(data.room);
     })

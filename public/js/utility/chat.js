@@ -1,9 +1,5 @@
 function initChat(roomId, userFName, userLName) {
 
-
-
-
-
     var socket = io.connect();
     var message = $('#message').val();
     var room = roomId;
@@ -24,15 +20,20 @@ function initChat(roomId, userFName, userLName) {
     socket.on('joined', function(ioUserName, users, numUsers) {
         console.log("current username", userName);
         console.log("data username", ioUserName);
+        $('#connectedUsers').empty();
+        for (user of users) {
+            $('#connectedUsers').append("<p>" + user.userName + "</p>")
+        }
+
         if (ioUserName == userName) {
-           $('#notice').html("<p>Welcome</p>");
+            $('#notice').html("<p>Welcome</p>");
         } else {
-             $('#notice').html("<p>" + ioUserName + " has joined the discussion </p>");
+            $('#notice').html("<p>" + ioUserName + " has joined the discussion </p>");
         };
         if (numUsers == 1) {
-             $('#notice').append("<p> You are the only user connected </p>");
+            $('#notice').append("<p> You are the only user connected </p>");
         } else {
-             $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
+            $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
         }
     });
 
@@ -51,14 +52,21 @@ function initChat(roomId, userFName, userLName) {
             room: room
         });
     });
+    //Window Closing event
+    window.onbeforeunload = function() {
+        socket.emit('unsubscribe', {
+            userName: userName,
+            room: room
+        });
+    };
 
     socket.on('leaving', function(data, numUsers) {
-         $('#notice').html("<p>" + data.userName + " has left the discussion </p>");
+        $('#notice').html("<p>" + data.userName + " has left the discussion </p>");
 
         if (numUsers == 1) {
-             $('#notice').append("<p> You are the only remaining connected user  </p>");
+            $('#notice').append("<p> You are the only remaining connected user  </p>");
         } else {
-             $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
+            $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
         }
     });
 
