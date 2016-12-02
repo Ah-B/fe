@@ -18,11 +18,12 @@ function initChat(roomId, userFName, userLName) {
 
 
     socket.on('joined', function(ioUserName, users, numUsers) {
-        console.log("current username", userName);
-        console.log("data username", ioUserName);
+
         $('#connectedUsers').empty();
         for (user of users) {
-            $('#connectedUsers').append("<p>" + user.userName + "</p>")
+            if (user.room == room) {
+                $('#connectedUsers').append("<p>" + user.userName + "</p>")
+            }
         }
 
         if (ioUserName == userName) {
