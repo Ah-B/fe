@@ -2,7 +2,7 @@
     <script type="text/javascript" src="/js/utility/chat.js"></script>
     <script type="text/javascript" src="/js/utility/ui.js"></script>
 
-
+    <div id="connectedUsers"></div>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -52,17 +52,20 @@
 
 
 
-</div><div class="chatRoom">
-  <h1>ChatRoom</h1>
-  <div id="connectedUsers"></div>
-  <div>
-    <div id="notice"></div>
-    <div id="messages"></div>
-  </div>
-  <input id="message" type="text" maxlength="14" name="name" value="" placeholder="message">
-  <button type="button" name="button" id="send">Send Message</button>
-  <button type="button" name="button" id="stop" onclick="hideChat()">stop</button>
 
+</div>
+<div class="chatRoom">
+
+  <h1>ChatRoom</h1>
+  <div>
+    <div id="messages"></div>
+    <div id="notice"></div>
+  </div>
+  <div class="chatBottomBar">
+  <input  id="message" type="text"  name="name" value="" placeholder="message">
+  <button type="button" name="button" id="send">Send Message</button>
+  <button type="button" name="button" id="stop" onclick="hideChat()">Leave</button>
+  </div>
   <script type="text/javascript">
     initChat('<%-query%>','<%-userFName%>','<%-userLName%>');
   </script>

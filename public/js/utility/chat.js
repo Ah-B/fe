@@ -27,14 +27,14 @@ function initChat(roomId, userFName, userLName) {
         }
 
         if (ioUserName == userName) {
-            $('#notice').html("<p>Welcome</p>");
+            $('#messages').append("<p class='notice' >Welcome</p>");
         } else {
-            $('#notice').html("<p>" + ioUserName + " has joined the discussion </p>");
+            $('#messages').append("<p class='notice' >  " + ioUserName + " has joined the discussion </p>");
         };
         if (numUsers == 1) {
-            $('#notice').append("<p> You are the only user connected </p>");
+            $('#messages').append("<p class='notice' > You are the only user connected </p>");
         } else {
-            $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
+            $('#messages').append("<p class='notice' > There are " + numUsers + " users currently connected </p>");
         }
     });
     $('#message').keypress(function(e) {
@@ -76,12 +76,12 @@ function initChat(roomId, userFName, userLName) {
             $('#connectedUsers').append("<p>" + user.userName + "</p>")
         }
 
-        $('#notice').html("<p>" + data.userName + " has left the discussion </p>");
+        $('#messages').append("<p class='notice'>" + data.userName + " has left the discussion </p>");
 
         if (numUsers == 1) {
-            $('#notice').append("<p> You are the only remaining connected user  </p>");
+            $('#messages').append("<p class='notice'> You are the only remaining connected user  </p>");
         } else {
-            $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
+            $('#messages').append("<p class='notice'> There are " + numUsers + " users currently connected </p>");
         }
     });
 

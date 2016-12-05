@@ -31,25 +31,47 @@
     z-index: 100;
     opacity: 0;
 }
-.chatRoom{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: white;
-  z-index: 10;
-  visibility: hidden;
-}
-#notice{
-bottom: 50px;
-left: 50%;
+
+.chatRoom {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: white;
+    z-index: 10;
+    visibility: hidden;
 }
 
-#message{
-  bottom: 0px;
-  width: 100%
+.notice {
+    position: relative;
+    color: green;
+    text-align: center;
 }
-#connectedUsers{
-  color: red;
+
+#connectedUsers {
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    z-index: 11;
+    visibility: hidden;
+}
+
+.chatBottomBar {
+    bottom: 0px;
+}
+
+#message {
+    position: relative;
+    width: 80%;
+    left: 1px;
+}
+
+#send {
+    width: 10%;
+    margin: -5px;
+}
+
+#stop {
+    width: 10%;
 }
