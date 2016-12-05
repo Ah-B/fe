@@ -37,7 +37,16 @@ function initChat(roomId, userFName, userLName) {
             $('#notice').append("<p> There are " + numUsers + " users currently connected </p>");
         }
     });
-
+    $('#message').keypress(function(e) {
+        if (e.keyCode == 13) {
+            var message = $('#message').val();
+            socket.emit('send', {
+                userName: userName,
+                room: room,
+                message: message
+            });
+        }
+    });
     $('#send').click(function() {
         var message = $('#message').val();
         socket.emit('send', {
@@ -53,7 +62,7 @@ function initChat(roomId, userFName, userLName) {
             room: room
         });
     });
-    //Window Closing event
+
     window.onbeforeunload = function() {
         socket.emit('unsubscribe', {
             userName: userName,
@@ -78,7 +87,10 @@ function initChat(roomId, userFName, userLName) {
 
     socket.on('message', function(data) {
         console.log(data);
+        $('#message').val('');
         $("#messages").append("<p>" + data.userName + " : " + data.message + "</p>");
+        $('.typing').remove();
+
     });
 
 
@@ -91,7 +103,7 @@ function initChat(roomId, userFName, userLName) {
     });
     socket.on('writing', function(data) {
         if (data.userName !== userName) {
-            $('#notice').html("<p id=typing>" + data.userName + " : is typing </p>");
+            $('#messages').append("<p class=typing>" + data.userName + " : is typing </p>");
         }
     })
 
@@ -101,7 +113,7 @@ function initChat(roomId, userFName, userLName) {
     });
 
     socket.on('stopWriting', function() {
-        $("#typing").remove();
+      $('.typing').remove();
     })
 
 

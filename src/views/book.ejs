@@ -1,5 +1,6 @@
 <% layout('boilerplate') -%>
     <script type="text/javascript" src="/js/utility/chat.js"></script>
+    <script type="text/javascript" src="/js/utility/ui.js"></script>
 
 
     <nav class="navbar navbar-default">
@@ -17,22 +18,13 @@
     </nav>
 
     <div ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>'">
-
-
-
-
-
-
         <h1>{{book.title}}</h1>
         <button type="submit" class="btn btn-success" ng-click="addToLibrary()">Add to Personal Library</button>
         <img src="" />
-        <button class="btn btn-success" id="chatStart" name="button">Start Chatting</button>
+        <button class="btn btn-success" id="chatStart" onclick="showChat()" name="button">Start Chatting</button>
         <h3>Author : <a href="/author/{{book.author._id}}">{{book.author.fName}}{{book.author.lName}}</a></h3>
         <h3>Date : {{book.date}}</h3>
         <h3>Genre : {{book.genre}}</h3>
-
-
-
         <h1>rating:{{rating}}</h1>
         <form ng-submit="rate()">
             <input ng-model="ratingModel">
@@ -58,25 +50,20 @@
 
 
 
-        <div class="chatRoom">
-          <h1>ChatRoom</h1>
-          <div id="connectedUsers">
-
-          </div>
-          <div>
-            <div id="notice"></div>
-            <div id="messages"></div>
-          </div>
-          <input id="message" type="text" maxlength="14" name="name" value="" placeholder="message">
-          <button type="button" name="button" id="send">Send Message</button>
-          <button type="button" name="button" id="stop">stop</button>
-
-          <script type="text/javascript">
-
-        
-            initChat('<%-query%>','<%-userFName%>','<%-userLName%>');
-          </script>
-        </div>
 
 
+</div><div class="chatRoom">
+  <h1>ChatRoom</h1>
+  <div id="connectedUsers"></div>
+  <div>
+    <div id="notice"></div>
+    <div id="messages"></div>
+  </div>
+  <input id="message" type="text" maxlength="14" name="name" value="" placeholder="message">
+  <button type="button" name="button" id="send">Send Message</button>
+  <button type="button" name="button" id="stop" onclick="hideChat()">stop</button>
+
+  <script type="text/javascript">
+    initChat('<%-query%>','<%-userFName%>','<%-userLName%>');
+  </script>
 </div>

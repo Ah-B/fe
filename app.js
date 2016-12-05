@@ -90,11 +90,7 @@ io.on('connection', function(socket) {
     socket.on('focusOut', function(data) {
         io.sockets.emit('stopWriting');
     })
-    socket.on('focusIn', function(data) {
-        console.log("focusin");
-        io.sockets.in(data.room).emit('writing', data)
-        console.log(data.userName + "is writing");
-    })
+  
 
 });
 

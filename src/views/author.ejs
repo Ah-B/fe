@@ -32,10 +32,10 @@
                     rate!
             </button>
         </form>
-        <div ng-repeat="comment in comments">
-            <h2>{{comment.commenter.fName}} {{comment.commenter.lName}}</h2>
-            <span>{{comment.date}}</span>
-            <span>{{comment.text}}</span>
+        <div ng-repeat="comment in comments" class="thumbnail">
+          <h2>{{comment.commenter.fName}} {{comment.commenter.lName}}</h2>
+          <h6>{{comment.date}}</h6>
+          <h2>{{comment.text}}</h2>
         </div>
         <h2>add comment</h2>
 

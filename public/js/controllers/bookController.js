@@ -12,8 +12,8 @@ app.controller('bookController', function($scope, $http) {
         }
 
         $http(req).then(function() {
-            location.reload();
-        });
+            $scope.getBookData();
+      });
 
     }
     $scope.rate = function() {
@@ -31,7 +31,7 @@ app.controller('bookController', function($scope, $http) {
         $http(req).then(function(message) {
             console.log(message.data);
             if (message.data.type === "successMessage") {
-                location.reload();
+              $scope.getBookData();
             }
         });
     }
@@ -47,25 +47,28 @@ app.controller('bookController', function($scope, $http) {
             // TODO: This return data MUST be shown as a toast or popup message
             console.log(message.data);
         });
+
     }
+    $scope.getBookData = function(){
+    $http.get('/api/book/' + $scope.bookId).success(function(data) {
+        $scope.book = data;
+        //console.log($scope.book);
+        var average = 0;
+        var count = 0;
+        for (rate of $scope.book.ratings) {
+            average = average + rate.rating;
+            count++;
+        }
+        $scope.rating = average / count;
+      //  console.log($scope.rating);
+
+        $scope.comments = $scope.book.comments;
+    });}
 
     $scope.$watch(['bookId', 'currentUser'], function() {
         //console.log($scope.bookId);
       //  console.log($scope.currentUser);
-        $http.get('/api/book/' + $scope.bookId).success(function(data) {
-            $scope.book = data;
-            //console.log($scope.book);
-            var average = 0;
-            var count = 0;
-            for (rate of $scope.book.ratings) {
-                average = average + rate.rating;
-                count++;
-            }
-            $scope.rating = average / count;
-          //  console.log($scope.rating);
-
-            $scope.comments = $scope.book.comments;
-        });
+    $scope.getBookData();
     });
 
 

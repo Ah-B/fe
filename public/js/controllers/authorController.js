@@ -13,7 +13,7 @@ app.controller('authorController', function($scope, $http) {
         }
 
         $http(req).then(function() {
-            location.reload();
+          $scope.getAuthorData();
 
         });
 
@@ -40,6 +40,21 @@ app.controller('authorController', function($scope, $http) {
 
     }
 
+      $scope.getAuthorData = function(){
+      $http.get('/api/author/' + $scope.authorId).success(function(data) {
+          $scope.author = data;
+          var average = 0;
+          var count = 0;
+          for (rate of $scope.author.ratings) {
+              average = average + rate.rating;
+              count++;
+          }
+          $scope.rating = average / count;
+          $scope.books = $scope.author.books;
+          $scope.comments = $scope.author.comments;
+      });
+    };
+
     //  WAIT FOR SCOPE INIT
     //   $scope.$watch('pageTitle', function () {
     //     console.log($scope.pageTitle);
@@ -47,23 +62,7 @@ app.controller('authorController', function($scope, $http) {
     $scope.$watch(['authorId', 'currentUser'], function() {
         console.log($scope.authorId);
         console.log($scope.currentUser);
-        $http.get('/api/author/' + $scope.authorId).success(function(data) {
-            $scope.author = data;
-            var average = 0;
-            var count = 0;
-            for (rate of $scope.author.ratings) {
-                average = average + rate.rating;
-                count++;
-            }
-            $scope.rating = average / count;
-            $scope.books = $scope.author.books;
-            $scope.comments = $scope.author.comments;
-            console.log($scope.author);
-
-
-        });
-
-
+        $scope.getAuthorData();
 
     });
 
