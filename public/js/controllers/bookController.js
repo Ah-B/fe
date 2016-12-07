@@ -13,7 +13,7 @@ app.controller('bookController', function($scope, $http) {
 
         $http(req).then(function() {
             $scope.getBookData();
-      });
+        });
 
     }
     $scope.rate = function() {
@@ -31,44 +31,50 @@ app.controller('bookController', function($scope, $http) {
         $http(req).then(function(message) {
             console.log(message.data);
             if (message.data.type === "successMessage") {
-              $scope.getBookData();
+                $scope.getBookData();
             }
         });
     }
     $scope.addToLibrary = function() {
-        var req = {
-            method: 'POST',
-            url: '/api/user/addToLibrary/' + $scope.currentUser + '/' + $scope.bookId,
-            headers: {
-                'Content-Type': 'application/json'
+        if ($scope.user.type == "free" && $scope.book.type == "premium") {
+            alert('for premium members only')
+        } else {
+            var req = {
+                method: 'POST',
+                url: '/api/user/addToLibrary/' + $scope.currentUser + '/' + $scope.bookId,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
+            $http(req).then(function(message) {
+                // TODO: This return data MUST be shown as a toast or popup message
+                alert(message.data.content);
+            });
         }
-        $http(req).then(function(message) {
-            // TODO: This return data MUST be shown as a toast or popup message
-            console.log(message.data);
-        });
-
     }
-    $scope.getBookData = function(){
-    $http.get('/api/book/' + $scope.bookId).success(function(data) {
-        $scope.book = data;
-        //console.log($scope.book);
-        var average = 0;
-        var count = 0;
-        for (rate of $scope.book.ratings) {
-            average = average + rate.rating;
-            count++;
-        }
-        $scope.rating = average / count;
-      //  console.log($scope.rating);
 
-        $scope.comments = $scope.book.comments;
-    });}
+    $scope.getBookData = function() {
+        $http.get('/api/book/' + $scope.bookId).success(function(data) {
+            $scope.book = data;
+            console.log(data);
+            var average = 0;
+            var count = 0;
+            for (rate of $scope.book.ratings) {
+                average = average + rate.rating;
+                count++;
+            }
+            $scope.rating = average / count;
+            //  console.log($scope.rating);
+
+            $scope.comments = $scope.book.comments;
+        });
+    }
 
     $scope.$watch(['bookId', 'currentUser'], function() {
-        //console.log($scope.bookId);
-      //  console.log($scope.currentUser);
-    $scope.getBookData();
+        $http.get('/api/user/' + $scope.currentUser).success(function(data) {
+            $scope.user = data;
+        });
+        $scope.getBookData();
     });
 
 

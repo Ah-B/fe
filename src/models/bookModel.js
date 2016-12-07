@@ -11,6 +11,7 @@ let bookModel = new Schema({
     date: Date,
     genre: String,
     pdfUrl: String,
+    type: String,
     imageUrl: String,
     ratings: [{
         rating: Number,

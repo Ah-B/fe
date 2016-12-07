@@ -17,7 +17,7 @@
         </div>
     </nav>
 
-    <div ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>'">
+    <div ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>';userType='<%-userType%>'">
         <h1>{{book.title}}</h1>
         <button type="submit" class="btn btn-success" ng-click="addToLibrary()">Add to Personal Library</button>
         <img src="" />
@@ -25,7 +25,9 @@
         <h3>Author : <a href="/author/{{book.author._id}}">{{book.author.fName}}{{book.author.lName}}</a></h3>
         <h3>Date : {{book.date}}</h3>
         <h3>Genre : {{book.genre}}</h3>
+        <h3>type:{{book.type}}</h3>
         <h1>rating:{{rating}}</h1>
+
         <form ng-submit="rate()">
             <input ng-model="ratingModel">
             </input>

@@ -158,7 +158,8 @@ interfaceRouter.get('/book/:bookId', (req, res) => {
             query: req.params.bookId,
             currentUser: req.user._id,
             userFName: req.user.fName,
-            userLName: req.user.lName
+            userLName: req.user.lName,
+            userType: req.user.type
         });
     } else {
         res.render('homePage');
