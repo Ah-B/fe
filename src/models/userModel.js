@@ -10,6 +10,7 @@ let userModel = new Schema({
     adress: String,
     signDate: Date,
     password: String,
+    type: String,
     library: [{
         book: {
             type: Schema.Types.ObjectId,

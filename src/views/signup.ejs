@@ -1,26 +1,26 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>hello auth</h1>
+<% layout('boilerplate') -%>
+
 
     <div>
-      <a href="/auth/signIn">Login</a>
-      <h1>Sign up</h1>
-      <form name="signUpForm"action="/auth/signUp" method="post">
-        <input  name="fName" id="fName" placeholder="fName">
-        <input  name="lName" id="lName" placeholder="lName">
-        <input  name="email" id="email" placeholder="email">
-        <input  name="adress" id="adress" placeholder="adress">
-        <input  name="birthDate" id="birthDate" placeholder="birthDate">
-        <input  name="userName" id="userName" placeholder="userName">
-        <input  name="password" id="password" placeholder="Password">
-        <input  type="submit">
-      </form>
+        <a href="/auth/signIn">Login</a>
+        <h1>Sign up</h1>
+        <form id="signUpForm" name="signUpForm" action="/auth/signUp" method="post">
+            <h1>First Name</h1>
+            <input name="fName" id="fName" placeholder="First Name">
+            <h1>Last Name</h1>
+            <input name="lName" id="lName" placeholder="Last Name">
+            <h1>Email</h1>
+            <input name="email" id="email" placeholder="email">
+            <h1>Adress</h1>
+            <input name="adress" id="adress" placeholder="Adress">
+            <h1>Birth Date</h1>
+            <input name="birthDate" id="birthDate" type="date">
+            <h1>UserName</h1>
+            <input name="userName" id="userName" placeholder="userName">
+            <h1>Password</h1>
+            <input name="password" id="password" placeholder="Password">
+            <button type="submit">Create Account</button>
+        </form>
     </div>
 
-  </body>
-</html>
+    <script type="text/javascript" src="/js/utility/signupInterface.js"></script>

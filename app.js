@@ -12,6 +12,7 @@ const express = require('express'),
 
 const app = express();
 app.use(express.static('public'));
+app.locals.baseurl = 'http://localhost:3000';
 
 
 
@@ -90,7 +91,7 @@ io.on('connection', function(socket) {
     socket.on('focusOut', function(data) {
         io.sockets.emit('stopWriting');
     })
-  
+
 
 });
 

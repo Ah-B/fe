@@ -23,19 +23,23 @@ interfaceRouter.route('/signUp')
       res.render('signup');
     })
     .post((req, res) => {
-        console.log(req.body);
-        mongodb.connect(dblink.url, (err, db) => {
-            let collection = db.collection('users');
-            let user = {
-                username: req.body.userName,
-                password: req.body.password
-            };
-            collection.insert(user, (err, results) => {
-                req.login(results.ops[0], () => {
-                    res.redirect('/profile');
-                });
-            });
-        });
+        //console.log("test");
+        // mongodb.connect(dblink.url, (err, db) => {
+        //     let collection = db.collection('user');
+        //     console.log(collection);
+        //     let user = {
+        //         username: req.body.userName,
+        //         password: req.body.password,
+        //         type : req.body.type
+        //     };
+        //
+        //
+        //     collection.insert(user, (err, results) => {
+        //         req.login(results.ops[0], () => {
+        //         res.redirect('/profile');
+        //         });
+        //     });
+        // });
     });
 
 interfaceRouter.route('/error')

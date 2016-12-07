@@ -1,27 +1,27 @@
 <div id="wrapper">
 
-<% layout('boilerplate') -%>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Booker</a>
+    <% layout('boilerplate') -%>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Booker</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/books">Books</a></li>
+                    <li><a href="/authors">Authors</a></li>
+                </ul>
             </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/books">Books</a></li>
-                <li><a href="/authors">Authors</a></li>
-            </ul>
-        </div>
-    </nav>
-  </div>
-
-    <div ng-controller="readerController">
-        <div id="reader">
-            <div class="wrapper">
-                <h1>{{pdfName}}</h1>
-                <ng-pdf template-url="partials/viewer.html" canvasid="pdf" scale="page-fit" page=1></ng-pdf>
+        </nav>
+        <div ng-controller="homeController" ng-init="currentUser='<%-currentUser%>'">
+            <div id="paymentPage" ng-show="user.type !== 'premium' && reminder == false ">
+                <h1>You are currently using a {{user.type}} account </h1>
+                <h2>To fully benefit from our platform you should switch to a premium account </h2>
+                <form method="post" action="/paypal/pay">
+                    <button type="submit">Switch to Premium</button>
+                </form>
+                <button id="paymentPageClose" ng-click="closePaymentPage()">Remind me later</button>
             </div>
         </div>
-    </div>
-    <button type="button" id="showReaderButton" onclick="showReader()">Read now</button>
+</div>

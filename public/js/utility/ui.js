@@ -1,6 +1,3 @@
-
-
-
         function showReader() {
             $('#reader').removeClass('zoomOut');
             $('#reader').addClass('animated fadeIn');
@@ -26,6 +23,4 @@
             $('.chatRoom').addClass('animated fadeOutRight');
             $('body').css('overflow', 'visible');
             $('#connectedUsers').css('visibility', 'hidden');
-
-
         };
