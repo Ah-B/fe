@@ -25,9 +25,8 @@ app.controller('readerController', function($scope, $http) {
         console.log("**************** Reader Stopped : //Substract Dates + //Get counter ****************");
         var startTime = $scope.startTime;
         var endTime = moment();
-        //var duration = endTime.diff(startTime, 'minutes');
-        var duration = endTime.diff(startTime, 'seconds');
-        console.log("End time " + endTime.format("HH:mm") + "Duration: " + duration + "Pages Read : " + $scope.pagesReadCounter);
+        var duration = endTime.diff(startTime,'seconds');
+        console.log("start time "+$scope.startTime+"End time " + endTime + "Duration: " + duration + "Pages Read : " + $scope.pagesReadCounter);
 
         //POST to DB:User:habits
         var reqHabit = {
@@ -58,7 +57,7 @@ app.controller('readerController', function($scope, $http) {
         });
         $http(reqHabit).then(function() {
             $scope.pagesReadCounter = 1;
-            window.location = "/profile";
+            //window.location = "/profile";
         });
 
 
@@ -69,7 +68,7 @@ app.controller('readerController', function($scope, $http) {
         $scope.bookId = id;
         $scope.startTime = moment();
 
-        console.log("Start time " + $scope.startTime.format("HH:mm"));
+        console.log("Start time " + $scope.startTime);
     };
     $scope.pageFinished = function() {
         $scope.pagesReadCounter++;
