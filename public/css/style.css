@@ -57,30 +57,39 @@
     visibility: hidden;
 }
 
+
+
 .chatBottomBar {
-    bottom: 0px;
+    position: fixed;
+    bottom: -1%;
+    left: 24%;
+    width: 100%;
+    z-index: 15;
+    visibility: hidden;
+
 }
 
 #message {
-    position: relative;
-    width: 80%;
-    left: 1px;
+    height: 40px;
+    display: inline-block
 }
 
 #send {
-    width: 10%;
-    margin: -5px;
+  height: 40px;
+    display: inline-block
 }
 
 #stop {
-    width: 10%;
+  height: 40px;
+  display: inline-block
 }
-#paymentPage{
+
+#paymentPage {
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
     z-index: 10;
-    background-color: rgba(170,170,170,0.7);
-  }
+    background-color: rgba(170, 170, 170, 0.7);
+}

@@ -14,11 +14,12 @@ function initChat(roomId, userFName, userLName) {
             userName: userName,
             room: room
         });
+        $('header').hide();
     });
 
 
     socket.on('joined', function(ioUserName, users, numUsers) {
-
+        $('#messages').html('');
         $('#connectedUsers').empty();
         for (user of users) {
             if (user.room == room) {
