@@ -1,28 +1,32 @@
 <% layout('boilerplate') -%>
 
 
-
-
     <div ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>';userType='<%-userType%>'">
 
         <main role="main">
-            <div id="intro-wrap" data-height="22.222">
-                <div id="intro" class="preload darken" data-autoplay="5000" data-navigation="true" data-pagination="true" data-transition="fade">
-                    <div class="intro-item" style="background-image: url(http://placehold.it/1800x600/ddd/fff&text=Beetle%20image);">
-                    </div>
-                </div>
-            </div>
 
+            <div id="intro-wrap" class="full-height">
+              <div id="intro" class="preload darken more-button">
+                <div class="intro-item" style="background-image: url(/../Images/{{book.author.imageUrl}});">
+                </div>
+              </div>
+            </div>
 
             <div id="main" class="row">
                 <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
                     <div class="post-area clear-after">
                         <article role="main" class="column nine">
                             <h5 class="meta-post"></h5>
-                            <h1>{{book.title}}</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                            <p>BOOK DESCRIPTION Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
+                            <div class="section-title">
+                              <h3>{{book.title}}</h3>
+
+                            </div>
+                            <div class="owl-item active">
+                            <img class="bookCover" width="770" height="580" ng-src="/../Images/{{book.imageUrl}}" alt="" />
+                          </div>
+                            <br>
+                            <p>{{book.description}}</p>
+
                         </article>
 
                         <aside role="complementary" class="sidebar column three last">
@@ -47,7 +51,7 @@
                             <div class="widget">
                                 <a class="button mint" ng-click="addToLibrary()">Add to library</a>
                                 <a class="button mint" id="chatStart" onclick="showChat()">Start Chatting</a>
-                                <a class="button mint">Rate this Book</a>
+                                <a class="button mint" ng-click="rate()">Rate this Book</a>
                             </div>
                         </aside>
                     </div>
@@ -91,10 +95,6 @@
 
 
 
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-        <script src="/js/plugins.js"></script>
-        <script src="/js/beetle.js"></script>
 
 
         <div id="connectedUsers"></div>
@@ -117,3 +117,7 @@
         </div>
 
     </div>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/beetle.js"></script>

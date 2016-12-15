@@ -4,9 +4,12 @@ let Schema = mongoose.Schema;
 let authorModel = new Schema({
     fName: String,
     lName: String,
-    birthDate: Date,
-    deathDate: Date,
+    birthDate: String,
+    deathDate: String,
     imageUrl: String,
+    imageUrlMedium: String,
+    imageUrlSmall: String,
+    description : String,
     books: [{
         type: Schema.Types.ObjectId,
         ref: 'Book'

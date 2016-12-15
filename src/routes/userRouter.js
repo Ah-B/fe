@@ -79,7 +79,7 @@ module.exports = (User) => {
                         user.save();
                         res.json({
                             "type" : "successMessage",
-                            "content" : "This book was added successfully in your library"
+                            "content" : "This book was added successfully in your personal library"
                         })
                     } else {
                         res.json({

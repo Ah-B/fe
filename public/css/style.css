@@ -62,7 +62,7 @@
 .chatBottomBar {
     position: fixed;
     bottom: -1%;
-    left: 24%;
+    left: 26%;
     width: 100%;
     z-index: 15;
     visibility: hidden;
@@ -92,4 +92,73 @@
     height: 100%;
     z-index: 10;
     background-color: rgba(170, 170, 170, 0.7);
+}
+.bookCover{
+  /*position: relative;
+  left: 23%;*/
+  border-radius: 8%;
+
+}
+.authorCover{
+  position: relative;
+  border-radius: 8%;
+}
+.bookCoverList{
+  margin-bottom: 20px;
+}
+.authorCoverList{
+  border-radius:80%;
+  margin-bottom: 20px;
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate.ng-enter{
+  animation: 2s appear;
+
+
+}
+
+.animate.ng-leave{
+  animation: 1s disappear;
+}
+.animate.ng-move{
+  transition: all 1.5s ease;
+  left: 0px;
+}
+.animate.ng-move-active{
+  transition: all 1.5s ease;
+  left: 0px;
+}
+
+.element:hover {
+    color: #FC685C;
+}
+.element:active {
+    color: #FC685C;
+}
+.searchOptions{
+  position: relative;
+  width: 800px;
+}
+
+.searchOptionsList{
+  list-style-type: none;
+padding: 0;
+margin: 0;
+margin-bottom: 20px;
 }

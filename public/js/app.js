@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngResource','pdf']);
+var app = angular.module('app', ['ngResource','ngAnimate','pdf']);
 
 //
 // app.controller('controller', function($scope, $http) {

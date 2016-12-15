@@ -16,28 +16,55 @@ app.controller('bookController', function($scope, $http) {
         });
 
     }
-    $scope.rate = function() {
-        var req = {
-            method: 'POST',
-            url: '/api/book/rate/' + $scope.bookId + '/' + $scope.currentUser,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: {
-                rating: $scope.ratingModel
-            }
-        }
 
-        $http(req).then(function(message) {
-            console.log(message.data);
-            if (message.data.type === "successMessage") {
-                $scope.getBookData();
+    $scope.rate = function() {
+        swal({
+            title: "Rate book",
+            text: "Give us your own rating",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "slide-from-top",
+            inputPlaceholder: "Rating / 10 "
+        }, function(inputValue) {
+            if (inputValue === false) return false;
+            if (inputValue === "") {
+                swal.showInputError("You need to write something!");
+                return false;
+            };
+            if (inputValue > 10 ) {
+                swal.showInputError("Rating should be on an 10 scale ");
+                return false;
+            };
+            if (isNaN(inputValue)) {
+                swal.showInputError("Rating should be a number ");
+                return false;
+            };
+            var req = {
+                method: 'POST',
+                url: '/api/book/rate/' + $scope.bookId + '/' + $scope.currentUser,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    rating: inputValue
+                }
             }
+            $http(req).then(function(message) {
+                console.log(message.data);
+                if (message.data.type === "successMessage") {
+                    swal("Rated!", " " + message.data.content);
+                    $scope.getBookData();
+                } else {
+                    swal("Error", " " + message.data.content, "error");
+                }
+            });
         });
+
     }
     $scope.addToLibrary = function() {
         if ($scope.user.type == "free" && $scope.book.type == "premium") {
-            alert('for premium members only')
+            swal("Premium Content", "This book is for premium members only", "error");
         } else {
             var req = {
                 method: 'POST',
@@ -47,8 +74,11 @@ app.controller('bookController', function($scope, $http) {
                 }
             }
             $http(req).then(function(message) {
-                // TODO: This return data MUST be shown as a toast or popup message
-                alert(message.data.content);
+                if (message.data.type === "successMessage") {
+                    swal("Book added !", " " +message.data.content);
+                } else {
+                    swal("Already in library", " " +message.data.content, "warning");
+                }
             });
         }
     }
@@ -56,18 +86,18 @@ app.controller('bookController', function($scope, $http) {
     $scope.getBookData = function() {
         $http.get('/api/book/' + $scope.bookId).success(function(data) {
             $scope.book = data;
-            console.log(data);
+            $scope.authorImageUrl="/Images/"+data.author.imageUrl;
+            console.log($scope.authorImageUrl);
             var average = 0;
             var count = 0;
             for (rate of $scope.book.ratings) {
                 average = average + rate.rating;
                 count++;
             }
-            $scope.rating = average / count;
-            //  console.log($scope.rating);
-
+            $scope.rating = (average / count).toFixed(1);
             $scope.comments = $scope.book.comments;
         });
+
     }
 
     $scope.$watch(['bookId', 'currentUser'], function() {

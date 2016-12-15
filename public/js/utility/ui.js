@@ -33,3 +33,4 @@
             $('#connectedUsers').css('visibility', 'hidden');
             $('.chatBottomBar').css('visibility', 'hidden');
         };
+    

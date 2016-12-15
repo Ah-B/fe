@@ -1,60 +1,103 @@
-<!-- <% layout('boilerplate') -%>
-    <div ng-controller="bookController">
-        <table>
-            <thead>
-                <tr>
-                    <td>
-                        <h1>Title</h1></td>
-                    <td>
-                        <h1>Author</h1></td>
-                    <td>
-                        <h1>Ratings</h1></td>
-                </tr>
-            </thead>
-
-            <tr ng-repeat="book in books">
-                <td>{{book.title}}</td>
-                <td>{{book.author.fName}}</td>
-            </tr>
-        </table>
-    </div> -->
-
-<% layout('boilerplate') -%>
+<% layout('listBoilerplate') -%>
+    <link rel="apple-touch-icon" href="/template/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/template/img/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/template/img/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/template/img/apple-touch-icon-152x152.png">
     <div ng-controller="booksController">
 
 
+        <main role="main">
+            <div id="intro-wrap" class="full-height">
+                <div id="intro" class="preload darken more-button">
+                    <div class="intro-item" style="background-image: url(../Images/1.jpg);">
+                    </div>
+                </div>
 
-
-
-
-        <h1>books page</h1>
-        <br>
-
-        <div class="container">
-            <div class="form-group">
-                <input type="text" class="form-control" id="name" ng-model="search.title" placeholder="Search name..." />
-                <select class="form-control" ng-model="bookOrder" ng-init="title">
-                                                <option  value="title">Name(ASC)</option>
-                                                <option value="-title">Name(DEC)</option>
-                                                <option  value="date">Date(ASC)</option>
-                                                <option  value="-date">Date(DEC)</option>
-                    </select>
-
-                <!-- <select class="form-control" ng-model="bookGenreOrder"  ng-init="title">
-                                                <option  value="title">Name(ASC)</option>
-                                                <option value="-title">Name(DEC)</option>
-                    </select> -->
             </div>
-            <div class="row">
-                <div ng-repeat="book in books| filter : search | orderBy: bookOrder" class="thumbnail">
-                    <a href="/book/{{book._id}}">
-                        <h3>book:</h3>
-                        <h5>{{book.title}}</h5>
-                        <h5>{{book.date}}</h5>
-                        <h5>{{book.type}}</h5>
+            <div id="main" class="row">
+                <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+                    <div class="column nine">
+                        <div class="search-results">
+                            <h4>{{filteredItems.length}} books</h4>
+                        </div>
 
+                        <article ng-repeat="book in (filteredItems = (books  | filter : search | filter : radio | orderBy: bookOrder))" class="clear-after">
+                            <div class="column three">
+                                <figure>
+                                    <a href="/book/{{book._id}}"> <img class="bookCoverList" ng-src="/../Images/{{book.imageUrl}}" width="200" height="250"></a>
+                                </figure>
+                            </div>
+                            <div class="column nine last">
+                                <h2><a href="/book/{{book._id}}">{{book.title}}</a></h2>
+                                <h2></h2><h5 class="meta-post">Type : {{book.type}}</h5>
+                                <h5 class="meta-post"><a href="/author/{{book.author._id}}">Author : {{book.author.fName}} {{book.author.LName}}</a> - <time >Date : {{book.date}}</time></h5>
+                                <p>{{book.description| limitTo:200}} .....</p>
+                            </div>
+                        </article>
+                <!-- ******************************PAGINATION OLDER NEWER****************************** -->
+                        <!-- <div id="pagination">
+                            <ul class="clear-after reset plain">
+                                <li id="older" class="pagination-nav"><a href="#" class="button transparent aqua"><i class="fa fa-chevron-left"></i><span class="label">Older</span></a></li>
+                                <li id="newer" class="pagination-nav"><a href="#" class="button transparent aqua"><span class="label">Newer</span><i class="fa fa-chevron-right"></i></a></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                    <aside role="complementary" class="sidebar column three last">
+
+                        <h4>Title</h4>
+                        <div class="column ">
+                            <input id="name" ng-model="search.title" type="text" placeholder="Search..." value="" class="plain buffer">
+                        </div>
+                        <h4>Author</h4>
+                        <div class="column ">
+                            <input id="name" ng-model="search.author.fName" type="text" placeholder="Search..." value="" class="plain buffer">
+                        </div>
+                        <h4>Type</h4>
+                        <div class="column  searchOptions">
+                            <ul class="searchOptionsList">
+                              <li>
+                                  <input type="radio" ng-model="search.type" id="t-option" value="" name="all">
+                                  <label for="t-option">All</label>
+                              </li>
+                                <li>
+                                    <input type="radio" ng-model="search.type" id="t-option" value="premium" name="premium">
+                                    <label for="t-option">Premium</label>
+                                </li>
+                                <li>
+                                    <input type="radio" ng-model="search.type" id="t-option" value="free" name="free">
+                                    <label for="t-option">Free</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4>Genres</h4>
+                        <div class="column  searchOptions">
+                            <ul class="searchOptionsList">
+                                <li>
+                                    <input type="radio" ng-model="radio" id="t-option" value="" name="All">
+                                    <label for="t-option">All</label>
+                                </li>
+                                <li>
+                                    <input type="radio" ng-model="radio" id="t-option" value="Fantasy" name="Fantasy">
+                                    <label for="t-option">Fantasy</label>
+                                </li>
+                                <li>
+                                    <input type="radio" ng-model="radio" id="t-option" value="Romance" name="Romance">
+                                    <label for="t-option">Romance</label>
+                                </li>
+                                <li>
+                                    <input type="radio" ng-model="radio" id="t-option2" value="Thriller" name="Thriller">
+                                    <label for="t-option2">Thriller</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
                 </div>
             </div>
+        </main>
 
-        </div>
+
     </div>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/beetle.js"></script>

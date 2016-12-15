@@ -868,9 +868,7 @@ nav ul.sub-menu > li:last-child > a {
 .blog-section.list-style article figure img,
 .search.list-style article figure img {
     width: 100%;
-    -webkit-border-radius: 25%;
-    -moz-border-radius: 25%;
-    border-radius: 25%;
+  
 }
 
 .blog.list-style article p,
@@ -1150,7 +1148,6 @@ nav ul.sub-menu > li:last-child > a {
 }
 
 .portfolio .overlay,
-.portfolio-section .overlay,
 .related .overlay {
     position: absolute;
     top: 0;
@@ -1168,6 +1165,24 @@ nav ul.sub-menu > li:last-child > a {
     cursor: pointer;
     -moz-opacity: 0;
 }
+.portfolio-section .overlay{
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  padding: 0 1em;
+  height: 100%;
+  border-bottom: none;
+  background-color: rgba(20,20,20,0.5);
+  color: #fff;
+  text-align: center;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  cursor: pointer;
+  -moz-opacity: 0;
+  }
 
 .portfolio-section.dribbble-items .overlay {
     background-color: rgba(255,107,171,0.9);
@@ -1273,6 +1288,7 @@ nav ul.sub-menu > li:last-child > a {
 .grid-items .column.six,
 .grid-items .column.eight {
     margin-right: 0;
+    margin-left: 20px;
 }
 
 .shuffle-sizer {
