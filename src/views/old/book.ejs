@@ -1,0 +1,122 @@
+<% layout('boilerplate') -%>
+
+
+    <div ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>';userType='<%-userType%>'">
+
+        <main role="main">
+
+            <div id="intro-wrap" class="full-height">
+              <div id="intro" class="preload darken more-button">
+                <div class="intro-item" style="background-image: url(/../Images/{{book.author.imageUrl}});">
+                </div>
+              </div>
+            </div>
+
+            <div id="main" class="row">
+                <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+                    <div class="post-area clear-after">
+                        <article role="main" class="column nine">
+                            <h5 class="meta-post"></h5>
+                            <div class="section-title">
+                              <h3>{{book.title}}</h3>
+                            </div>
+                            <div class="owl-item active">
+                            <img class="bookCover" width="770" height="580" ng-src="/../Images/{{book.imageUrl}}" alt="" />
+                          </div>
+                            <br>
+                            <p>{{book.description}}</p>
+
+                        </article>
+
+                        <aside role="complementary" class="sidebar column three last">
+                            <div class="widget">
+                                <h4>AUTHOR</h4>
+                                <a href="/author/{{book.author._id}}">
+                                    <p>{{book.author.fName}}{{book.author.lName}}</p>
+                                </a>
+                            </div>
+                            <div class="widget">
+                                <h4>Publication date</h4>
+                                <p>{{book.date}}</p>
+                            </div>
+                            <div class="widget">
+                                <h4>Genre</h4>
+                                <p>{{book.genre}}</p>
+                            </div>
+                            <div class="widget">
+                                <h4>Rating</h4>
+                                <p>{{rating}}</p>
+                            </div>
+                            <div class="widget">
+                                <a class="button mint" ng-click="addToLibrary()">Add to library</a>
+                                <a class="button mint" id="chatStart" onclick="showChat()">Start Chatting</a>
+                                <a class="button mint" ng-click="rate()">Rate this Book</a>
+                            </div>
+                        </aside>
+                    </div>
+
+                    <div class="comment-section">
+                        <h3 id="comments">{{comments.length}} Comments</h3>
+                        <div class="thumbnail">
+                            <ul class="comment-list plain">
+                                <li class="comment">
+                                    <li class="comment" ng-repeat="comment in comments">
+                                        <div class="single-comment">
+
+                                            <!-- comment-author -->
+
+                                            <div class="comment-author">
+                                                <img src="http://placehold.it/60x60" class="avatar" alt="">
+                                                <cite>{{comment.commenter.fName}} {{comment.commenter.lName}}</cite>
+                                            </div>
+                                            <div class="comment-meta">
+                                                <time>{{comment.date}}</time>
+                                            </div>
+                                            <p>{{comment.text}}</p>
+                                        </div>
+                                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <br>
+                    <div id="post-comment" class="clear-after">
+                        <h3 id="reply-title">Leave a Reply</h3>
+                        <form class="comment-form" ng-submit="comment()">
+                            <textarea id='text' ng-model="commentModel" placeholder="Don't forget that kindness is all!"></textarea>
+                            <input class="plain button red" type="submit" value="Submit Comment">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+
+
+
+
+        <div id="connectedUsers"></div>
+        <div class="chatBottomBar">
+          <input id="message" type="text" name="name" value="" placeholder="message"/>
+          <a class="button transparent aqua" id="send">Send</a>
+          <a class="button transparent aqua" id="stop" onclick="hideChat()">Leave</a>
+        </div>
+        <div class="chatRoom">
+
+        <div class="section-title">{{book.title}} ChatRoom</h3></div>
+            <div class="chatMessages">
+                <div id="messages"></div>
+                <div id="notice"></div>
+            </div>
+
+            <script type="text/javascript">
+                initChat('<%-query%>', '<%-userFName%>', '<%-userLName%>');
+            </script>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="/js/plugins.js"></script>
+    <script src="/js/beetle.js"></script>

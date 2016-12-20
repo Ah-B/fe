@@ -7,8 +7,6 @@ let authorModel = new Schema({
     birthDate: String,
     deathDate: String,
     imageUrl: String,
-    imageUrlMedium: String,
-    imageUrlSmall: String,
     description : String,
     books: [{
         type: Schema.Types.ObjectId,

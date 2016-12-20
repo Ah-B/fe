@@ -1,7 +1,7 @@
 function initChat(roomId, userFName, userLName) {
 
     var socket = io.connect();
-    var message = $('#message').val();
+    var message = $('#chatMessage').val();
     var room = roomId;
     var userName = userFName.concat(" ", userLName);
     console.log(room);
@@ -14,33 +14,32 @@ function initChat(roomId, userFName, userLName) {
             userName: userName,
             room: room
         });
-        $('header').hide();
     });
-
 
     socket.on('joined', function(ioUserName, users, numUsers) {
         $('#messages').html('');
         $('#connectedUsers').empty();
         for (user of users) {
             if (user.room == room) {
-                $('#connectedUsers').append("<p>" + user.userName + "</p>")
+                $('#connectedUsers').append("<h4>" + user.userName + "</h4>")
             }
         }
-
         if (ioUserName == userName) {
-            $('#messages').append("<p class='notice' >Welcome</p>");
+            $('#messages').append("<h4 class='notice' >Welcome</h4>");
         } else {
-            $('#messages').append("<p class='notice' >  " + ioUserName + " has joined the discussion </p>");
+            $('#messages').append("<h4 class='notice' >  " + ioUserName + " has joined the discussion </h4>");
         };
         if (numUsers == 1) {
-            $('#messages').append("<p class='notice' > You are the only user connected </p>");
+            $('#messages').append("<h4 class='notice' > You are the only user connected </h4>");
+            $('#messages').append("<div class='space30'></div>");
         } else {
-            $('#messages').append("<p class='notice' > There are " + numUsers + " users currently connected </p>");
+            $('#messages').append("<h4 class='notice' > There are " + numUsers + " users currently connected </h4>");
+            $('#messages').append("<div class='space30'></div>");
         }
     });
-    $('#message').keypress(function(e) {
+    $('#chatMessage').keypress(function(e) {
         if (e.keyCode == 13) {
-            var message = $('#message').val();
+            var message = $('#chatMessage').val();
             socket.emit('send', {
                 userName: userName,
                 room: room,
@@ -49,8 +48,8 @@ function initChat(roomId, userFName, userLName) {
         }
     });
     $('#send').click(function() {
-        var message = $('#message').val();
-        socket.emit('send', {
+        var message = $('#chatMessage').val();
+          socket.emit('send', {
             userName: userName,
             room: room,
             message: message
@@ -74,29 +73,29 @@ function initChat(roomId, userFName, userLName) {
     socket.on('leaving', function(data, numUsers, users) {
         $('#connectedUsers').empty();
         for (user of users) {
-            $('#connectedUsers').append("<p>" + user.userName + "</p>")
+            $('#connectedUsers').append("<h4>" + user.userName + "</h4>")
         }
 
-        $('#messages').append("<p class='notice'>" + data.userName + " has left the discussion </p>");
+        $('#messages').append("<h4 class='notice'>" + data.userName + " has left the discussion </h4>");
 
         if (numUsers == 1) {
-            $('#messages').append("<p class='notice'> You are the only remaining connected user  </p>");
+            $('#messages').append("<h4 class='notice'> You are the only remaining connected user  </h4>");
         } else {
-            $('#messages').append("<p class='notice'> There are " + numUsers + " users currently connected </p>");
+            $('#messages').append("<h4 class='notice'> There are " + numUsers + " users currently connected </h4>");
         }
     });
 
     socket.on('message', function(data) {
         console.log(data);
-        $('#message').val('');
-        $("#messages").append("<p>" + data.userName + " : " + data.message + "</p>");
+        $('#chatMessage').val('');
+        $("#messages").append("<h4> <strong> " + data.userName + " </strong>  : " + data.message + "</h4>");
         $('.typing').remove();
 
     });
 
 
 
-    $('#message').focus(function() {
+    $('#chatMessage').focus(function() {
         socket.emit('focusIn', {
             userName: userName,
             room: room
@@ -108,7 +107,7 @@ function initChat(roomId, userFName, userLName) {
         }
     })
 
-    $('#message').focusout(function() {
+    $('#chatMessage').focusout(function() {
         socket.emit('focusOut');
         console.log("focusOut");
     });

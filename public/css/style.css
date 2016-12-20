@@ -61,26 +61,33 @@
 
 .chatBottomBar {
     position: fixed;
-    bottom: -1%;
-    left: 26%;
-    width: 100%;
+    bottom: 2%;
+    left: 30%;
+    width: 40%;
     z-index: 15;
     visibility: hidden;
-
 }
 
 #message {
     height: 40px;
     display: inline-block
 }
+#chatMessage{
+  width: 78%;
+  display: inline-block
 
+}
 #send {
-  height: 40px;
+  height: 33px;
+  width: 10%;
+
     display: inline-block
 }
 
 #stop {
-  height: 40px;
+  height: 33px;
+  width: 10%;
+
   display: inline-block
 }
 
@@ -93,23 +100,11 @@
     z-index: 10;
     background-color: rgba(170, 170, 170, 0.7);
 }
-.bookCover{
-  /*position: relative;
-  left: 23%;*/
-  border-radius: 8%;
 
-}
-.authorCover{
-  position: relative;
-  border-radius: 8%;
-}
-.bookCoverList{
-  margin-bottom: 20px;
-}
-.authorCoverList{
-  border-radius:80%;
-  margin-bottom: 20px;
-}
+
+
+
+/*OLDER TEMPLATE*/
 @keyframes appear {
   from {
     opacity: 0;
@@ -157,8 +152,11 @@
 }
 
 .searchOptionsList{
-  list-style-type: none;
+list-style-type: none;
 padding: 0;
 margin: 0;
 margin-bottom: 20px;
+}
+.commentText{
+  color: red
 }

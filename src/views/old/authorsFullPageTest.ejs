@@ -1,0 +1,244 @@
+<% layout('boilerplate') -%>
+<body id="pages">
+
+	<!-- STYLES -->
+	<div id="stylesBox">
+		<a href="#" class="contact">STYLES</a>
+		<div class="stylesBack">
+
+			<p>Layout Style</p>
+			<a class="boxed1" href="portfolio_01b28e.html?theme=boxed1" title="boxed">boxed</a> ::
+			<a class="boxed2" href="portfolio_01c286.html?theme=boxed2" title="not boxed">not boxed</a>
+
+			<p>Main Background Pattern</p>
+			<div class="pattern-links">
+				<a class="colorbox back21" href="portfolio_01a51f.html?theme=back21" title="Background"></a>
+				<a class="colorbox back22" href="portfolio_01c525.html?theme=back22" title="Background"></a>
+				<a class="colorbox back23" href="portfolio_014cc5.html?theme=back23" title="Background"></a>
+				<a class="colorbox back24" href="portfolio_01cc72.html?theme=back24" title="Background"></a>
+				<a class="colorbox back25" href="portfolio_01f825.html?theme=back25" title="Background"></a>
+
+				<a class="colorbox back1" href="portfolio_01e818.html?theme=back1" title="Background"></a>
+				<a class="colorbox back2" href="portfolio_017fb3.html?theme=back2" title="Background"></a>
+				<a class="colorbox back3" href="portfolio_01feb1.html?theme=back3" title="Background"></a>
+				<a class="colorbox back4" href="portfolio_017cb1.html?theme=back4" title="Background"></a>
+				<a class="colorbox back5" href="portfolio_016b45.html?theme=back5" title="Background"></a>
+				<a class="colorbox back6" href="portfolio_01132a.html?theme=back6" title="Background"></a>
+				<a class="colorbox back7" href="portfolio_019bca.html?theme=back7" title="Background"></a>
+				<a class="colorbox back8" href="portfolio_011bd4.html?theme=back8" title="Background"></a>
+				<a class="colorbox back9" href="portfolio_01e446.html?theme=back9" title="Background"></a>
+				<a class="colorbox back10" href="portfolio_01864b.html?theme=back10" title="Background"></a>
+				<a class="colorbox back11" href="portfolio_010454.html?theme=back11" title="Background"></a>
+				<a class="colorbox back12" href="portfolio_018242.html?theme=back12" title="Background"></a>
+				<a class="colorbox back13" href="portfolio_01ef26.html?theme=back13" title="Background"></a>
+				<a class="colorbox back14" href="portfolio_0102f5.html?theme=back14" title="Background"></a>
+				<a class="colorbox back15" href="portfolio_01000c.html?theme=back15" title="Background"></a>
+				<a class="colorbox back16" href="portfolio_0123f4.html?theme=back16" title="Background"></a>
+				<a class="colorbox back17" href="portfolio_01bc8a.html?theme=back17" title="Background"></a>
+				<a class="colorbox back18" href="portfolio_01c7bc.html?theme=back18" title="Background"></a>
+				<a class="colorbox back19" href="portfolio_01df9a.html?theme=back19" title="Background"></a>
+				<a class="colorbox back20" href="portfolio_01bf4e.html?theme=back20" title="Background"></a>
+
+			</div>
+
+			<a href="#" id="resetButton">Reset Styles</a>
+
+		</div>
+	</div>
+	<!-- STYLES -->
+
+	<div class="body"  ng-controller="authorsController">
+		<div class="top-wrap">
+			<div class="overlay-bg"></div>
+			<!-- Header -->
+
+			<!-- Header -->
+		</div>
+
+		<div class="space30"></div>
+
+		<!-- Main content -->
+		<div class="page-wrap container">
+			<h3>Portfolio Style 1</h3>
+			<div class="space30"></div>
+			<!-- Portfolio content -->
+			<section id="portfolio">
+				<!-- Start Filter -->
+				<ul class="folio-filter xtra" data-option-key="filter">
+					<li><h1>inputs here</h1></li>
+
+				</ul>
+				<!-- End Filter -->
+				<div class="portfolio-inner nport ">
+					<div ng-repeat="author in authors" id="folio" class="isotope">
+
+						<div class="folio-item col-md-4 isotope-item test">
+							<div class="p-item-inner">
+								<img ng-src="/../Images/{{author.imageUrl}}" class="img-responsive" alt="img" />
+								<div class="overlay-wrap">
+									<div class="overlay">
+										<div class="overlay-inner">
+											<a href="#" data-toggle="modal" data-target="#modal{{$index}}"><i class="fa fa-plus"></i></a>
+											<div class="space30"></div>
+											<h5>{{author.fName}}</h5>
+											<p>Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="space50"></div>
+					<div class="row page-nav">
+						<div class="col-md-12 no-padding">
+							<div class="col-md-6">
+								<ul>
+									<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+								</ul>
+							</div>
+							<div class="col-md-6">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- Portfolio content -->
+		</div>
+		<!-- Main content -->
+
+		<!-- Footer -->
+		<footer>
+			<div class="container">
+				<div class="col-md-2 footer-widget">
+					<h6>Quick Links</h6>
+					<ul class="link-list">
+						<li><a href="#">&rarr; Features</a></li>
+						<li><a href="#">&rarr; Portfolio</a></li>
+						<li><a href="#">&rarr; Our Blog</a></li>
+						<li><a href="#">&rarr; About</a></li>
+						<li><a href="#">&rarr; Contact</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2 footer-widget">
+					<h6>Blogroll</h6>
+					<ul class="link-list">
+						<li><a href="#">&rarr; Forums</a></li>
+						<li><a href="#">&rarr; Support/Help</a></li>
+						<li><a href="#">&rarr; Privacy Policy</a></li>
+						<li><a href="#">&rarr; Documentation</a></li>
+						<li><a href="#">&rarr; Terms</a></li>
+					</ul>
+				</div>
+				<div class="col-md-2 footer-widget">
+					<h6>Contact</h6>
+					<p>Design Headquarters<br>456 W57th Street<br>NYC, New York 06415</p>
+				</div>
+				<div class="col-md-6 footer-widget">
+					<h6>Be Sociable</h6>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+					<ul class="social">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+		<div class="footer-copy">
+			<div class="container">
+				<div class="col-md-12">
+					<p>&copy; Copyright 2014 Chemistry. - Purchase today at <a href="http://bit.ly/OgJ2eL">ThemeForest</a></p>
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+
+		<!-- Portfolio - Modal -->
+		<div ng-repeat="author in authors" class="modal fade" ng-attr-id={{'modal'+$index}} tabindex="-1" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<span class="close" data-dismiss="modal"><img src="/templateElements/images/close.png" alt="img"/></span>
+						<a class="prev-project" href="#" data-toggle="modal" data-dismiss="modal" data-target="#myModal1"></a>
+						<a class="next-project" href="#" data-toggle="modal" data-dismiss="modal" data-target="#myModal1"></a>
+						<div class="project-single container">
+							<div class="col-md-7">
+								<div class="project-slide">
+									<div class="big-img">
+										<img src="/templateElements/demo/projects/single1/1-big.jpg" class="img-responsive p1-img" alt="img" />
+										<img src="/templateElements/demo/projects/single1/2-big.jpg" class="img-responsive p2-img" style="display:none;" alt="img" />
+										<img src="/templateElements/demo/projects/single1/3-big.jpg" class="img-responsive p3-img" style="display:none;" alt="img" />
+									</div>
+									<div class="small-img">
+										<ul>
+											<li class="p1">
+												<div class="small-img-inner">
+													<img src="/templateElements/demo/projects/single1/1-small.jpg" class="img-responsive" alt="img" />
+													<span class="small-img-overlay"><i class="fa fa-plus"></i></span>
+												</div>
+											</li>
+											<li class="p2">
+												<div class="small-img-inner">
+													<img src="/templateElements/demo/projects/single1/2-small.jpg" class="img-responsive" alt="img" />
+													<span class="small-img-overlay"><i class="fa fa-plus"></i></span>
+												</div>
+											</li>
+											<li class="p3">
+												<div class="small-img-inner">
+													<img src="/templateElements/demo/projects/single1/3-small.jpg" class="img-responsive" alt="img" />
+													<span class="small-img-overlay"><i class="fa fa-plus"></i></span>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<h4>{{author.fName}} {{author.lName}}</h4>
+								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+								<p>Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+									felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
+								<div class="project-details">
+									<h5>Client:</h5>
+									<p>Samwise Gamgee</p>
+									<div class="divider2"></div>
+									<h5>Brief:</h5>
+									<p>Blue Monster trying to capture a heart</p>
+									<div class="divider2"></div>
+									<h5>Budget:</h5>
+									<p>$3,000 - $4,500</p>
+									<div class="divider2"></div>
+									<h5>Applications Used:</h5>
+									<p>Photoshop CS6 & Illustrator CS6</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Portfolio - Modal -->
+
+
+	</div>
+
+	<!-- JavaScript -->
+	<script src="/templateElements/js/jquery.js"></script>
+	<script src="/templateElements/js/bootstrap.js"></script>
+	<script src="/templateElements/js/owl-carousel/owl.carousel.js"></script>
+	<script src="/templateElements/js/flexslider/jquery.flexslider.js"></script>
+	<script src="/templateElements/js/slickNav/jquery.slicknav.min.js"></script>
+	<script src="/templateElements/js/jquery.isotope.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="/templateElements/js/jquery.gmap.js"></script>
+	<script src="/templateElements/js/fancybox/jquery.fancybox.pack.js"></script>
+	<script src="/templateElements/js/main.js"></script>
+
+
+</body>

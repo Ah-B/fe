@@ -86,8 +86,7 @@ app.controller('authorController', function($scope, $http) {
 
       $scope.getAuthorData = function(){
       $http.get('/api/author/' + $scope.authorId).success(function(data) {
-          $scope.author = data;        console.log($scope.author);
-
+          $scope.author = data;
           var average = 0;
           var count = 0;
           for (rate of $scope.author.ratings) {
@@ -100,13 +99,9 @@ app.controller('authorController', function($scope, $http) {
       });
     };
 
-    //  WAIT FOR SCOPE INIT
-    //   $scope.$watch('pageTitle', function () {
-    //     console.log($scope.pageTitle);
-    // });
+
     $scope.$watch(['authorId', 'currentUser'], function() {
         $scope.getAuthorData();
-
     });
 
 

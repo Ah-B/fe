@@ -32,7 +32,7 @@ app.controller('bookController', function($scope, $http) {
                 swal.showInputError("You need to write something!");
                 return false;
             };
-            if (inputValue > 10 ) {
+            if (inputValue > 10) {
                 swal.showInputError("Rating should be on an 10 scale ");
                 return false;
             };
@@ -75,18 +75,29 @@ app.controller('bookController', function($scope, $http) {
             }
             $http(req).then(function(message) {
                 if (message.data.type === "successMessage") {
-                    swal("Book added !", " " +message.data.content);
+                    swal("Book added !", " " + message.data.content);
                 } else {
-                    swal("Already in library", " " +message.data.content, "warning");
+                    swal("Already in library", " " + message.data.content, "warning");
                 }
             });
         }
     }
+    $scope.getBooksSameAuthor = function() {
+        $http.get('/api/book/').success(function(data){
+            $scope.sameAuthor = [];
+            for (book of data) {
+                if (book.author._id == $scope.book.author._id && book.title != $scope.book.title ) {
+                    $scope.sameAuthor.push(book);
+                }
+            }
+        })
 
+    };
     $scope.getBookData = function() {
         $http.get('/api/book/' + $scope.bookId).success(function(data) {
             $scope.book = data;
-            $scope.authorImageUrl="/Images/"+data.author.imageUrl;
+            console.log(data);
+            $scope.authorImageUrl = "/Images/" + data.author.imageUrl;
             console.log($scope.authorImageUrl);
             var average = 0;
             var count = 0;
@@ -96,6 +107,8 @@ app.controller('bookController', function($scope, $http) {
             }
             $scope.rating = (average / count).toFixed(1);
             $scope.comments = $scope.book.comments;
+            $scope.getBooksSameAuthor();
+
         });
 
     }

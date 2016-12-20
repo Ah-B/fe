@@ -1,0 +1,66 @@
+    <% layout('listBoilerplate') -%>
+        <link rel="apple-touch-icon" href="/template/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/template/img/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/template/img/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/template/img/apple-touch-icon-152x152.png">
+        <div ng-controller="authorsController">
+
+
+            <main role="main">
+                <div id="intro-wrap" class="full-height">
+                    <div id="intro" class="preload darken more-button">
+                      <div class="intro-item" style="background-image: url(http://placehold.it/780x1824/ddd/fff&text=Beetle%20image);">
+                        </div>
+                    </div>
+
+                </div>
+                <div id="main" class="row">
+                    <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
+                        <div class="column nine">
+                            <div class="search-results">
+                                <h4>{{filteredItems.length}} Authors</h4>
+                            </div>
+
+                            <article ng-repeat="author in (filteredItems = (authors  | filter : search ))" class="clear-after">
+                                <div class="column three">
+                                    <figure>
+                                        <a href="/author/{{author._id}}"> <img class="authorCoverList" ng-src="/../Images/{{author.imageUrlSmall}}" width="200" height="250"></a>
+                                    </figure>
+                                </div>
+                                <div class="column nine last">
+                                    <h2><a href="/author/{{author._id}}">{{author.fName}} {{author.lName}}</a></h2>
+                                      <h5 class="meta-post"><time >Birth date : {{author.birthDate}}</time></h5>
+                                      <h5 class="meta-post"> <time >Death date : {{author.deathDate}}</time> </h5>
+                                    <p>{{author.description| limitTo:200}} .....</p>
+                                </div>
+                            </article>
+                    <!-- ******************************PAGINATION OLDER NEWER****************************** -->
+                            <!-- <div id="pagination">
+                                <ul class="clear-after reset plain">
+                                    <li id="older" class="pagination-nav"><a href="#" class="button transparent aqua"><i class="fa fa-chevron-left"></i><span class="label">Older</span></a></li>
+                                    <li id="newer" class="pagination-nav"><a href="#" class="button transparent aqua"><span class="label">Newer</span><i class="fa fa-chevron-right"></i></a></li>
+                                </ul>
+                            </div> -->
+                        </div>
+                        <aside role="complementary" class="sidebar column three last">
+
+                            <h4>First Name</h4>
+                            <div class="column ">
+                                <input id="name" ng-model="search.fName" type="text" placeholder="Search..." value="" class="plain buffer">
+                            </div>
+                            <h4>Last Name</h4>
+                            <div class="column ">
+                                <input id="name" ng-model="search.lName" type="text" placeholder="Search..." value="" class="plain buffer">
+                            </div>
+
+                        </aside>
+                    </div>
+                </div>
+            </main>
+
+
+        </div>
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+        <script src="/js/plugins.js"></script>
+        <script src="/js/beetle.js"></script>
