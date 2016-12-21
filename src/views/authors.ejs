@@ -1,137 +1,47 @@
 <% layout('boilerplate') -%>
+<section id="content" ng-controller="authorsController">
+<header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
+<ul class="nav navbar-nav hidden-xs">
+</ul>
+<form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
+<div class="form-group">
+<div class="input-group"> <span class="input-group-btn"> <div  class=" btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></div> </span> <input ng-model="search.fName" type="text" class="form-control input-sm no-border rounded" placeholder="Fing by first name">
+</div>
+</div>
+</form>
+<form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
+<div class="form-group">
+<div class="input-group"> <span class="input-group-btn"> <div  class=" btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></div> </span> <input ng-model="search.lName" type="text" class="form-control input-sm no-border rounded" placeholder="Find by last name">
+</div>
+</div>
+</form>
+</header>
+<section class="hbox stretch">
+<section>
+<section class="vbox">
+<section class="scrollable padder-lg">
 
-	<body id="pages">
+  <h2 class="font-thin m-b">Authors</h2>
+  <p>Showing {{filteredItems.length}} results of {{authors.length}}</p>
+<br>
+  <div class="row row-sm">
+    <div ng-repeat="author in (filteredItems = (authors  | filter : search | orderBy: authorOrder ))" class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="item">
+        <div class="pos-rlt">
+          <div class="item-overlay opacity r r-2x bg-black">
+            <div class="center text-center m-t-n"> <a href="#"><i class="fa fa-file-text-o i-2x"></i></a><h4>View Author</h4> </div>
+          </div>
+          <a href="track-detail.html"><img ng-src="/Images/{{author.imageUrl}}" width="200" height="200" alt="" class="r r-2x img-full"></a>
+        </div>
+        <div class="padder-v"> <a href="track-detail.html" data-bjax="" data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">{{author.fName}} {{author.lName}}</a> <a href="track-detail.html" data-bjax="" data-target="#bjax-target"
+          data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">{{author.birthDate}} - {{author.deathDate}}</a> </div>
+      </div>
+    </div>
 
+  </div>
 
-		<div class="body" ng-controller="authorsController">
-
-			<!-- Main content -->
-			<div class="page-wrap container">
-				<h3>Shop</h3>
-				<!-- Shop Content -->
-				<div role="main" class="main shop">
-					<div class="row">
-						<div class="col-md-9">
-							<div class="row">
-								<div class="col-md-6">
-									<p>Showing {{filteredItems.length}} results of {{authors.length}}</p>
-								</div>
-
-							</div>
-							<div class="space20"></div>
-							<div class="row">
-								<ul class="products thumb-info-list">
-									<li ng-repeat="author in (filteredItems = (authors  | filter : search | orderBy: authorOrder ))" class="col-md-4 product">
-										<span class="thumb-info">
-									<a href="/author/{{author._id}}">
-									<span class="thumb-info-image">
-									<span class="thumb-info-act">
-									<span class="thumb-info-act-left"><em>View</em></span>
-										<span class="thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
-										</span>
-										<img alt="img" ng-src="/../Images/{{author.imageUrl}}" width="210" height="320">
-										</span>
-										</a>
-										<span class="thumb-info-content">
-											<a href="/author/{{author._id}}">
-												<h4>{{author.fName}}</h4>
-												<h4>{{author.lName}}</h4>
-											</a>
-										</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-
-							<div class="row page-nav">
-								<div class="col-md-12 no-padding">
-									<div class="col-md-6">
-										<ul>
-											<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-											<li class="active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-										</ul>
-									</div>
-									<div class="col-md-6">
-										<p>Page 1 of 2</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<aside>
-								<div class="space50"></div>
-
-								<div class="side-widget">
-									<h5>Search</h5>
-									<div class="search">
-										<input type="text" class="form-control" ng-model="search.fName" placeholder="Author first name...">
-										<br>
-										<input type="text" class="form-control" ng-model="search.lName" placeholder="Author last name...">
-									</div>
-									<div class="space50"></div>
-								</div>
-							</aside>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Main content -->
-
-			<!-- Footer -->
-			<footer>
-				<div class="container">
-					<div class="col-md-2 footer-widget">
-						<h6>Quick Links</h6>
-						<ul class="link-list">
-							<li><a href="#">&rarr; Features</a></li>
-							<li><a href="#">&rarr; Portfolio</a></li>
-							<li><a href="#">&rarr; Our Blog</a></li>
-							<li><a href="#">&rarr; About</a></li>
-							<li><a href="#">&rarr; Contact</a></li>
-						</ul>
-					</div>
-					<div class="col-md-2 footer-widget">
-						<h6>Blogroll</h6>
-						<ul class="link-list">
-							<li><a href="#">&rarr; Forums</a></li>
-							<li><a href="#">&rarr; Support/Help</a></li>
-							<li><a href="#">&rarr; Privacy Policy</a></li>
-							<li><a href="#">&rarr; Documentation</a></li>
-							<li><a href="#">&rarr; Terms</a></li>
-						</ul>
-					</div>
-					<div class="col-md-2 footer-widget">
-						<h6>Contact</h6>
-						<p>Design Headquarters<br>456 W57th Street<br>NYC, New York 06415</p>
-					</div>
-					<div class="col-md-6 footer-widget">
-						<h6>Be Sociable</h6>
-						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-						<ul class="social">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</footer>
-			<div class="footer-copy">
-				<div class="container">
-					<div class="col-md-12">
-						<p>&copy; Copyright 2014 Chemistry. - Purchase today at <a href="http://bit.ly/OgJ2eL">ThemeForest</a></p>
-					</div>
-				</div>
-			</div>
-			<!-- Footer -->
-		</div>
-
-
-
-
-	</body>
-
-	</html>
+</section>
+</section>
+</section>
+</section>
+</section>

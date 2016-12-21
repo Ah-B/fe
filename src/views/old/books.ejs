@@ -1,110 +1,212 @@
-<% layout('listBoilerplate') -%>
-    <link rel="apple-touch-icon" href="/template/img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/template/img/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/template/img/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/template/img/apple-touch-icon-152x152.png">
-    <div ng-controller="booksController">
+<% layout('boilerplate') -%>
+
+<body id="pages">
 
 
-        <main role="main">
-            <div id="intro-wrap" class="full-height">
-                <div id="intro" class="preload darken more-button">
-                    <div class="intro-item" style="background-image: url(http://placehold.it/780x1824/ddd/fff&text=Beetle%20image);">
-                    </div>
-                </div>
+<div class="body" ng-controller="booksController">
 
+	<!-- Main content -->
+	<div class="page-wrap container">
+		<h3>Shop</h3>
+		<!-- Shop Content -->
+		<div role="main" class="main shop">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="row">
+						<div class="col-md-6">
+							<p>Showing {{filteredItems.length}} results of {{books.length}}</p>
+						</div>
+
+					</div>
+					<div class="space20"></div>
+					<div class="row">
+						<ul class="products thumb-info-list">
+							<li ng-repeat="book in (filteredItems = (books  | filter : search | filter : genre | orderBy: bookOrder ))" class="col-md-4 product">
+								<span class="onsale" ng-hide="book.type === 'premium'">Free</span>
+								<span class="thumb-info">
+									<a href="/book/{{book._id}}">
+									<span class="thumb-info-image">
+									<span class="thumb-info-act">
+									<span class="thumb-info-act-left"><em>View</em></span>
+									<span class="thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+									</span>
+									<img alt="img" ng-src="/../Images/{{book.imageUrl}}" width="210" height="320" >
+									</span>
+									</a>
+									<span class="thumb-info-content">
+										<a href="/book/{{book._id}}"><h4>{{book.title}}</h4></a>
+                      <a href="/author/{{book.author._id}}">
+                      <h4>{{book.author.fName}}</h4>
+                      <h4> {{book.author.lName}}</h4>
+                      </a>
+											<!-- <span class="price">
+											<del><span class="amount">$325</span></del>
+											<ins><span class="amount">$299</span></ins>
+											</span> -->
+									</span>
+								</span>
+							</li>
+						</ul>
+					</div>
+
+					<div class="row page-nav">
+						<div class="col-md-12 no-padding">
+							<div class="col-md-6">
+								<ul>
+									<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+									<li class="active"><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+								</ul>
+							</div>
+							<div class="col-md-6">
+								<p>Page 1 of 2</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<aside>
+						<div class="space50"></div>
+
+						<div class="side-widget">
+							<h5>Search</h5>
+							<div class="search">
+								<input type="text" class="form-control" ng-model="search.title" placeholder="Book title ...">
+                <br>
+                <input type="text" class="form-control" ng-model="search.author.fName" placeholder="Author first name...">
+                <br>
+                <input type="text" class="form-control" ng-model="search.author.lName" placeholder="Author last name...">
+							</div>
+							<div class="space50"></div>
+						</div>
+            <div class="side-widget">
+              <h5>Genre</h5>
+              <select ng-model="genre" class="form-control" name="">
+                <option  value="" selected >All</option>
+                <option  ng-repeat="genre in genres" value="{{genre}}">{{genre}}</option>
+              </select>
+              <div class="space50"></div>
             </div>
-            <div id="main" class="row">
-                <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
-                    <div class="column nine">
-                        <div class="search-results">
-                            <h4>{{filteredItems.length}} books</h4>
-                        </div>
-
-                        <article ng-repeat="book in (filteredItems = (books  | filter : search | filter : radio | orderBy: bookOrder |
- pagination: curPage * pageSize | limitTo: pageSize ))" class="clear-after">
-                            <div class="column three">
-                                <figure>
-                                    <a href="/book/{{book._id}}"> <img class="bookCoverList" ng-src="/../Images/{{book.imageUrl}}" width="200" height="250"></a>
-                                </figure>
-                            </div>
-                            <div class="column nine last">
-                                <h2><a href="/book/{{book._id}}">{{book.title}}</a></h2>
-                                <h2></h2><h5 class="meta-post">Type : {{book.type}}</h5>
-                                <h5 class="meta-post"><a href="/author/{{book.author._id}}">Author : {{book.author.fName}} {{book.author.lName}}</a></h5>
-                                <h5 class="meta-post"> <time >Date : {{book.date}}</time></h5>
-                                <p>{{book.description| limitTo:200}} .....</p>
-                            </div>
-                        </article>
-                <!-- ******************************PAGINATION OLDER NEWER****************************** -->
-                        <!-- <div id="pagination">
-                            <ul class="clear-after reset plain">
-                                <li id="older" class="pagination-nav"><a href="#" class="button transparent aqua"><i class="fa fa-chevron-left"></i><span class="label">Older</span></a></li>
-                                <li id="newer" class="pagination-nav"><a href="#" class="button transparent aqua"><span class="label">Newer</span><i class="fa fa-chevron-right"></i></a></li>
-                            </ul>
-                        </div> -->
-                    </div>
-                    <aside role="complementary" class="sidebar column three last">
-
-                        <h4>Title</h4>
-                        <div class="column ">
-                            <input id="name" ng-model="search.title" type="text" placeholder="Search..." value="" class="plain buffer">
-                        </div>
-                        <h4>Author</h4>
-                        <div class="column ">
-                          <h5>First name</h5>
-                            <input id="name" ng-model="search.author.fName" type="text" placeholder="Search..." value="" class="plain buffer">
-                        </div>
-                        <div class="column ">
-                          <h5>Last name</h5>
-                            <input id="name" ng-model="search.author.lName" type="text" placeholder="Search..." value="" class="plain buffer">
-                        </div>
-                        <h4>Type</h4>
-                        <div class="column  searchOptions">
-                            <ul class="searchOptionsList">
-                              <li>
-                                  <input type="radio" ng-model="search.type" id="t-option" value="" name="all">
-                                  <label for="t-option">All</label>
-                              </li>
-                                <li>
-                                    <input type="radio" ng-model="search.type" id="t-option" value="premium" name="premium">
-                                    <label for="t-option">Premium</label>
-                                </li>
-                                <li>
-                                    <input type="radio" ng-model="search.type" id="t-option" value="free" name="free">
-                                    <label for="t-option">Free</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <h4>Genres</h4>
-                        <div class="column  searchOptions">
-                            <ul class="searchOptionsList">
-                                <li>
-                                    <input type="radio" ng-model="radio" id="t-option" value="" name="All">
-                                    <label for="t-option">All</label>
-                                </li>
-                                <li>
-                                    <input type="radio" ng-model="radio" id="t-option" value="Fantasy" name="Fantasy">
-                                    <label for="t-option">Fantasy</label>
-                                </li>
-                                <li>
-                                    <input type="radio" ng-model="radio" id="t-option" value="Romance" name="Romance">
-                                    <label for="t-option">Romance</label>
-                                </li>
-                                <li>
-                                    <input type="radio" ng-model="radio" id="t-option2" value="Thriller" name="Thriller">
-                                    <label for="t-option2">Thriller</label>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
-                </div>
+            <div class="side-widget">
+              <h5>Type</h5>
+              <select ng-model="search.type" class="form-control" name="">
+                <option  value="" selected >All</option>
+                <option  value="premium">Premium </option>
+                <option  value="free">Free</option>
+              </select>
+              <div class="space50"></div>
             </div>
-        </main>
+						<!-- <div class="side-widget">
+							<h5>Top Rated Products</h5>
+							<ul class="simple-post-list">
+								<li>
+									<div class="post-image">
+										<div class="img-thumbnail">
+											<a href="shop-product-sidebar.html">
+											<img alt="img" width="60" height="60" class="img-responsive" src="/templateElements/demo/products/product-1.jpg">
+											</a>
+										</div>
+									</div>
+									<div class="post-info">
+										<a href="shop-product-sidebar.html">Photo</a>
+										<div class="post-meta1">
+											$299
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="post-image">
+										<div class="img-thumbnail">
+											<a href="shop-product-sidebar.html">
+											<img alt="img" width="60" height="60" class="img-responsive" src="/templateElements/demo/products/product-2.jpg">
+											</a>
+										</div>
+									</div>
+									<div class="post-info">
+										<a href="shop-product-sidebar.html">Illustration</a>
+										<div class="post-meta1">
+											$72
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="post-image">
+										<div class="img-thumbnail">
+											<a href="shop-product-sidebar.html">
+											<img alt="img" width="60" height="60" class="img-responsive" src="/templateElements/demo/products/product-3.jpg">
+											</a>
+										</div>
+									</div>
+									<div class="post-info">
+										<a href="shop-product-sidebar.html">Painting</a>
+										<div class="post-meta1">
+											$60
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div> -->
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Main content -->
+
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="col-md-2 footer-widget">
+				<h6>Quick Links</h6>
+				<ul class="link-list">
+					<li><a href="#">&rarr; Features</a></li>
+					<li><a href="#">&rarr; Portfolio</a></li>
+					<li><a href="#">&rarr; Our Blog</a></li>
+					<li><a href="#">&rarr; About</a></li>
+					<li><a href="#">&rarr; Contact</a></li>
+				</ul>
+			</div>
+			<div class="col-md-2 footer-widget">
+				<h6>Blogroll</h6>
+				<ul class="link-list">
+					<li><a href="#">&rarr; Forums</a></li>
+					<li><a href="#">&rarr; Support/Help</a></li>
+					<li><a href="#">&rarr; Privacy Policy</a></li>
+					<li><a href="#">&rarr; Documentation</a></li>
+					<li><a href="#">&rarr; Terms</a></li>
+				</ul>
+			</div>
+			<div class="col-md-2 footer-widget">
+				<h6>Contact</h6>
+				<p>Design Headquarters<br>456 W57th Street<br>NYC, New York 06415</p>
+			</div>
+			<div class="col-md-6 footer-widget">
+				<h6>Be Sociable</h6>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+				<ul class="social">
+					<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+					<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+					<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	<div class="footer-copy">
+		<div class="container">
+			<div class="col-md-12">
+				<p>&copy; Copyright 2014 Chemistry. - Purchase today at <a href="http://bit.ly/OgJ2eL">ThemeForest</a></p>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+</div>
 
 
-    </div>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="/js/plugins.js"></script>
-    <script src="/js/beetle.js"></script>
+
+
+</body>
+
+</html>

@@ -1,66 +1,137 @@
-    <% layout('listBoilerplate') -%>
-        <link rel="apple-touch-icon" href="/template/img/apple-touch-icon.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/template/img/apple-touch-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/template/img/apple-touch-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/template/img/apple-touch-icon-152x152.png">
-        <div ng-controller="authorsController">
+<% layout('boilerplate') -%>
+
+	<body id="pages">
 
 
-            <main role="main">
-                <div id="intro-wrap" class="full-height">
-                    <div id="intro" class="preload darken more-button">
-                      <div class="intro-item" style="background-image: url(http://placehold.it/780x1824/ddd/fff&text=Beetle%20image);">
-                        </div>
-                    </div>
+		<div class="body" ng-controller="authorsController">
 
-                </div>
-                <div id="main" class="row">
-                    <div class="row-content buffer-left buffer-right buffer-bottom clear-after">
-                        <div class="column nine">
-                            <div class="search-results">
-                                <h4>{{filteredItems.length}} Authors</h4>
-                            </div>
+			<!-- Main content -->
+			<div class="page-wrap container">
+				<h3>Shop</h3>
+				<!-- Shop Content -->
+				<div role="main" class="main shop">
+					<div class="row">
+						<div class="col-md-9">
+							<div class="row">
+								<div class="col-md-6">
+									<p>Showing {{filteredItems.length}} results of {{authors.length}}</p>
+								</div>
 
-                            <article ng-repeat="author in (filteredItems = (authors  | filter : search ))" class="clear-after">
-                                <div class="column three">
-                                    <figure>
-                                        <a href="/author/{{author._id}}"> <img class="authorCoverList" ng-src="/../Images/{{author.imageUrlSmall}}" width="200" height="250"></a>
-                                    </figure>
-                                </div>
-                                <div class="column nine last">
-                                    <h2><a href="/author/{{author._id}}">{{author.fName}} {{author.lName}}</a></h2>
-                                      <h5 class="meta-post"><time >Birth date : {{author.birthDate}}</time></h5>
-                                      <h5 class="meta-post"> <time >Death date : {{author.deathDate}}</time> </h5>
-                                    <p>{{author.description| limitTo:200}} .....</p>
-                                </div>
-                            </article>
-                    <!-- ******************************PAGINATION OLDER NEWER****************************** -->
-                            <!-- <div id="pagination">
-                                <ul class="clear-after reset plain">
-                                    <li id="older" class="pagination-nav"><a href="#" class="button transparent aqua"><i class="fa fa-chevron-left"></i><span class="label">Older</span></a></li>
-                                    <li id="newer" class="pagination-nav"><a href="#" class="button transparent aqua"><span class="label">Newer</span><i class="fa fa-chevron-right"></i></a></li>
-                                </ul>
-                            </div> -->
-                        </div>
-                        <aside role="complementary" class="sidebar column three last">
+							</div>
+							<div class="space20"></div>
+							<div class="row">
+								<ul class="products thumb-info-list">
+									<li ng-repeat="author in (filteredItems = (authors  | filter : search | orderBy: authorOrder ))" class="col-md-4 product">
+										<span class="thumb-info">
+									<a href="/author/{{author._id}}">
+									<span class="thumb-info-image">
+									<span class="thumb-info-act">
+									<span class="thumb-info-act-left"><em>View</em></span>
+										<span class="thumb-info-act-right"><em><i class="fa fa-plus"></i> Details</em></span>
+										</span>
+										<img alt="img" ng-src="/../Images/{{author.imageUrl}}" width="210" height="320">
+										</span>
+										</a>
+										<span class="thumb-info-content">
+											<a href="/author/{{author._id}}">
+												<h4>{{author.fName}}</h4>
+												<h4>{{author.lName}}</h4>
+											</a>
+										</span>
+										</span>
+									</li>
+								</ul>
+							</div>
 
-                            <h4>First Name</h4>
-                            <div class="column ">
-                                <input id="name" ng-model="search.fName" type="text" placeholder="Search..." value="" class="plain buffer">
-                            </div>
-                            <h4>Last Name</h4>
-                            <div class="column ">
-                                <input id="name" ng-model="search.lName" type="text" placeholder="Search..." value="" class="plain buffer">
-                            </div>
+							<div class="row page-nav">
+								<div class="col-md-12 no-padding">
+									<div class="col-md-6">
+										<ul>
+											<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+											<li class="active"><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+										</ul>
+									</div>
+									<div class="col-md-6">
+										<p>Page 1 of 2</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<aside>
+								<div class="space50"></div>
 
-                        </aside>
-                    </div>
-                </div>
-            </main>
+								<div class="side-widget">
+									<h5>Search</h5>
+									<div class="search">
+										<input type="text" class="form-control" ng-model="search.fName" placeholder="Author first name...">
+										<br>
+										<input type="text" class="form-control" ng-model="search.lName" placeholder="Author last name...">
+									</div>
+									<div class="space50"></div>
+								</div>
+							</aside>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Main content -->
+
+			<!-- Footer -->
+			<footer>
+				<div class="container">
+					<div class="col-md-2 footer-widget">
+						<h6>Quick Links</h6>
+						<ul class="link-list">
+							<li><a href="#">&rarr; Features</a></li>
+							<li><a href="#">&rarr; Portfolio</a></li>
+							<li><a href="#">&rarr; Our Blog</a></li>
+							<li><a href="#">&rarr; About</a></li>
+							<li><a href="#">&rarr; Contact</a></li>
+						</ul>
+					</div>
+					<div class="col-md-2 footer-widget">
+						<h6>Blogroll</h6>
+						<ul class="link-list">
+							<li><a href="#">&rarr; Forums</a></li>
+							<li><a href="#">&rarr; Support/Help</a></li>
+							<li><a href="#">&rarr; Privacy Policy</a></li>
+							<li><a href="#">&rarr; Documentation</a></li>
+							<li><a href="#">&rarr; Terms</a></li>
+						</ul>
+					</div>
+					<div class="col-md-2 footer-widget">
+						<h6>Contact</h6>
+						<p>Design Headquarters<br>456 W57th Street<br>NYC, New York 06415</p>
+					</div>
+					<div class="col-md-6 footer-widget">
+						<h6>Be Sociable</h6>
+						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+						<ul class="social">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+			<div class="footer-copy">
+				<div class="container">
+					<div class="col-md-12">
+						<p>&copy; Copyright 2014 Chemistry. - Purchase today at <a href="http://bit.ly/OgJ2eL">ThemeForest</a></p>
+					</div>
+				</div>
+			</div>
+			<!-- Footer -->
+		</div>
 
 
-        </div>
-        <script src="https://code.jquery.com/jquery.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-        <script src="/js/plugins.js"></script>
-        <script src="/js/beetle.js"></script>
+
+
+	</body>
+
+	</html>
