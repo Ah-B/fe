@@ -1,10 +1,16 @@
 app.controller('booksController', function($scope, $http) {
     $scope.bookOrder = "title";
-    $scope.changeGenre = function(test){
-      if(test =='All'){
+
+    $scope.changeGenre = function(event,genre){
+
+        $(".list-group-item").removeClass('active')
+        $(event.target).addClass('active');
+
+
+      if(genre =='All'){
         $scope.genreFilter = "";
       }
-        $scope.genreFilter = test;
+        $scope.genreFilter = genre;
     }
 
     $http.get('/api/book/').success(function(data) {

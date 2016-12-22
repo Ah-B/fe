@@ -9,18 +9,23 @@
         };
 
         function showChat() {
-            $('.chatRoom').removeClass('fadeOutRight');
-            $('.chatBottomBar').removeClass('fadeOutRight');
+
+
+            // $('.chatRoom').removeClass('fadeOutRight');
+            // $('.chatBottomBar').removeClass('fadeOutRight');
 
             $('.chatRoom').css('visibility', 'visible');
-            $('.chatRoom').addClass('animated fadeInRight');
-            $('.chatBottomBar').addClass('animated fadeInRight');
-            $('.chatExternalContent').addClass('animated fadeOutRight');
+            $('#navData').html('');
 
-            $('body').css('overflow', 'hidden');
-            $('.chatRoom').css('overflow-y', 'scroll');
-            $('#connectedUsers').css('visibility', 'visible');
-            $('.chatBottomBar').css('visibility', 'visible');
+
+            // $('.chatRoom').addClass('animated fadeInRight');
+            // $('.chatBottomBar').addClass('animated fadeInRight');
+            // $('.chatExternalContent').addClass('animated fadeOutRight');
+            //
+            // $('body').css('overflow', 'hidden');
+            // $('.chatRoom').css('overflow-y', 'scroll');
+            // $('#connectedUsers').css('visibility', 'visible');
+            // $('.chatBottomBar').css('visibility', 'visible');
 
         };
 
