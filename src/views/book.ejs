@@ -1,145 +1,152 @@
 <% layout('boilerplate') -%>
-	<section id="content" ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>';userType='<%-userType%>'">
-		<section class="vbox">
-			<section class="scrollable wrapper-lg">
-				<div class="row">
-					<div class="col-sm-8">
-						<div class="blog-post">
-							<div class="post-item">
-								<div class="post-media"> <img src="/Images/{{book.imageUrl}}" width="800" height="400" class="img-full"> </div>
-								<div class="caption wrapper-lg">
-									<h2 class="post-title">{{book.title}}</h2>
-									<h3>{{book.author.fName}} {{book.author.lName}}</h3>
-									<br>
-									<div class="post-sum">
-										<p>{{book.description}}</p>
-									</div>
-									<div class="line line-lg"></div>
-									<div class="text-muted">
-										<a href="#" class="m-l-sm">
-											<i class="fa fa-clock-o icon-muted"></i> {{book.date}}
-										</a>
-										<a href="#" class="m-l-sm">
-											<i class="fa fa-comment-o icon-star"></i> {{rating}}
-										</a>
-									</div>
-									<div class="line line-lg"></div>
-									<div style="margin-left:200px">
-										<a href="#" class="btn btn-s-md btn-info btn-rounded" ng-click="addToLibrary()"> <i class="fa fa-plus"></i> Add to library</a>
-										<a href="#" class="btn btn-s-md btn-info btn-rounded" ng-click="rate()"><i class="icon-bubbles"></i>  Rate</a>
-										<a href="#" class="btn btn-s-md btn-info btn-rounded" id="chatStart" onclick="showChat()"><i class="icon-star"></i> Chat</a>
-									</div>
-								</div>
-							</div>
-							<h4 class="m-t-lg m-b">{{comments.length}} Comments</h4>
-							<section class="comment-list block">
-								<article ng-repeat="comment in comments" id="comment-id-1" class="comment-item">
-									<a class="pull-left thumb-sm avatar"> <img src="/template/images/a1.png" class="img-circle" alt="..."> </a> <span class="arrow left"></span>
-									<section class="comment-body panel panel-default">
-										<header class="panel-heading bg-white">
-											<a href="#">{{comment.commenter.fName}} {{comment.commenter.lName}}</a>
-											<label class="label bg-info m-l-xs"></label>
-											<span class="text-muted m-l-sm pull-right"> <i class="fa fa-clock-o"></i> {{comment.date}} </span>
-										</header>
-										<div class="panel-body">
-											<div>
-												{{comment.text}}
-											</div>
-										</div>
-									</section>
-								</article>
-							</section>
-							<h4 class="m-t-lg m-b">Leave a comment</h4>
-							<form ng-submit="comment()">
-								<div class="form-group"> <textarea ng-model="commentModel" class="form-control" rows="5" placeholder="Type your comment"></textarea> </div>
-								<div class="form-group"> <button type="submit" class="btn " style="background-color:#36B0C8;border-color:#36B0C8;color:#fff !important">Submit comment</button> </div>
-							</form>
-						</div>
+<section id="content" ng-controller="bookController" ng-init="bookId = '<%-query%>';currentUser='<%-currentUser%>';userType='<%-userType%>'">
+   <section class="hbox stretch">
+      <section>
+         <section class="vbox">
+            <section class="scrollable padder-lg" id="bjax-target">
+               <section class="scrollable wrapper-lg">
+                  <div class="row">
+                     <div id="mainContent" class="col-lg-8">
+                        <div class="blog-post">
+                           <div class="post-item">
+                              <div class="post-media">
+                                 <img ng-src="/Images/{{book.imageUrl}}" height="500" class="img-full">
+                              </div>
+                              <div class="caption wrapper-lg">
+                                 <h2 class="post-title">{{book.title}}</h2>
+                                 <h3>{{book.author.fName}} {{book.author.lName}}</h3>
+                                 <br>
+                                 <div class="post-sum">
+                                    <p>{{book.description}}</p>
+                                 </div>
+                                 <div class="line line-lg"></div>
+                                 <div class="text-muted">
+                                    <a href="#" class="m-l-sm">
+                                    <i class="fa fa-clock-o icon-muted"></i> {{book.date}}
+                                    </a>
+                                    <a href="#" class="m-l-sm">
+                                    <i class="fa fa-comment-o icon-star"></i> {{rating}}
+                                    </a>
+                                 </div>
+                                 <div class="line line-lg"></div>
+                                 <div class="row">
+                                    <div class="col-lg-12">
+                                       <div class="col-lg-4">
+                                          <a href="#" class="btn btn-s-md btn-info btn-rounded" ng-click="addToLibrary()"> <i class="fa fa-plus"></i> Add to library</a>
+                                       </div>
+                                       <div class="col-lg-4">
+                                          <a href="#" class="btn btn-s-md btn-info btn-rounded" ng-click="rate()"><i class="icon-bubbles"></i>  Rate</a>
+                                       </div>
+                                       <div class="col-lg-4">
+                                          <a href="#" class="btn btn-s-md btn-info btn-rounded" id="chatStart" onclick="showChat()"><i class="icon-star"></i> Chat</a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="post-item">
+                           </div>
+                           <h4 class="m-t-lg m-b">{{comments.length}} Comments</h4>
+                           <section class="comment-list block">
+                              <article ng-repeat="comment in comments" id="comment-id-1" class="comment-item">
+                                 <a class="pull-left thumb-sm avatar"> <img src="/template/images/a1.png" class="img-circle" alt="..."> </a> <span class="arrow left"></span>
+                                 <section class="comment-body panel panel-default">
+                                    <header class="panel-heading bg-white">
+                                       <a href="#">{{comment.commenter.fName}} {{comment.commenter.lName}}</a>
+                                       <label class="label bg-info m-l-xs"></label>
+                                       <span class="text-muted m-l-sm pull-right"> <i class="fa fa-clock-o"></i> {{comment.date}} </span>
+                                    </header>
+                                    <div class="panel-body">
+                                       <div>
+                                          {{comment.text}}
+                                       </div>
+                                    </div>
+                                 </section>
+                              </article>
+                           </section>
+                           <h4 class="m-t-lg m-b">Leave a comment</h4>
+                           <form ng-submit="comment()">
+                              <div class="form-group"> <textarea ng-model="commentModel" class="form-control" rows="5" placeholder="Type your comment"></textarea> </div>
+                              <div class="form-group"> <button type="submit" class="btn " style="background-color:#36B0C8;border-color:#36B0C8;color:#fff !important">Submit comment</button> </div>
+                           </form>
+                        </div>
+                     </div>
+                     <div id="navData" class="col-sm-4 ">
+                        <h5 class="font-bold">About</h5>
+                        <ul class="list-group">
+                           <li class="list-group-item">
+                              <a href="#"> <span class="badge pull-right">15</span> Total Pages </a>
+                           </li>
+                           <li class="list-group-item">
+                              <a href="#"> <span class="badge pull-right">30</span> Total words </a>
+                           </li>
+                           <li class="list-group-item">
+                              <a href="#"> <span class="badge pull-right">9</span> People reading </a>
+                           </li>
+                           <li class="list-group-item">
+                              <a href="#"> <span class="badge pull-right">4</span> Expected reading time</a>
+                           </li>
+                        </ul>
+                        <div class="line"></div>
+                        <div >
+													<div class="panel panel-default"  style="padding-left: 20px;">
+                           <h5 class="font-bold">By the same author</h5>
+                           <div>
+                              <div ng-repeat="same in sameAuthor | limitTo : 4">
+                                 <article class="media media m-t-none">
+                                    <a href="/book/{{same._id}}" class="pull-left  m-t-xs"> <img ng-src="/Images/{{same.imageUrl}}" height="200" width="150" class="r-2x "></a>
+                                    <div class="media-body">
+                                       <a href="/book/{{same._id}}" class="font-semibold">
+                                          <h3>{{same.title}}</h3>
+                                       </a>
+                                    </div>
+                                    <div class="text-xs block m-t-xs"><h4>{{same.genre}}</h4> </div>
+                                 </article>
+                                 <div class="line"></div>
+                              </div>
+                           </div>
+												 </div>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+            </section>
+         </section>
+      </section>
+      <!-- side content -->
+      <aside class="aside-md bg-light dk" id="sidebar" style="display:none;width:500px !important;background-color:white">
+         <section class="vbox animated fadeInRight">
+            <section class="w-f-md scrollable hover" >
+               <section class="panel panel-default" style="background-color:white" >
+                  <header class="panel-heading">Chat</header>
+                  <section  class="chat-list panel-body">
+                     <div id="chatMessageContainer"></div>
+                     <div id="notice"></div>
+                  </section>
+               </section>
+            </section>
+            <footer class="panel-footer" style="background-color:white">
+               <div id="isTyping"> </div>
+               <!-- chat form -->
+               <article class="chat-item" id="chat-form">
+                  <a class="pull-left thumb-sm avatar"><img src="/template/images/a3.png" class="img-circle" alt="..."></a>
+                  <section class="chat-body">
+                     <form action="http://flatfull.com/themes/musik/index.html" class="m-b-none">
+                        <div class="input-group">
+											<input type="text" class="form-control" id="chatMessage" rows="5" placeholder="Type your comment" style="margin-left: 0px; margin-right: 0px; width: 387px;"></input>
 
-					</div>
-					<div id="navData" class="col-sm-4 ">
-
-						<!-- <section class="vbox">
-							<section class="scrollable wrapper">
-								<p>
-									lorem
-								</p>
-								<h5 class="font-bold">Data</h5>
-								<ul class="list-group">
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">15</span> Total Pages </a>
-									</li>
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">30</span> Total words </a>
-									</li>
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">9</span> People reading </a>
-									</li>
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">4</span> Expected reading time</a>
-									</li>
-								</ul>
-								<div class="line"></div>
-								<h5 class="font-bold">By the same author</h5>
-								<div>
-									<div ng-repeat="same in sameAuthor | limitTo : 4">
-										<article class="media media m-t-none">
-											<a href="/book/{{same._id}}" class="pull-left thumb thumb-wrapper m-t-xs"> <img ng-src="/Images/{{same.imageUrl}}" height="44" width="44"></a>
-											<div class="media-body">
-												<a href="/book/{{same._id}}" class="font-semibold">
-													<h4>{{same.title}}</h4>
-												</a>
-											</div>
-											<div class="text-xs block m-t-xs"><a href="#">{{same.genre}}</a> </div>
-										</article>
-										<div class="line"></div>
-									</div>
-								</div>
-							</section>
-						</section> -->
-					
-								<p>
-									lorem
-								</p>
-								<h5 class="font-bold">Data</h5>
-								<ul class="list-group">
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">15</span> Total Pages </a>
-									</li>
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">30</span> Total words </a>
-									</li>
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">9</span> People reading </a>
-									</li>
-									<li class="list-group-item">
-										<a href="#"> <span class="badge pull-right">4</span> Expected reading time</a>
-									</li>
-								</ul>
-								<div class="line"></div>
-								<h5 class="font-bold">By the same author</h5>
-								<div>
-									<div ng-repeat="same in sameAuthor | limitTo : 4">
-										<article class="media media m-t-none">
-											<a href="/book/{{same._id}}" class="pull-left thumb thumb-wrapper m-t-xs"> <img ng-src="/Images/{{same.imageUrl}}" height="44" width="44"></a>
-											<div class="media-body">
-												<a href="/book/{{same._id}}" class="font-semibold">
-													<h4>{{same.title}}</h4>
-												</a>
-											</div>
-											<div class="text-xs block m-t-xs"><a href="#">{{same.genre}}</a> </div>
-										</article>
-										<div class="line"></div>
-									</div>
-								</div>
-					
-					</div>
-				</div>
-			</section>
-
-		</section>
-
-	</section>
-	<script type="text/javascript">
-		initChat('<%-query%>', '<%-userFName%>', '<%-userLName%>');
-	</script>
+														<button class="btn btn-s-md btn-info btn-rounded" id="send" type="button">SEND</button>
+														<button class="btn btn-s-md btn-info btn-rounded" id="stop" onclick="hideChat()"type="button">LEAVE</button>
+												</div>
+                     </form>
+                  </section>
+               </article>
+            </footer>
+         </section>
+      </aside>
+      <!-- / side content -->
+   </section>
+</section>
+<script type="text/javascript">
+   initChat('<%-query%>', '<%-userFName%>', '<%-userLName%>');
+</script>

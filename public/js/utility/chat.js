@@ -17,24 +17,27 @@ function initChat(roomId, userFName, userLName) {
     });
 
     socket.on('joined', function(ioUserName, users, numUsers) {
-        $('#messages').html('');
+        $('#chatMessageContainer').empty();
+        $('#chatMessageContainer').empty();
+        $('#notice').empty();
+
         $('#connectedUsers').empty();
         for (user of users) {
             if (user.room == room) {
-                $('#connectedUsers').append("<h4>" + user.userName + "</h4>")
+                $('#connectedUsers').append("<p>" + user.userName + "</p>")
             }
         }
         if (ioUserName == userName) {
-            $('#messages').append("<h4 class='notice' >Welcome</h4>");
+            $('#notice').append("<p class='notice' >Welcome</p>");
         } else {
-            $('#messages').append("<h4 class='notice' >  " + ioUserName + " has joined the discussion </h4>");
+            $('#notice').append("<p class='notice' >  " + ioUserName + " has joined the discussion </p>");
         };
         if (numUsers == 1) {
-            $('#messages').append("<h4 class='notice' > You are the only user connected </h4>");
-            $('#messages').append("<div class='space30'></div>");
+            $('#notice').append("<p class='notice' > You are the only user connected </p>");
+            $('#notice').append("<div class='space30'></div>");
         } else {
-            $('#messages').append("<h4 class='notice' > There are " + numUsers + " users currently connected </h4>");
-            $('#messages').append("<div class='space30'></div>");
+            $('#notice').append("<p class='notice' > There are " + numUsers + " users currently connected </p>");
+            $('#notice').append("<div class='space30'></div>");
         }
     });
     $('#chatMessage').keypress(function(e) {
@@ -54,6 +57,9 @@ function initChat(roomId, userFName, userLName) {
             room: room,
             message: message
         });
+        var message ='<article id="myMessage" class="chat-item right"><a href="#" class="pull-right thumb-sm avatar"><img src="/template/images/a3.png" class="img-circle" alt="..."></a><section class="chat-body"><div class="panel bg-light text-sm m-b-none"><div class="panel-body"> <span class="arrow right"></span><p class="m-b-none">'+message+'</p></div></div></section></article>'
+        $("#chatMessageContainer").append(message);
+
     });
 
     $('#stop').click(function() {
@@ -73,24 +79,26 @@ function initChat(roomId, userFName, userLName) {
     socket.on('leaving', function(data, numUsers, users) {
         $('#connectedUsers').empty();
         for (user of users) {
-            $('#connectedUsers').append("<h4>" + user.userName + "</h4>")
+            $('#connectedUsers').append("<p>" + user.userName + "</p>")
         }
-
-        $('#messages').append("<h4 class='notice'>" + data.userName + " has left the discussion </h4>");
-
+        $('#notice').append("<p class='notice'>" + data.userName + " has left the discussion </p>");
         if (numUsers == 1) {
-            $('#messages').append("<h4 class='notice'> You are the only remaining connected user  </h4>");
+            $('#notice').append("<p class='notice'> You are the only remaining connected user  </p>");
         } else {
-            $('#messages').append("<h4 class='notice'> There are " + numUsers + " users currently connected </h4>");
+            $('#notice').append("<p class='notice'> There are " + numUsers + " users currently connected </p>");
         }
     });
 
     socket.on('message', function(data) {
-        console.log(data);
         $('#chatMessage').val('');
-        $("#messages").append("<h4> <strong> " + data.userName + " </strong>  : " + data.message + "</h4>");
         $('.typing').remove();
+        if (data.userName !== userName) {
+          var message = '<article class="chat-item left"><div class="pull-left thumb-sm avatar"><img src="/template/images/a2.png" alt="..."></div><section class="chat-body"><div class="panel b-light text-sm m-b-none"><header class="panel-heading bg-white"> <p>'+data.userName+'</p></header><div class="panel-body"> <span class="arrow left bg-white"></span><p class="m-b-none">'+data.message+'</p></div></div> <small class="text-muted"><i class="fa fa-ok text-success"></i> 2 minutes ago</small> </section></article>';
+          $("#chatMessageContainer").append(message);
+        } else {
 
+        }
+        $("#notice").empty();
     });
 
 
@@ -102,8 +110,9 @@ function initChat(roomId, userFName, userLName) {
         });
     });
     socket.on('writing', function(data) {
+
         if (data.userName !== userName) {
-            $('#messages').append("<p class=typing>" + data.userName + " : is typing </p>");
+            $('#isTyping').append("<p class=typing>" + data.userName + " : is typing </p>");
         }
     })
 

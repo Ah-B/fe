@@ -93,7 +93,7 @@ app.controller('authorController', function($scope, $http) {
               average = average + rate.rating;
               count++;
           }
-          $scope.rating = average / count;
+          $scope.rating = (average / count).toFixed(1);
           $scope.books = $scope.author.books;
           $scope.comments = $scope.author.comments;
       });

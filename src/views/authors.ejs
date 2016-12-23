@@ -1,53 +1,3 @@
-<!--
-<!-- <section id="content" ng-controller="authorsController">
-<header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-<ul class="nav navbar-nav hidden-xs">
-</ul>
-<form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
-<div class="form-group">
-<div class="input-group"> <span class="input-group-btn"> <div  class=" btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></div> </span> <input ng-model="search.fName" type="text" class="form-control input-sm no-border rounded" placeholder="Fing by first name">
-</div>
-</div>
-</form>
-<form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
-<div class="form-group">
-<div class="input-group"> <span class="input-group-btn"> <div  class=" btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></div> </span> <input ng-model="search.lName" type="text" class="form-control input-sm no-border rounded" placeholder="Find by last name">
-</div>
-</div>
-</form>
-</header>
-<section class="hbox stretch">
-<section>
-<section class="vbox">
-<section class="scrollable padder-lg">
-
-   <h2 class="font-thin m-b">Authors</h2>
-  <p>Showing {{filteredItems.length}} results of {{authors.length}}</p>
-<br>
-
-  <div class="row row-sm">
-    <div ng-repeat="author in (filteredItems = (authors  | filter : search | orderBy: authorOrder ))" class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-      <div class="item">
-        <div class="pos-rlt">
-          <div class="item-overlay opacity r r-2x bg-black">
-            <div class="center text-center m-t-n"> <a href="#"><i class="fa fa-file-text-o i-2x"></i></a><h4>View Author</h4> </div>
-          </div>
-          <a href="track-detail.html"><img ng-src="/Images/{{author.imageUrl}}" width="200" height="200" alt="" class="r r-2x img-full"></a>
-        </div>
-        <div class="padder-v"> <a href="track-detail.html" data-bjax="" data-target="#bjax-target" data-el="#bjax-el" data-replace="true" class="text-ellipsis">{{author.fName}} {{author.lName}}</a> <a href="track-detail.html" data-bjax="" data-target="#bjax-target"
-          data-el="#bjax-el" data-replace="true" class="text-ellipsis text-xs text-muted">{{author.birthDate}} - {{author.deathDate}}</a> </div>
-      </div>
-    </div>
-
-  </div>
-
-</section>
-</section>
-</section>
-</section>
-</section> -->
-
-
 <% layout('listBoilerplate') -%>
 <section class="vbox"  ng-controller="authorsController">
 	<header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
@@ -79,7 +29,7 @@
 	</header>
 	<section>
 		<section class="hbox stretch">
-			<aside class="bg-black dk  aside hidden-print" id="nav">
+			<aside class="bg-dark dk  aside hidden-print" id="nav">
 				<section class="vbox">
 					<section class="w-f-md scrollable">
 						<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 253px;">
@@ -134,7 +84,7 @@
 													<a href="grid.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Grid</span> </a>
 												</li>
 												<li>
-													<a href="widgets.html" class="auto"> <b class="badge bg-black pull-right">8</b> <i class="fa fa-angle-right text-xs"></i> <span>Widgets</span> </a>
+													<a href="widgets.html" class="auto"> <b class="badge bg-dark pull-right">8</b> <i class="fa fa-angle-right text-xs"></i> <span>Widgets</span> </a>
 												</li>
 												<li>
 													<a href="components.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Components</span> </a>
@@ -233,17 +183,18 @@
 
 							<section>
 								<section class="vbox">
-									<section class="scrollable padder-lg">
+									<section class="scrollable padder-lg" >
 										<br>
-										<h2>Books</h2>
+
+										<h2>Authors</h2>
 										<p>Showing {{filteredItems.length}} results of {{authors.length}}</p>
 										<br>
 
-                    <div class="row row-sm">
+                    <div class="row row-sm" >
                       <div ng-repeat="author in (filteredItems = (authors  | filter : search | orderBy: authorOrder ))" class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                        <div class="item">
+                        <div class="item panel">
                           <div class="pos-rlt">
-                            <div class="item-overlay opacity r r-2x bg-black">
+                            <div class="item-overlay opacity r r-2x bg-dark">
                               <div class="center text-center m-t-n"> <a href="/author/{{author._id}}"><i class="fa fa-file-text-o i-2x"></i></a><h4>View Author</h4> </div>
                             </div>
                             <a href="/author/{{author._id}}"><img ng-src="/Images/{{author.imageUrl}}"  height="350" alt="" class="r r-2x img-full"></a>

@@ -45,11 +45,7 @@
     visibility: hidden;
 }*/
 
-.notice {
-    position: relative;
-    color: green;
-    text-align: center;
-}
+
 
 #connectedUsers {
     position: fixed;
@@ -81,18 +77,15 @@
 
 }
 #send {
-  height: 33px;
-  width: 10%;
+margin-left: 40px;
+margin-top: 5px;}
 
-    display: inline-block
-}
 
 #stop {
-  height: 33px;
-  width: 10%;
 
-  display: inline-block
-}
+margin-left: 40px;
+margin-top: 5px;}
+
 
 #paymentPage {
     position: absolute;

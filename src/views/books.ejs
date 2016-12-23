@@ -24,7 +24,7 @@
 	</header>
 	<section>
 		<section class="hbox stretch">
-			<aside class="bg-black dk  aside hidden-print" id="nav">
+			<aside class="bg-dark dk  aside hidden-print" id="nav">
 				<section class="vbox">
 					<section class="w-f-md scrollable">
 						<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 253px;">
@@ -79,7 +79,7 @@
 													<a href="grid.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Grid</span> </a>
 												</li>
 												<li>
-													<a href="widgets.html" class="auto"> <b class="badge bg-black pull-right">8</b> <i class="fa fa-angle-right text-xs"></i> <span>Widgets</span> </a>
+													<a href="widgets.html" class="auto"> <b class="badge bg-dark pull-right">8</b> <i class="fa fa-angle-right text-xs"></i> <span>Widgets</span> </a>
 												</li>
 												<li>
 													<a href="components.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Components</span> </a>
@@ -188,9 +188,9 @@
 							<!-- / side content -->
 							<section>
 								<section class="vbox">
-									<section class="scrollable padder-lg">
-										<br>
-										<h2>Books</h2>
+									<section class=" scrollable padder-lg">
+
+									<h2 class="font-thin m-b">Books</h2>
 										<p>Showing {{filteredItems.length}} results of {{books.length}}</p>
 										<br>
 										<div class="row row-sm">
@@ -198,13 +198,13 @@
 												<div class="item">
 													<div class="pos-rlt">
 														<div class="bottom"> </div>
-														<div class="item-overlay opacity r r-2x bg-black">
+														<div class="item-overlay opacity r r-2x bg-dark">
 															<div class="center text-center m-t-n">
 																<a href="/book/{{book._id}}"><i class="fa fa-file-text-o i-2x"></i></a>
 																<h4>View Book </h4>
 															</div>
 														</div>
-														<a href="/book/{{book._id}}"><img ng-src="/Images/{{book.imageUrl}}" width="150" height="250" alt="" class="r r-2x img-full"></a>
+														<a href="/book/{{book._id}}"><img ng-src="/Images/{{book.imageUrl}}" alt="" height="227" class="r r-2x img-full"></a>
 													</div>
 													<div class="padder-v"> <a href="/book/{{book._id}}" class="text-ellipsis">{{book.title}}</a> <a href="/author/{{book.author._id}}" class="text-ellipsis text-xs text-muted">{{book.author.fName}} {{book.author.lName}}</a> </div>
 												</div>
