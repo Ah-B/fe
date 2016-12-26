@@ -7,9 +7,14 @@ app.controller('homeController', function($scope, $http) {
       console.log($scope.reminder);
     }
 
+$scope.init = function(){
+
+//angular.element(document.getElementById('navBar')).remove();
+}
     $scope.$watch('currentUser', function() {
         $http.get('/api/user/' + $scope.currentUser).success(function(data) {
             $scope.user = data;
+            console.log($scope.user);
         })
         // .then(function() {
         // });

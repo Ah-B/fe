@@ -77,11 +77,11 @@ interfaceRouter.get('/paypal/success', function(req, res) {
           console.log(JSON.stringify(payment));
       }
   });
-
+console.log("***********************************************",req.user._id);
     User.findById(req.user._id, (err, user) => {
             user.type = "premium";
             user.save();
-            res.render('main', {
+            res.render('profile', {
                 currentUser: req.user._id
             });
     });

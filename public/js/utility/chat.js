@@ -93,7 +93,7 @@ function initChat(roomId, userFName, userLName) {
         $('#chatMessage').val('');
         $('.typing').remove();
         if (data.userName !== userName) {
-          var message = '<article class="chat-item left"><div class="pull-left thumb-sm avatar"><img src="/template/images/a2.png" alt="..."></div><section class="chat-body"><div class="panel b-light text-sm m-b-none"><header class="panel-heading bg-white"> <p>'+data.userName+'</p></header><div class="panel-body"> <span class="arrow left bg-white"></span><p class="m-b-none">'+data.message+'</p></div></div> <small class="text-muted"><i class="fa fa-ok text-success"></i> 2 minutes ago</small> </section></article>';
+          var message = '<article class="chat-item left"><div class="pull-left thumb-sm avatar"><img src="/template/images/a2.png" alt="..."></div><section class="chat-body"><div class="panel b-light text-sm m-b-none"><header class="panel-heading bg-white"> <p>'+data.userName+'</p></header><div class="panel-body"> <span class="arrow left bg-white"></span><p class="m-b-none">'+data.message+'</p></div></div> </section></article>';
           $("#chatMessageContainer").append(message);
         } else {
 

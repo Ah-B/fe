@@ -87,16 +87,21 @@ margin-left: 40px;
 margin-top: 5px;}
 
 
-#paymentPage {
+.paymentPage {
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
     height: 100%;
-    z-index: 10;
-    background-color: rgba(170, 170, 170, 0.7);
+    z-index: 100;
+    background-color: #4CB6CB;
 }
-
+.paymentPageText{
+  color: #fff;
+}
+.hiddenNav{
+display: none;
+}
 
 
 
