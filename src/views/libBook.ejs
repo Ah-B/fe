@@ -1,32 +1,31 @@
 <% layout('boilerplate') -%>
-    <nav class="navbar navbar-default ui">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">Booker</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li class="active"><a href="/profile">Profile</a></li>
-                <li><a href="/books">Books</a></li>
-                <li><a href="/authors">Authors</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <div ng-controller="readerController" ng-init="currentUser='<%-currentUser%>';currentBookId='<%-libbook%>'">
-
-        <div class="ui">
-            <h1>{{currentBook.book.title}}</h1>
-            <h3>CurrentPage</h3>
-            <h5>{{currentBook.lastPage}}</h5>
-            <h3>Last Read date: </h3>{{currentBook.lastReadDate}}
-        </div>
+    <section class="scrollable " ng-controller="readerController" ng-init="currentUser='<%-currentUser%>';currentBookId='<%-libbook%>'">
         <div id="reader">
             <div class="wrapper">
                 <ng-pdf template-url="/partials/viewer.html" canvasid="pdf" scale="page-fit" page=<%-currentPage%> ></ng-pdf>
             </div>
-        </div>
-        <button class="ui" type="button" id="showReaderButton" ng-click="ngReaderStart(currentBook.book.pdfUrl,currentBook.book.title,currentBook.book._id,currentBook.lastPage)" onclick="showReader()">Start reading</button>
-
-
-    </div>
+        </div>  
+        <section class="panel panel-default ui " style="margin-left:20px; margin-right:20px">
+            <header class="panel-heading font-bold">
+                <h1>{{currentBook.book.title}}</h1>
+            </header>
+            <div class="panel-body">
+                <h5 class="font-bold">Info</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="#"> <span class=" pull-right">{{currentBookAuthor.fName}} {{currentBookAuthor.lName}}</span> Author </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <span class=" pull-right">{{currentBook.book.genre}}</span> Genre </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <span class="badge pull-right">{{currentBook.lastReadDate}}</span> Last read date </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#"> <span class="badge pull-right">{{currentBook.lastPage}}</span> Last read page </a>
+                    </li>
+                </ul>
+                <a href="#" class=" ui btn btn-s-md btn-info btn-rounded" id="showReaderButton" ng-click="ngReaderStart(currentBook.book.pdfUrl,currentBook.book.title,currentBook.book._id,currentBook.lastPage)" onclick="showReader()">Resume reading</a>
+            </div>
+        </section>

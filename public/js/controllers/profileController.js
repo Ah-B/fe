@@ -24,6 +24,6 @@ app.controller('profileController', function($scope, $http) {
             s = Math.floor(time % 3600 % 60);
         $scope.readingHabitsSeconds = (s < 10 ? "0" : "") + s;
         $scope.readingHabitsMinutes = (m < 10 ? "0" : "") + m;
-        $scope.readingHabitsHours = (h > 0 ? h : "");
+        $scope.readingHabitsHours = (h > 0 ? h : "0");
     }
 });

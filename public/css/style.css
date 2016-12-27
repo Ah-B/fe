@@ -8,12 +8,7 @@
     height: 100px;
 }
 
-.pdf-controls {
-    width: 100%;
-    background: #C1C1C1;
-    border-radius: 10px;
-    padding: 1em;
-}
+
 
 .fixed {
     position: fixed;
@@ -29,8 +24,7 @@
 
 #reader {
     z-index: 100;
-    opacity: 0;
-}
+display: none;}
 .chatRoom{
 
 }
@@ -160,4 +154,18 @@ margin-bottom: 20px;
 }
 .commentText{
   color: red
+}
+
+.pdf-controls {
+    width: 100%;
+    background: #4cb6cb;
+    padding: 1em;
+}
+.readerNavbar{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 70px!important;
+
 }

@@ -1,16 +1,23 @@
-<form class="navbar-form navbar-left" ng-class="getNavStyle(scroll)">
-    <button class="button transparent aqua" ng-click="goPrevious()"><</button>
-    <button class="button transparent aqua" ng-click="goNext();pageFinished()">></button>
-    <span>Page:</span>
-    <div class="form-group">
-        <input type="text" min=1 ng-model="pageNum" class="form-control" placeholder="Search">
-        <span> / {{pageCount}}</span>
+<form class="readerNavbar" ng-class="getNavStyle(scroll)">
+    <div class="row">
+        <div class="col-lg-2">
+            <h1 style="color:white">{{currentBook.book.title}}</h1>
+        </div>
+        <div class="col-lg-3 col-lg-offset-3 " style="margin-top:5px;">
+            <span style="float:left;margin-left:10px;margin-top:10px;color:white">Page:</span>
+            <input type="text" min=1 ng-model="pageNum" class="form-control rounded" style="width: 50px;float:left;margin-left:10px"><span style="float:left;margin-left:10px;margin-top:10px;color:white">/ {{pageCount}}</span>
+        </div>
+        <div class="col-lg-1 " style="margin-top:5px;">
+            <a href="#" class="btn btn-s btn-success btn-rounded" ng-click="goPrevious()">Previous</a>
+        </div>
+        <div class="col-lg-1 " style="margin-top:5px;">
+            <a href="#" class="btn btn-s btn-success btn-rounded" ng-click="goNext();pageFinished()">Next</a>
+        </div>
+        <div class="col-lg-1 col-lg-offset-1" style="margin-top:5px;">
+            <a href="#" class="btn btn-s btn-dark btn-rounded" ng-click="ngReaderStop()" onclick="hideReader()">Close</a>
+        </div>
+
     </div>
-    <div class="form-group">
-        <span>Document URL: </span>
-        <input type="text" min=1 ng-model="pdfUrl" class="form-control" placeholder="Book">
-    </div>
-    <button type="button" class="button transparent aqua" ng-click="ngReaderStop()" onclick="hideReader()">Close</button>
 </form>
 
 <canvas id="pdf"></canvas>

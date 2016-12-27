@@ -6,20 +6,25 @@ app.controller('readerController', function($scope, $http) {
             for (book of data.library) {
                 if (book.book._id === $scope.currentBookId) {
                     $scope.currentBook = book;
+
                 }
             }
 
             // console.log($scope.user);
-            // console.log($scope.currentBook);
+            // console.log("current",$scope.currentBook);
             // // $scope.currentPage=$scope.currentBook.lastPage;
             $scope.currentPageCounter = $scope.currentBook.lastPage;
             // console.log($scope.page);
+              $http.get('/api/book/' + $scope.currentBook.book._id).success(function(data) {
+                console.log(data);
+                $scope.currentBookAuthor = data.author;
+              })
         });
     });
     //$scope.scroll = 0;
     //$scope.current = 1;
 
-    $scope.pagesReadCounter = 1;
+    $scope.pagesReadCounter = 0;
     $scope.startTime;
     $scope.ngReaderStop = function() {
         console.log("**************** Reader Stopped : //Substract Dates + //Get counter ****************");
@@ -57,7 +62,7 @@ app.controller('readerController', function($scope, $http) {
         });
         $http(reqHabit).then(function() {
             $scope.pagesReadCounter = 1;
-            //window.location = "/profile";
+            window.location = "/profile";
         });
 
 

@@ -1,6 +1,5 @@
         function showReader() {
-            $('#reader').removeClass('zoomOut');
-            $('#reader').addClass('animated fadeIn');
+            $('#reader').toggle();
             $('.ui').toggle();
         };
 
@@ -9,12 +8,8 @@
         };
 
         function showChat() {
-
-
             // $('.chatRoom').removeClass('fadeOutRight');
             // $('.chatBottomBar').removeClass('fadeOutRight');
-
-
             $('#sidebar').toggle();
             $('#navData').hide();
             $('#mainContent').removeClass('col-lg-8');
