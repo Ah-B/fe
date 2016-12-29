@@ -1,24 +1,26 @@
 {
-    "name": "bookerpfe",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-        "start": "node app.js"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.15.2",
-        "cookie-parser": "^1.4.3",
-        "ejs": "^2.5.2",
-        "ejs-mate": "^2.3.0",
-        "express": "^4.14.0",
-        "express-session": "^1.14.2",
-        "mongoose": "^4.6.5",
-        "passport": "^0.3.2",
-        "passport-local": "^1.0.0",
-        "socket.io": "^1.2.1",
-        "paypal-rest-sdk": "*"
-    }
+  "name": "bookerpfe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chart.js": "^2.4.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.2",
+    "ejs-mate": "^2.3.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "mongoose": "^4.6.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "paypal-rest-sdk": "*",
+    "socket.io": "^1.2.1",
+    "tc-angular-chartjs": "^2.1.3"
+  }
 }

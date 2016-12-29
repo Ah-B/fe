@@ -117,7 +117,8 @@ module.exports = (User) => {
                 } else {
                     let habitData = {
                         "time": req.body.time,
-                        "pagesRead": req.body.pagesRead
+                        "pagesRead": req.body.pagesRead,
+                        "date" : req.body.date
                     };
                     user.habits.push(habitData);
                     user.save();

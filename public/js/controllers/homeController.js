@@ -12,7 +12,10 @@ app.controller('homeController', function($scope, $http) {
             $scope.user = data;
 
             $scope.getTopAuthors();
-            $scope.getBookComments();
+            $scope.getTopBooks();
+            $scope.getPopularBooks();
+
+
         });
     });
 
@@ -39,6 +42,7 @@ app.controller('homeController', function($scope, $http) {
                 return parseFloat(b.average) - parseFloat(a.average);
             });
             $scope.topRatedBooks = ratings;
+            console.log(ratings);
         });
     };
 
@@ -64,25 +68,40 @@ app.controller('homeController', function($scope, $http) {
             ratings.sort(function(a, b) {
                 return parseFloat(b.average) - parseFloat(a.average);
             });
-            $scope.topRatedAuthor = ratings;
+            $scope.topRatedAuthors = ratings;
+
         });
     };
 
-    $scope.getBookComments = function() {
-      var comments = [];
-      var sysDate = new Date();
-        $http.get('/api/book').success(function(data) {
-          for (user of data) {
-            for (comment of user.comments ) {
-                var commentHours = new Date(comment.date);
-                if
+    var unique = function(array, id) {
+        var unique = true;
+        for (elem of array) {
+            if (elem.book._id == id)
+                unique = false;
+        }
+        return unique;
+    }
+    $scope.getPopularBooks = function() {
+        $http.get('/api/user').success(function(data) {
+            var myArray = [];
+
+            for (user of data) {
+                for (book of user.library) {
+
+                    var test = unique(myArray, book.book._id)
+                    if (test == true) {
+                        myArray.push({
+                            book: book.book
+                        });
+                    }
+                }
             };
-          }
-          console.log(comments);
+
+            $scope.popularBooks= myArray;
+
         });
+    }
 
-
-    };
 
 
 });

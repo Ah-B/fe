@@ -21,7 +21,8 @@ let userModel = new Schema({
     }],
     habits: [{
         time: Number,
-        pagesRead: Number
+        pagesRead: Number,
+        date : String
     }]
 });
 

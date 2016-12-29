@@ -277,7 +277,7 @@
                                               <li ng-repeat="book in user.library" class="list-group-item">
                                                  <a href="/libbook/{{book.book._id}}/{{book.lastPage}}" class="thumb-sm pull-left m-r-sm"> <img ng-src="/Images/{{book.book.imageUrl}}" width="40" style="height:40px !important"class="img-circle"> </a>
                                                  <a href="/libbook/{{book.book._id}}/{{book.lastPage}}" class="clear"> <small class="pull-right">Last page {{book.lastPage}}</small> <strong class="block">{{book.book.title}}</strong>
-                                                   <small>Last Read date : {{book.lastReadDate}}</small>
+                                                   <small>Last Read date : {{book.lastReadDate| date:'medium'}}</small>
                                                  </a>
                                               </li>
 

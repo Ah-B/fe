@@ -100,6 +100,16 @@ interfaceRouter.get('/', (req, res) => {
   }
 });
 
+interfaceRouter.get('/stats', (req, res) => {
+  if (req.isAuthenticated()) {
+      res.render('stats', {
+          currentUser: req.user._id
+      });
+  } else {
+      res.render('homePage');
+  }
+});
+
 interfaceRouter.get('/profile', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('profile', {

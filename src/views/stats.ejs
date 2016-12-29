@@ -1,0 +1,27 @@
+<% layout('boilerplate') -%>
+
+<div ng-controller="statsController" ng-init="currentUser='<%-currentUser%>';init()">
+  <div id="content">
+
+      <div class="row">
+          <!-- <div class="col-lg-6">
+            <canvas
+            tc-chartjs-pie
+            chart-data="myData"
+            chart-options="myOptions"
+            chart-click="onChartClick(event)"
+            ></canvas>
+          </div> -->
+            <div class="col-lg-8">
+            <h1>Pages per date</h1>
+            <canvas
+            tc-chartjs-line
+            chart-data="myData"
+            chart-options="myOptions"
+            chart-click="onChartClick(event)"
+            ></canvas>
+          </div>
+      </div>
+  </div>
+
+</div>

@@ -30,6 +30,7 @@ app.controller('readerController', function($scope, $http) {
         console.log("**************** Reader Stopped : //Substract Dates + //Get counter ****************");
         var startTime = $scope.startTime;
         var endTime = moment();
+        var habitDate = moment().format("MMM Do YY");
         var duration = endTime.diff(startTime,'seconds');
         console.log("start time "+$scope.startTime+"End time " + endTime + "Duration: " + duration + "Pages Read : " + $scope.pagesReadCounter);
 
@@ -42,7 +43,8 @@ app.controller('readerController', function($scope, $http) {
             },
             data: {
                 time: duration,
-                pagesRead: $scope.pagesReadCounter
+                pagesRead: $scope.pagesReadCounter,
+                date : habitDate
             }
         };
         var reqLib = {
