@@ -6,7 +6,7 @@ app.controller('readerController', function($scope, $http) {
             for (book of data.library) {
                 if (book.book._id === $scope.currentBookId) {
                     $scope.currentBook = book;
-
+                      console.log("current book",$scope.currentBook);
                 }
             }
 
@@ -30,7 +30,7 @@ app.controller('readerController', function($scope, $http) {
         console.log("**************** Reader Stopped : //Substract Dates + //Get counter ****************");
         var startTime = $scope.startTime;
         var endTime = moment();
-        var habitDate = moment().format("MMM Do YY");
+        var habitDate = moment();
         var duration = endTime.diff(startTime,'seconds');
         console.log("start time "+$scope.startTime+"End time " + endTime + "Duration: " + duration + "Pages Read : " + $scope.pagesReadCounter);
 
@@ -54,7 +54,7 @@ app.controller('readerController', function($scope, $http) {
                 'Content-Type': 'application/json'
             },
             data: {
-                time: duration,
+                time: $scope.currentBook.time+duration,
                 lastPage: $scope.currentPageCounter,
                 lastReadDate: endTime
             }
@@ -78,6 +78,7 @@ app.controller('readerController', function($scope, $http) {
         console.log("Start time " + $scope.startTime);
     };
     $scope.pageFinished = function() {
+      // TODO: test if book ended
         $scope.pagesReadCounter++;
         $scope.currentPageCounter++;
     }

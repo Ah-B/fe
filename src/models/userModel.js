@@ -17,7 +17,8 @@ let userModel = new Schema({
             ref: 'Book'
         },
         lastPage: Number,
-        lastReadDate: Date
+        lastReadDate: String,
+        time : Number
     }],
     habits: [{
         time: Number,

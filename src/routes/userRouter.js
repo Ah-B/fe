@@ -99,6 +99,7 @@ module.exports = (User) => {
                 } else {
                     for (lib of user.library) {
                         if (lib.book == req.params.bookId) {
+                            lib.time = req.body.time;
                             lib.lastPage = req.body.lastPage;
                             lib.lastReadDate = req.body.lastReadDate;
                             user.save();
