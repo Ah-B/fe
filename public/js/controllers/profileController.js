@@ -1,4 +1,5 @@
 app.controller('profileController', function($scope, $http) {
+
     $scope.readingHabitsPages = 0;
     $scope.readingHabitsTime = 0;
     $scope.$watch('currentUser', function() {

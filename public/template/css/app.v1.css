@@ -13758,3 +13758,22 @@ width: 200px !important;
 .authorsInput:focus{
 border: 2px solid #4CB6CB;
 }
+
+
+.ngRepeatAnimation.ng-enter{
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+.ngRepeatAnimation.ng-leave {
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+.ngRepeatAnimation.ng-enter,
+.ngRepeatAnimation.ng-leave.ng-leave-active {
+  opacity:0;
+}
+.ngRepeatAnimation.ng-leave,
+.ngRepeatAnimation.ng-enter.ng-enter-active {
+  opacity:1;
+}

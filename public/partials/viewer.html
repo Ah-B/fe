@@ -1,17 +1,18 @@
 <form class="readerNavbar" ng-class="getNavStyle(scroll)">
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-1">
             <h1 style="color:white">{{currentBook.book.title}}</h1>
         </div>
         <div class="col-lg-3 col-lg-offset-3 " style="margin-top:5px;">
+          <a href="#"style="float:left;margin-left:10px;" class="btn btn-s btn-success btn-rounded" ng-click="goPrevious();prevPage()">Previous</a>
             <span style="float:left;margin-left:10px;margin-top:10px;color:white">Page:</span>
             <input type="text" min=1 ng-model="pageNum" class="form-control rounded" style="width: 50px;float:left;margin-left:10px"><span style="float:left;margin-left:10px;margin-top:10px;color:white">/ {{pageCount}}</span>
+            <a href="#" style="float:left;margin-left:10px;" class="btn btn-s btn-success btn-rounded" ng-click="goNext();pageFinished()">Next</a>
         </div>
-        <div class="col-lg-1 " style="margin-top:5px;">
-            <a href="#" class="btn btn-s btn-success btn-rounded" ng-click="goPrevious()">Previous</a>
-        </div>
-        <div class="col-lg-1 " style="margin-top:5px;">
-            <a href="#" class="btn btn-s btn-success btn-rounded" ng-click="goNext();pageFinished()">Next</a>
+        <div class="col-lg-2 col-lg-offset-1" style="margin-top:5px;width:200px!important">
+          <a href="#" class="btn btn-s btn-success btn-rounded" ng-click="zoomIn()"> <i class="icon-magnifier-add" style="color:white"></i></a>
+            <a href="#" class="btn btn-s btn-success btn-rounded" ng-click="fit()"> <i class="icon-size-fullscreen" style="color:white"></i></a>
+            <a href="#" class="btn btn-s btn-success btn-rounded" ng-click="zoomOut()"> <i class="icon-magnifier-remove" style="color:white"></i></a>
         </div>
         <div class="col-lg-1 col-lg-offset-1" style="margin-top:5px;">
             <a href="#" class="btn btn-s btn-dark btn-rounded" ng-click="ngReaderStop()" onclick="hideReader()">Close</a>

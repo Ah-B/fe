@@ -38,19 +38,20 @@ app.controller('statsController', function($scope, $http) {
     $scope.pagePerDateMonthFunction = function(data) {
 
         var dates = [];
-
+        console.log("data.habits",data.habits);
         for (book of data.habits) {
-            if(moment(book.date).format("MMMM") == moment().format("MMMM"))
-            {
+              //DATE TEST
+            // if(moment(book.date).format("MMMM") == moment().format("MMMM"))
+            // {
               dates.push(moment(book.date).format("Do dddd"));
-            }
+            // }
         }
+
         //REMOVE DUPLICATES
         var dates = dates.filter(function(elem, index, self) {
                 return index == self.indexOf(elem);
             })
 
-        console.log("aa",dates);
 
         var finalMonthArray = [];
         for (elem of dates) {
@@ -82,12 +83,12 @@ app.controller('statsController', function($scope, $http) {
     datasets: [{
         data: finalMonthPagesValues,
         backgroundColor: [
-          "#4CB6CB",
-          "#545CA6",
-          "#2EA0B6",
-          "#1AB667",
-          "#FAD733",
-          "#F05050"
+          "rgba(76, 182, 203, 0.7)",
+          "rgba(84, 92, 166, 0.7)",
+          "rgba(46, 160, 182, 0.7)",
+          "rgba(255, 208, 123, 0.7)",
+          "rgba(220, 247, 99, 0.7)",
+          "rgba(219, 213, 110, 0.7)"
         ],
         label: finalMonthDates // for legend
     }],
@@ -132,12 +133,12 @@ app.controller('statsController', function($scope, $http) {
         datasets: [{
             data: preferenceGenrePages,
             backgroundColor: [
-                "#4CB6CB",
-                "#545CA6",
-                "#2EA0B6",
-                "#1AB667",
-                "#FAD733",
-                "#F05050"
+              "#4CB6CB",
+              "#545CA6",
+              "#2EA0B6",
+              "#FFD07B",
+              "#DCF763",
+              "#DBD56E"
             ]
         }]
     };
@@ -186,12 +187,12 @@ app.controller('statsController', function($scope, $http) {
         datasets: [{
             data: preferenceAuthorPages,
             backgroundColor: [
-                "#4CB6CB",
-                "#545CA6",
-                "#2EA0B6",
-                "#1AB667",
-                "#FAD733",
-                "#F05050"
+              "#4CB6CB",
+              "#545CA6",
+              "#2EA0B6",
+              "#FFD07B",
+              "#DCF763",
+              "#DBD56E"
             ]
         }]
     }
@@ -228,12 +229,12 @@ app.controller('statsController', function($scope, $http) {
         datasets: [{
             data: timeSpentGenreTime,
             backgroundColor: [
-                "#4CB6CB",
-                "#545CA6",
-                "#2EA0B6",
-                "#1AB667",
-                "#FAD733",
-                "#F05050"
+              "#4CB6CB",
+              "#545CA6",
+              "#2EA0B6",
+              "#FFD07B",
+              "#DCF763",
+              "#DBD56E"
             ]
         }]
     }
@@ -257,9 +258,9 @@ app.controller('statsController', function($scope, $http) {
                 "#4CB6CB",
                 "#545CA6",
                 "#2EA0B6",
-                "#1AB667",
-                "#FAD733",
-                "#F05050"
+                "#FFD07B",
+                "#DCF763",
+                "#DBD56E"
             ]
         }]
     }
@@ -309,12 +310,12 @@ app.controller('statsController', function($scope, $http) {
         datasets: [{
             data: timeSpentAuthorTime,
             backgroundColor: [
-                "#4CB6CB",
-                "#545CA6",
-                "#2EA0B6",
-                "#1AB667",
-                "#FAD733",
-                "#F05050"
+              "#4CB6CB",
+              "#545CA6",
+              "#2EA0B6",
+              "#FFD07B",
+              "#DCF763",
+              "#DBD56E"
             ]
         }]
     }

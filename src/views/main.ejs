@@ -37,6 +37,8 @@
 		<script type="text/javascript" src="/js/controllers/readerController.js"></script>
 		<script type="text/javascript" src="/js/directives/angular-pdf.js"></script>
 		<!-- /.aside -->
+
+
 		<!-- ****************************************CONTENT**************************************************** -->
 		<section class="vbox paymentPage" id="mainPageNav" ng-show="user.type !== 'premium' && reminder == false ">
 			<section id="content" class="m-t-lg wrapper-md animated fadeInDown ">
@@ -54,26 +56,9 @@
 			</section>
 		</section>
 		<section class="vbox" id="mainPageContent">
-			<header class="bg-white-only header header-md navbar navbar-fixed-top-xs">
-				<div class="navbar-header aside bg-info dk nav-xs">
-					<a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html"> <i class="icon-list"></i> </a>
-					<a href="index-2.html" class="navbar-brand text-lt"> <i class="icon-earphones"></i> <img src="/template/images/logo.png" alt="." class="hide"> <span class="hidden-nav-xs m-l-sm">Musik</span> </a>
-					<a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user"> <i class="icon-settings"></i> </a>
-				</div>
-				<ul class="nav navbar-nav hidden-xs">
-					<li>
-						<a href="#nav,.navbar-header" data-toggle="class:nav-xs,nav-xs" class="text-muted"> <i class="fa fa-indent text"></i> <i class="fa fa-dedent text-active"></i> </a>
-					</li>
-				</ul>
-				<form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
-					<div class="form-group">
-						<div class="input-group"> <span class="input-group-btn"> <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button> </span> <input type="text" class="form-control input-sm no-border rounded" placeholder="Search songs, albums...">                        </div>
-					</div>
-				</form>
-			</header>
 			<section>
 				<section class="hbox stretch">
-					<aside class="bg-dark dk nav-xs aside hidden-print" id="nav">
+					<aside class="bg-dark dk nav-xs aside hidden-print ui" id="nav">
 						<section class="vbox">
 							<section class="w-f-md scrollable">
 								<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 253px;">
@@ -81,134 +66,35 @@
 										<!-- nav -->
 										<nav class="nav-primary hidden-xs">
 											<ul class="nav bg clearfix">
-												<li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted"> Discover </li>
 												<li>
-													<a href="index-2.html"> <i class="icon-disc icon "></i> <span class="font-bold">What's new</span> </a>
+													<div class="navbar-header aside bg-info dk nav-xs">
+														<a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html"> <i class="icon-list"></i> </a>
+														<a href="/" class="navbar-brand text-lt"> <i class="icon-book-open"></i> <span class="hidden-nav-xs m-l-sm">Booker</span> </a>
+														<a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user"> <i class="icon-settings"></i> </a>
+													</div>
+												</li>
+												<li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted">  </li>
+												<li>
+													<a href="/"> <i class="icon-home"></i> <span class="font-bold">Home</span> </a>
 												</li>
 												<li>
-													<a href="genres.html"> <i class="icon-music-tone-alt icon "></i> <span class="font-bold">Genres</span> </a>
+													<a href="/books"> <i class="icon-notebook icon "></i> <span class="font-bold">Books</span> </a>
 												</li>
 												<li>
-													<a href="events.html"> <i class="icon-drawer icon "></i> <b class="badge bg-primary pull-right">6</b> <span class="font-bold">Events</span> </a>
+													<a href="/authors"> <i class="fa fa-pencil"></i><span class="font-bold">Authors</span> </a>
 												</li>
 												<li>
-													<a href="listen.html"> <i class="icon-list icon "></i> <span class="font-bold">Listen</span> </a>
+													<a href="/profile"> <i class="icon-user"></i> <span class="font-bold">Profile</span> </a>
 												</li>
 												<li>
-													<a href="video.html" data-target="#content" data-el="#bjax-el" data-replace="true"> <i class="icon-social-youtube icon "></i> <span class="font-bold">Video</span> </a>
+													<a href="/stats"> <i class="icon-pie-chart"></i> <span class="font-bold">Stats</span> </a>
 												</li>
 												<li class="m-b hidden-nav-xs"></li>
 											</ul>
-											<ul class="nav" data-ride="collapse">
-												<li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted"> Interface </li>
-												<li>
-													<a href="#" class="auto"> <span class="pull-right text-muted"> <i class="fa fa-angle-left text"></i> <i class="fa fa-angle-down text-active"></i> </span> <i class="icon-screen-desktop icon"> </i> <span>Layouts</span> </a>
-													<ul class="nav dk text-sm">
-														<li>
-															<a href="layout-color.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Color option</span> </a>
-														</li>
-														<li>
-															<a href="layout-boxed.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Boxed layout</span> </a>
-														</li>
-														<li>
-															<a href="layout-fluid.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Fluid layout</span> </a>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<a href="#" class="auto"> <span class="pull-right text-muted"> <i class="fa fa-angle-left text"></i> <i class="fa fa-angle-down text-active"></i> </span> <i class="icon-chemistry icon"> </i> <span>UI Kit</span> </a>
-													<ul class="nav dk text-sm">
-														<li>
-															<a href="buttons.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Buttons</span> </a>
-														</li>
-														<li>
-															<a href="icons.html" class="auto"> <b class="badge bg-info pull-right">369</b> <i class="fa fa-angle-right text-xs"></i> <span>Icons</span> </a>
-														</li>
-														<li>
-															<a href="grid.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Grid</span> </a>
-														</li>
-														<li>
-															<a href="widgets.html" class="auto"> <b class="badge bg-dark pull-right">8</b> <i class="fa fa-angle-right text-xs"></i> <span>Widgets</span> </a>
-														</li>
-														<li>
-															<a href="components.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Components</span> </a>
-														</li>
-														<li>
-															<a href="list.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>List group</span> </a>
-														</li>
-														<li>
-															<a href="#table" class="auto"> <span class="pull-right text-muted"> <i class="fa fa-angle-left text"></i> <i class="fa fa-angle-down text-active"></i> </span> <i class="fa fa-angle-right text-xs"></i> <span>Table</span> </a>
-															<ul class="nav dker">
-																<li>
-																	<a href="table-static.html"> <i class="fa fa-angle-right"></i> <span>Table static</span> </a>
-																</li>
-																<li>
-																	<a href="table-datatable.html"> <i class="fa fa-angle-right"></i> <span>Datatable</span> </a>
-																</li>
-															</ul>
-														</li>
-														<li>
-															<a href="#form" class="auto"> <span class="pull-right text-muted"> <i class="fa fa-angle-left text"></i> <i class="fa fa-angle-down text-active"></i> </span> <i class="fa fa-angle-right text-xs"></i> <span>Form</span> </a>
-															<ul class="nav dker">
-																<li>
-																	<a href="form-elements.html"> <i class="fa fa-angle-right"></i> <span>Form elements</span> </a>
-																</li>
-																<li>
-																	<a href="form-validation.html"> <i class="fa fa-angle-right"></i> <span>Form validation</span> </a>
-																</li>
-																<li>
-																	<a href="form-wizard.html"> <i class="fa fa-angle-right"></i> <span>Form wizard</span> </a>
-																</li>
-															</ul>
-														</li>
-														<li>
-															<a href="chart.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Chart</span> </a>
-														</li>
-														<li>
-															<a href="portlet.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Portlet</span> </a>
-														</li>
-														<li>
-															<a href="timeline.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Timeline</span> </a>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<a href="#" class="auto"> <span class="pull-right text-muted"> <i class="fa fa-angle-left text"></i> <i class="fa fa-angle-down text-active"></i> </span> <i class="icon-grid icon"> </i> <span>Pages</span> </a>
-													<ul class="nav dk text-sm">
-														<li>
-															<a href="profile.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Profile</span> </a>
-														</li>
-														<li>
-															<a href="blog.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Blog</span> </a>
-														</li>
-														<li>
-															<a href="invoice.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Invoice</span> </a>
-														</li>
-														<li>
-															<a href="gmap.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Google Map</span> </a>
-														</li>
-														<li>
-															<a href="jvectormap.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Vector Map</span> </a>
-														</li>
-														<li>
-															<a href="signin.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Signin</span> </a>
-														</li>
-														<li>
-															<a href="signup.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>Signup</span> </a>
-														</li>
-														<li>
-															<a href="404.html" class="auto"> <i class="fa fa-angle-right text-xs"></i> <span>404</span> </a>
-														</li>
-													</ul>
-												</li>
-											</ul>
 											<ul class="nav text-sm">
-												<li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted"> <span class="pull-right"><a href="#"><i class="icon-plus i-lg"></i></a></span> Playlist </li>
+												<li class="hidden-nav-xs padder m-t m-b-sm text-xs text-muted"> <span class="pull-right"></span></li>
 												<li>
-													<a href="#"> <i class="icon-music-tone icon"></i> <span>Hip-Pop</span> </a>
-												</li>
-												<li>
-													<a href="#"> <i class="icon-playlist icon text-success-lter"></i> <b class="badge bg-success dker pull-right">9</b> <span>Jazz</span> </a>
+													<a href="/auth/logout"> <i class="icon-logout"></i> <span>Logout</span> </a>
 												</li>
 											</ul>
 										</nav>
@@ -302,7 +188,7 @@
 		<!-- ****************************************CONTENT**************************************************** -->
 		<!-- Bootstrap -->
 		<!-- App -->
-		<script src="/template/js/app.v1.js"></script>
-		<script src="/template/js/app.plugin.js"></script>
+		<!-- <script src="/template/js/app.v1.js"></script>
+		<script src="/template/js/app.plugin.js"></script> -->
 	</body>
 </html>

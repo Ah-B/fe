@@ -1,46 +1,83 @@
 <% layout('boilerplate') -%>
 
-    <div ng-controller="statsController" ng-init="currentUser='<%-currentUser%>';init()">
-        <div id="content">
-
-            <div class="row">
-                <!-- <div class="col-lg-6">
-            <canvas
-            tc-chartjs-pie
-            chart-data="myData"
-            chart-options="myOptions"
-            chart-click="onChartClick(event)"
-            ></canvas>
-          </div> -->
-                <div class="col-lg-6">
-                    <h1>This month</h1>
-                    <canvas tc-chartjs-polararea chart-data="pagePerDateMonth"></canvas>
+    <section id="content" ng-controller="statsController" ng-init="currentUser='<%-currentUser%>';init()">
+        <section class="vbox">
+            <section class="scrollable">
+              <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <section class="panel panel-default">
+                            <header class="panel-heading">Pages read</header>
+                            <section class="chat-list panel-body">
+                                <canvas tc-chartjs-line chart-data="pagePerDate"></canvas>
+                            </section>
+                        </section>
+                    </div>
+                    <div class="col-lg-6">
+                        <section class="panel panel-default">
+                            <header class="panel-heading">Reading speed projection</header>
+                            <section class="chat-list panel-body">
+                                <canvas tc-chartjs-line chart-data="pageMinutesPerDate"></canvas>
+                            </section>
+                        </section>
+                    </div>
                 </div>
-                <!-- <div class="col-lg-8">
-                    <h1>Pages per date</h1>
-                    <canvas tc-chartjs-line chart-data="pagePerDate"></canvas>
-                </div> -->
-                <!-- <div class="col-lg-8">
-                    <h1>Projected speed per date</h1>
-                    <canvas tc-chartjs-line chart-data="pageMinutesPerDate"></canvas>
-                </div> -->
-                <!-- <div class="col-lg-6">
-                    <h1>Time reading each book by minutes</h1>
-                    <canvas tc-chartjs-pie chart-data="timeSpentBook"></canvas>
-                </div> -->
-                <!-- <div class="col-lg-6">
-                    <h1>Time reading each author by minutes</h1>
-                    <canvas tc-chartjs-pie chart-data="timeSpentAuthor"></canvas>
-                </div> -->
-                <!-- <div class="col-lg-4">
-                    <h1>Time reading each author by minutes</h1>
-                    <canvas tc-chartjs-pie chart-data="preferenceAuthor"></canvas>
-                </div> -->
-                <!-- <div class="col-lg-4">
-                    <h1>Time reading each author by minutes</h1>
-                    <canvas tc-chartjs-pie chart-data="preferenceGenre"></canvas>
-                </div> -->
-            </div>
-        </div>
 
-    </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <section class="panel panel-default">
+                            <header class="panel-heading">Reading time by book <i>(minutes)</i></header>
+                            <section class="chat-list panel-body">
+                                <canvas tc-chartjs-pie chart-data="timeSpentBook"></canvas>
+                            </section>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <section class="panel panel-default">
+                            <header class="panel-heading">Reading time by author <i>(minutes)</i></header>
+                            <section class="chat-list panel-body">
+                                <canvas tc-chartjs-pie chart-data="timeSpentAuthor"></canvas>
+                            </section>
+                        </section>
+                    </div>
+                    <div class="col-lg-4">
+                        <section class="panel panel-default">
+                            <header class="panel-heading">Reading time by genre <i>(minutes)</i></header>
+                            <section class="chat-list panel-body">
+                              <canvas tc-chartjs-pie chart-data="timeSpentGenre"></canvas>
+                            </section>
+                        </section>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 ">
+                      <section class="panel panel-default">
+                          <header class="panel-heading">This month's total read pages</header>
+                          <section class="chat-list panel-body">
+                            <canvas tc-chartjs-polararea chart-data="pagePerDateMonth"></canvas>
+                          </section>
+                      </section>
+                  </div>
+                  <div class="col-lg-4">
+                      <section class="panel panel-default">
+                          <header class="panel-heading">Total read pages by author</header>
+                          <section class="chat-list panel-body">
+                            <canvas tc-chartjs-pie chart-data="preferenceAuthor"></canvas>
+                          </section>
+                      </section>
+                  </div>
+                  <div class="col-lg-4">
+                      <section class="panel panel-default">
+                          <header class="panel-heading">Total read pages by genre</header>
+                          <section class="chat-list panel-body">
+                            <canvas tc-chartjs-pie chart-data="preferenceGenre"></canvas>
+                          </section>
+                      </section>
+                  </div>
+                </div>
+
+
+            </section>
+        </section>
+    </section>
