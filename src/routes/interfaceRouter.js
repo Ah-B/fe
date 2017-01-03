@@ -100,6 +100,27 @@ interfaceRouter.get('/', (req, res) => {
   }
 });
 
+
+
+interfaceRouter.get('/genres', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('genres');
+    } else {
+        res.render('homePage');
+    }
+});
+
+interfaceRouter.get('/bookGenres/:genre', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('booksGenre',{
+            genre: req.params.genre
+        });
+    } else {
+        res.render('homePage');
+    }
+});
+
+
 interfaceRouter.get('/stats', (req, res) => {
   if (req.isAuthenticated()) {
       res.render('stats', {

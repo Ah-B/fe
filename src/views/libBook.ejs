@@ -2,10 +2,10 @@
 
     <section class="scrollable " ng-controller="readerController" ng-init="currentUser='<%-currentUser%>';currentBookId='<%-libbook%>'">
         <div id="reader">
-            <div class="wrapper">
+            <div class="readerWrapper">
                 <ng-pdf template-url="/partials/viewer.html" canvasid="pdf" scale="page-fit" page=<%-currentPage%> ></ng-pdf>
             </div>
-        </div>  
+        </div>
         <section class="panel panel-default ui " style="margin-left:20px; margin-right:20px">
             <header class="panel-heading font-bold">
                 <h1>{{currentBook.book.title}}</h1>
