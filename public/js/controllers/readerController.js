@@ -26,6 +26,7 @@ app.controller('readerController', function($scope, $http) {
 
     $scope.pagesReadCounter = 0;
     $scope.startTime;
+
     $scope.ngReaderStop = function() {
         console.log("**************** Reader Stopped : //Substract Dates + //Get counter ****************");
         var startTime = $scope.startTime;

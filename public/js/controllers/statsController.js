@@ -41,10 +41,10 @@ app.controller('statsController', function($scope, $http) {
         console.log("data.habits",data.habits);
         for (book of data.habits) {
               //DATE TEST
-            // if(moment(book.date).format("MMMM") == moment().format("MMMM"))
-            // {
+            if(moment(book.date).format("MMMM") == moment().format("MMMM"))
+            {
               dates.push(moment(book.date).format("Do dddd"));
-            // }
+            }
         }
 
         //REMOVE DUPLICATES
