@@ -16,6 +16,7 @@
 					</div>
 				</div>
 			</form>
+			<h5 style="margin-top:23px">Showing {{filteredItems.length}} results of {{books.length}}</h5>
 		</header>
 
 
@@ -86,12 +87,11 @@
 								<!-- / side content -->
 								<section>
 									<section class="vbox">
-										<section class=" scrollable padder-lg">
+										<section class=" scrollable">
+											<!-- <p>Showing {{filteredItems.length}} results of {{books.length}}</p> -->
 
-											<h2 class="font-thin m-b">Books</h2>
-											<p>Showing {{filteredItems.length}} results of {{books.length}}</p>
-											<br>
-											<div class="row row-sm">
+
+											<!-- <div class="row row-sm">
 												<div ng-repeat="book in (filteredItems = (books  | filter : search | filter : genreFilter | orderBy: bookOrder ))" class="ngRepeatAnimation col-xs-6 col-sm-4 col-md-3 col-lg-2">
 													<div class="item">
 														<div class="pos-rlt">
@@ -111,7 +111,41 @@
 														<div class="padder-v"> <a href="/book/{{book._id}}" class="text-ellipsis">{{book.title}}</a> <a href="/author/{{book.author._id}}" class="text-ellipsis text-xs text-muted">{{book.author.fName}} {{book.author.lName}}</a> </div>
 													</div>
 												</div>
-											</div>
+											</div> -->
+
+											<section class="vbox">
+												<section class="bg-light dk">
+													<div id="photosBooks" class="bg-light dk">
+														<div ng-repeat="book in (filteredItems = (books  | filter : search | filter : genreFilter | orderBy: bookOrder ))" class="item myListElement ngRepeatAnimation">
+															<div class="pos-rlt">
+																<div class="top" ng-show="book.type === 'premium'">
+																	<span class="pull-right m-t-sm m-r-sm badge bg-warning lt">Premium</span>
+																</div>
+																<div class="bottom"></div>
+
+																<div class="item-overlay opacity r r-2x bg-black ">
+																	<div class="text-info padder m-t-sm text-sm" style="margin-top: -10px"><a href="/book/{{book._id}}"><h3>{{book.title}}</a></h3>
+																		<p>{{book.computedRating}}</p>
+
+																	</div>
+																	<div class="center text-center m-t-n">
+																		<a href="/book/{{book._id}}" data-toggle="class"> <i class="text-success icon-magnifier i-2x text"></i> <i class="icon-control-pause i-2x text-active"></i> </a>
+																	</div>
+																	<div class="bottom padder m-b-sm" style="padding-bottom: 0px;margin-bottom: -8px;">
+																		<a href="/author/{{book.author._id}}" class="pull-left" data-toggle="class"><h4>{{book.author.fName}} {{book.author.lName}}</h4></a>
+																	</div>
+																</div>
+																<img style="width:100%;height:100%" ng-src="/Images/{{book.imageUrl}}" alt="" />
+															</div>
+														</div>
+													</div>
+
+
+												</section>
+											</section>
+
+
+
 										</section>
 									</section>
 								</section>

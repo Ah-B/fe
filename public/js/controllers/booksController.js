@@ -11,6 +11,15 @@ app.controller('booksController', function($scope, $http,$timeout) {
     }
 
     $http.get('/api/book/').success(function(data) {
+        for (db of data) {
+          var rating = 0;
+          var times = 0;
+            for (ratings of db.ratings) {
+                rating = rating + ratings.rating;
+                times = times +1;
+            }
+            db.computedRating = (rating/times).toFixed(1);
+        }
         $scope.books = data;
         $scope.genres = ['All'];
         $scope.genreFilter = "";
