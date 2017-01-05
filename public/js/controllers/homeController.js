@@ -34,7 +34,7 @@ app.controller('homeController', function($scope, $http) {
                     var avg = count / times;
                     ratings.push({
                         book: book,
-                        average: avg
+                        average: avg.toFixed(1)
                     });
                 }
             }
@@ -54,15 +54,17 @@ app.controller('homeController', function($scope, $http) {
 
             for (author of data) {
                 {
-                    for (rating of author.ratings) {
-                        count = count + rating.rating;
-                        times++;
+                    if ((typeof author.ratings !== 'undefined' && author.ratings.length > 0)) {
+                        for (rating of author.ratings) {
+                            count = count + rating.rating;
+                            times++;
+                        }
+                        var avg = count / times;
+                        ratings.push({
+                            author: author,
+                            average: avg
+                        });
                     }
-                    var avg = count / times;
-                    ratings.push({
-                        author: author,
-                        average: avg
-                    });
                 }
             }
             ratings.sort(function(a, b) {
@@ -97,7 +99,7 @@ app.controller('homeController', function($scope, $http) {
                 }
             };
 
-            $scope.popularBooks= myArray;
+            $scope.popularBooks = myArray;
 
         });
     }

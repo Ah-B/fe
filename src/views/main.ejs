@@ -128,11 +128,11 @@
 														<div class="item">
 															<div class="pos-rlt">
 																<div class="item-overlay opacity r r-2x bg-black">
-																	<div class="center text-center m-t-n"> <a href="/book/{{book.book._id}}"><i class="icon-book-open i-2x"></i></a> </div>
+																	<div class="center text-center m-t-n"> <a href="/book/{{book.book._id}}"><h1>{{book.average}}</h1></a> </div>
 																</div>
 																<a href="/book/{{book.book._id}}"><img ng-src="Images/{{book.book.imageUrl}}" width="135" height="135" alt="" class="r r-2x img-full"></a>
 															</div>
-															<div class="padder-v"> <a href="/book/{{book.book._id}}" class="text-ellipsis">{{book.book.title}}</a> <a href="/author/{{book.book.author._id}}" class="text-ellipsis text-xs text-muted">{{book.book.author.fName}} {{book.book.author.lName}}</a> </div>
+															<div class="padder-v"> <a href="/book/{{book.book._id}}" class="text-ellipsis">{{book.book.title}} </a> <a href="/author/{{book.book.author._id}}" class="text-ellipsis text-xs text-muted">{{book.book.author.fName}} {{book.book.author.lName}}</a> </div>
 														</div>
 													</div>
 
