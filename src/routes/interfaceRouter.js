@@ -166,7 +166,8 @@ interfaceRouter.get('/author/:authorId', (req, res) => {
             query: req.params.authorId,
             currentUser: req.user._id,
             userFName: req.user.fName,
-            userLName: req.user.lName
+            userLName: req.user.lName,
+            userAvatar : req.user.avatar
         });
     } else {
         res.render('homePage');
@@ -190,7 +191,8 @@ interfaceRouter.get('/book/:bookId', (req, res) => {
             currentUser: req.user._id,
             userFName: req.user.fName,
             userLName: req.user.lName,
-            userType: req.user.type
+            userType: req.user.type,
+            userAvatar : req.user.avatar
         });
     } else {
         res.render('homePage');
@@ -224,6 +226,7 @@ interfaceRouter.route('/auth/signUp')
                 birthDate: req.body.birthDate,
                 username: req.body.userName,
                 password: req.body.password,
+                avatar : "default.png",
                 type : "free"
             };
             collection.insert(user, (err, results) => {

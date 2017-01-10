@@ -1,5 +1,5 @@
-function initChat(roomId, userFName, userLName) {
-
+function initChat(roomId, userFName, userLName,userAvatar) {
+    var avatar = userAvatar;
     var socket = io.connect();
     var message = $('#chatMessage').val();
     var room = roomId;
@@ -45,19 +45,23 @@ function initChat(roomId, userFName, userLName) {
             var message = $('#chatMessage').val();
             socket.emit('send', {
                 userName: userName,
+                avatar : avatar,
                 room: room,
                 message: message
             });
+            var message ='<article id="myMessage" class="chat-item right"><a href="#" class="pull-right thumb-sm avatar"><img src="/Images/avatar/'+userAvatar+'.png" class="img-circle" alt="..."></a><section class="chat-body"><div class="panel bg-light text-sm m-b-none"><div class="panel-body"> <span class="arrow right"></span><p class="m-b-none">'+message+'</p></div></div></section></article>'
+            $("#chatMessageContainer").append(message);
         }
     });
     $('#send').click(function() {
         var message = $('#chatMessage').val();
           socket.emit('send', {
             userName: userName,
+            avatar : avatar,
             room: room,
             message: message
         });
-        var message ='<article id="myMessage" class="chat-item right"><a href="#" class="pull-right thumb-sm avatar"><img src="/template/images/a3.png" class="img-circle" alt="..."></a><section class="chat-body"><div class="panel bg-light text-sm m-b-none"><div class="panel-body"> <span class="arrow right"></span><p class="m-b-none">'+message+'</p></div></div></section></article>'
+        var message ='<article id="myMessage" class="chat-item right"><a href="#" class="pull-right thumb-sm avatar"><img src="/Images/avatar/'+userAvatar+'.png" class="img-circle" alt="..."></a><section class="chat-body"><div class="panel bg-light text-sm m-b-none"><div class="panel-body"> <span class="arrow right"></span><p class="m-b-none">'+message+'</p></div></div></section></article>'
         $("#chatMessageContainer").append(message);
 
     });
@@ -79,6 +83,7 @@ function initChat(roomId, userFName, userLName) {
     socket.on('leaving', function(data, numUsers, users) {
         $('#connectedUsers').empty();
         for (user of users) {
+          console.log(user);
             $('#connectedUsers').append("<p>" + user.userName + "</p>")
         }
         $('#notice').append("<p class='notice'>" + data.userName + " has left the discussion </p>");
@@ -92,8 +97,10 @@ function initChat(roomId, userFName, userLName) {
     socket.on('message', function(data) {
         $('#chatMessage').val('');
         $('.typing').remove();
+        console.log("data",data);
         if (data.userName !== userName) {
-          var message = '<article class="chat-item left"><div class="pull-left thumb-sm avatar"><img src="/template/images/a2.png" alt="..."></div><section class="chat-body"><div class="panel b-light text-sm m-b-none"><header class="panel-heading bg-white"> <p>'+data.userName+'</p></header><div class="panel-body"> <span class="arrow left bg-white"></span><p class="m-b-none">'+data.message+'</p></div></div> </section></article>';
+
+          var message = '<article class="chat-item left"><div class="pull-left thumb-sm avatar"><img src="/Images/avatar/'+data.avatar+'.png" alt="..."></div><section class="chat-body"><div class="panel b-light text-sm m-b-none"><header class="panel-heading bg-white"> <p>'+data.userName+'</p></header><div class="panel-body"> <span class="arrow left bg-white"></span><p class="m-b-none">'+data.message+'</p></div></div> </section></article>';
           $("#chatMessageContainer").append(message);
         } else {
 

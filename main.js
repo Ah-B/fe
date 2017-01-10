@@ -56,9 +56,9 @@ backEnd.listen(3000, function () {
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
 
-  win = new BrowserWindow({fullscreen:false})
+  win = new BrowserWindow({fullscreen:false,width:1366,height:1024})
   win.loadURL('http://localhost:3000/');
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools();
   win.on('closed', () => {
     win = null
   })

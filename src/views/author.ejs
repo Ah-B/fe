@@ -37,7 +37,7 @@
                            <h4 class="m-t-lg m-b">{{comments.length}} Comments</h4>
                            <section class="comment-list block">
                               <article ng-repeat="comment in comments" id="comment-id-1" class="comment-item">
-                                 <a class="pull-left thumb-sm avatar"> <img src="/template/images/a1.png" class="img-circle" alt="..."> </a> <span class="arrow left"></span>
+                                 <a class="pull-left thumb-sm avatar"> <img ng-src="/Images/avatar/{{comment.commenter.avatar}}.png" class="img-circle" alt="..."> </a> <span class="arrow left"></span>
                                  <section class="comment-body panel panel-default">
                                     <header class="panel-heading bg-white">
                                        <a href="#">{{comment.commenter.fName}} {{comment.commenter.lName}}</a>
@@ -117,16 +117,14 @@
                <div id="isTyping"> </div>
                <!-- chat form -->
                <article class="chat-item" id="chat-form">
-                  <a class="pull-left thumb-sm avatar"><img src="/template/images/a3.png" class="img-circle" alt="..."></a>
+                  <a class="pull-left thumb-sm avatar"><img ng-src="/Images/avatar/{{user.avatar}}.png" class="img-circle" alt="..."></a>
                   <section class="chat-body">
-                     <form action="http://flatfull.com/themes/musik/index.html" class="m-b-none">
                         <div class="input-group">
 											<input type="text" class="form-control" id="chatMessage" rows="5" placeholder="Type your comment" style="margin-left: 0px; margin-right: 0px; width: 387px;"></input>
 
 														<button class="btn btn-s-md btn-info btn-rounded" id="send" type="button">SEND</button>
 														<button class="btn btn-s-md btn-info btn-rounded" id="stop" onclick="hideChat()"type="button">LEAVE</button>
 												</div>
-                     </form>
                   </section>
                </article>
             </footer>
@@ -136,5 +134,5 @@
    </section>
 </section>
 <script type="text/javascript">
-   initChat('<%-query%>', '<%-userFName%>', '<%-userLName%>');
+   initChat('<%-query%>', '<%-userFName%>', '<%-userLName%>','<%-userAvatar%>');
 </script>

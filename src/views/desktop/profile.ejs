@@ -14,7 +14,7 @@
                                   <section class="scrollable">
                                      <div class="wrapper">
                                         <div class="text-center m-b m-t">
-                                           <a href="#" class="thumb-lg"> <img src="/template/images/a0.png" class="img-circle"> </a>
+                                           <a href="#" class="thumb-lg"> <img ng-src="/Images/avatar/{{user.avatar}}.png" class="img-circle"> </a>
                                            <div>
                                               <div class="h3 m-t-xs m-b-xs">{{user.fName}} {{user.lName}}</div>
                                            </div>
@@ -76,14 +76,4 @@
           </section>
        </section>
 
-       <script type="text/javascript">
-       var test = function(a){
-       		const {
-       				BrowserWindow
-       		} = require('electron').remote;
-       		win = new BrowserWindow({fullscreen:true})
-       		//win.loadURL('http://localhost:3000/');
-        }
-
-       </script>
     </body>

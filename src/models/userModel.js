@@ -11,6 +11,7 @@ let userModel = new Schema({
     signDate: Date,
     password: String,
     type: String,
+    avatar : String,
     library: [{
         book: {
             type: Schema.Types.ObjectId,

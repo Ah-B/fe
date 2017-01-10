@@ -102,6 +102,10 @@ app.controller('authorController', function($scope, $http) {
 
     $scope.$watch(['authorId', 'currentUser'], function() {
         $scope.getAuthorData();
+        $http.get('/api/user/' + $scope.currentUser).success(function(data) {
+          $scope.user = data;
+        })
+
     });
 
 

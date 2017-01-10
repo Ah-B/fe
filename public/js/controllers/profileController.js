@@ -1,5 +1,28 @@
 app.controller('profileController', function($scope, $http) {
 
+  $scope.avatar = function(test){
+    $http.get('/api/user/' + $scope.currentUser).success(function(data){
+      data.avatar = test;
+      $scope.user=data;
+      console.log(data);
+      var avatar = test;
+      var reqAvatar = {
+          method: 'PUT',
+          url: '/api/user/' + $scope.currentUser,
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          data: {
+              avatar : avatar
+          }
+      };
+      $http(reqAvatar).then(function() {
+
+
+      });
+
+    });
+  }
     $scope.readingHabitsPages = 0;
     $scope.readingHabitsTime = 0;
     $scope.$watch('currentUser', function() {
@@ -27,4 +50,5 @@ app.controller('profileController', function($scope, $http) {
         $scope.readingHabitsMinutes = (m < 10 ? "0" : "") + m;
         $scope.readingHabitsHours = (h > 0 ? h : "0");
     }
+
 });

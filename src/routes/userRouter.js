@@ -31,6 +31,17 @@ module.exports = (User) => {
                     res.json(user);
                 }
             });
+        })  //CHANGE AVATAR
+        .put((req,res) => {
+          User.findById(req.params.userId, (err, user) => {
+              if (err) {
+                  res.status(500).send(err);
+              } else {
+                  user.avatar =  req.body.avatar;
+                  user.save();
+                  res.status(200).send('changed avatar');
+              }
+          });
         })
         .delete((req, res) => {
             User.findById(req.params.userId, (err, user) => {
@@ -127,5 +138,6 @@ module.exports = (User) => {
                 }
             });
         });
+
     return userRouter;
 }
