@@ -8,11 +8,12 @@ let bookModel = new Schema({
         ref: 'Author'
     },
     description: String,
-    date: Date,
+    date: String,
     genre: String,
     pdfUrl: String,
     type: String,
     imageUrl: String,
+    pages: Number,
     ratings: [{
         rating: Number,
         rater: {

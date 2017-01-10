@@ -62,7 +62,7 @@ app.controller('homeController', function($scope, $http) {
                         var avg = count / times;
                         ratings.push({
                             author: author,
-                            average: avg
+                            average: avg.toFixed(1)
                         });
                     }
                 }
