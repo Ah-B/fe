@@ -12,22 +12,22 @@ let passport = require('passport');
 
 //Paypal Api config
 let config = {
-        'mode': 'sandbox',
-        "client_id": "ASMtmV0jHVXdMyPx8htHHqJSO49RSzrvRO2nt5kn-wOjzET3IUq763q9LNwSWbjxIJkli8qrMq2xI7hZ", // your paypal application client id
-        "client_secret": "EHSMuUjfEs6T6rLbVDOuiaNZ043obf1RhksR_b6kl6nh4xOnMRT-ZFJKE8awR28FwnmbnkTizmlCkRhv" // your paypal application secret id
+    'mode': 'sandbox',
+    "client_id": "ASMtmV0jHVXdMyPx8htHHqJSO49RSzrvRO2nt5kn-wOjzET3IUq763q9LNwSWbjxIJkli8qrMq2xI7hZ", // your paypal application client id
+    "client_secret": "EHSMuUjfEs6T6rLbVDOuiaNZ043obf1RhksR_b6kl6nh4xOnMRT-ZFJKE8awR28FwnmbnkTizmlCkRhv" // your paypal application secret id
 }
 paypal.configure(config);
 
-interfaceRouter.post('/paypal/pay',(req,res) => {
+interfaceRouter.post('/paypal/pay', (req, res) => {
 
-  var create_payment_json = {
+    var create_payment_json = {
         "intent": "sale",
         "payer": {
             "payment_method": "paypal"
         },
         "redirect_urls": {
-            "return_url":"http://localhost:3000/paypal/success",
-            "cancel_url":"http://localhost:3000/paypal/cancel"
+            "return_url": "http://localhost:3000/paypal/success",
+            "cancel_url": "http://localhost:3000/paypal/cancel"
         },
         "transactions": [{
             "amount": {
@@ -53,37 +53,37 @@ interfaceRouter.post('/paypal/pay',(req,res) => {
 
         }
     });
-  });
+});
 
 interfaceRouter.get('/paypal/success', function(req, res) {
 
     var execute_payment_json = {
-      "payer_id": req.query.PayerID,
-      "transactions": [{
-          "amount": {
-              "currency": "USD",
-              "total": "20.00"
-          }
-      }]
-  };
-  var paymentId = req.query.paymentId;
+        "payer_id": req.query.PayerID,
+        "transactions": [{
+            "amount": {
+                "currency": "USD",
+                "total": "20.00"
+            }
+        }]
+    };
+    var paymentId = req.query.paymentId;
 
-  paypal.payment.execute(paymentId, execute_payment_json, function(error, payment) {
-      if (error) {
-          console.log(error.response);
-          throw error;
-      } else {
-          console.log("Get Payment Response");
-          console.log(JSON.stringify(payment));
-      }
-  });
-console.log("***********************************************",req.user._id);
+    paypal.payment.execute(paymentId, execute_payment_json, function(error, payment) {
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+        }
+    });
+    console.log("***********************************************", req.user._id);
     User.findById(req.user._id, (err, user) => {
-            user.type = "premium";
-            user.save();
-            res.render('profile', {
-                currentUser: req.user._id
-            });
+        user.type = "premium";
+        user.save();
+        res.render('profile', {
+            currentUser: req.user._id
+        });
     });
 
 
@@ -91,13 +91,13 @@ console.log("***********************************************",req.user._id);
 
 
 interfaceRouter.get('/', (req, res) => {
-  if (req.isAuthenticated()) {
-      res.render('main', {
-          currentUser: req.user._id
-      });
-  } else {
-      res.render('homePage');
-  }
+    if (req.isAuthenticated()) {
+        res.render('main', {
+            currentUser: req.user._id
+        });
+    } else {
+        res.render('homePage');
+    }
 });
 
 
@@ -112,7 +112,7 @@ interfaceRouter.get('/genres', (req, res) => {
 
 interfaceRouter.get('/bookGenres/:genre', (req, res) => {
     if (req.isAuthenticated()) {
-        res.render('booksGenre',{
+        res.render('booksGenre', {
             genre: req.params.genre
         });
     } else {
@@ -122,13 +122,13 @@ interfaceRouter.get('/bookGenres/:genre', (req, res) => {
 
 
 interfaceRouter.get('/stats', (req, res) => {
-  if (req.isAuthenticated()) {
-      res.render('stats', {
-          currentUser: req.user._id
-      });
-  } else {
-      res.render('homePage');
-  }
+    if (req.isAuthenticated()) {
+        res.render('stats', {
+            currentUser: req.user._id
+        });
+    } else {
+        res.render('homePage');
+    }
 });
 
 interfaceRouter.get('/profile', (req, res) => {
@@ -144,8 +144,8 @@ interfaceRouter.get('/libbook/:bookId/:currentPage', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('libBook', {
             currentUser: req.user._id,
-            libbook : req.params.bookId,
-            currentPage : req.params.currentPage
+            libbook: req.params.bookId,
+            currentPage: req.params.currentPage
         });
     } else {
         res.render('homePage');
@@ -167,7 +167,7 @@ interfaceRouter.get('/author/:authorId', (req, res) => {
             currentUser: req.user._id,
             userFName: req.user.fName,
             userLName: req.user.lName,
-            userAvatar : req.user.avatar
+            userAvatar: req.user.avatar
         });
     } else {
         res.render('homePage');
@@ -192,7 +192,7 @@ interfaceRouter.get('/book/:bookId', (req, res) => {
             userFName: req.user.fName,
             userLName: req.user.lName,
             userType: req.user.type,
-            userAvatar : req.user.avatar
+            userAvatar: req.user.avatar
         });
     } else {
         res.render('homePage');
@@ -210,6 +210,10 @@ interfaceRouter.route('/auth/signIn')
     });
 
 
+interfaceRouter.route('/admin/books')
+    .get((req, res) => {
+        res.render('admin/books');
+    });
 interfaceRouter.route('/auth/signUp')
     .get((req, res) => {
         res.render('signup');
@@ -226,8 +230,8 @@ interfaceRouter.route('/auth/signUp')
                 birthDate: req.body.birthDate,
                 username: req.body.userName,
                 password: req.body.password,
-                avatar : "default.png",
-                type : "free"
+                avatar: "default.png",
+                type: "free"
             };
             collection.insert(user, (err, results) => {
                 req.login(results.ops[0], () => {
