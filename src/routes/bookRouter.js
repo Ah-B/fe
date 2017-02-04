@@ -53,7 +53,7 @@ module.exports = (Book) => {
                     res.status(500).send(err);
                 } else {
                     book.remove();
-                    res.status(500).send('Removed');
+                    res.sendStatus(200);
                 }
             });
         })

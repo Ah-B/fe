@@ -214,6 +214,16 @@ interfaceRouter.route('/admin/books')
     .get((req, res) => {
         res.render('admin/books');
     });
+interfaceRouter.route('/admin/book/add')
+    .get((req, res) => {
+        res.render('admin/addBook');
+    });
+interfaceRouter.route('/admin/book/:id')
+    .get((req, res) => {
+        res.render('admin/updateBook');
+    });
+
+
 interfaceRouter.route('/auth/signUp')
     .get((req, res) => {
         res.render('signup');

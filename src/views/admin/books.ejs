@@ -7,18 +7,11 @@
                         <br>
                         <section class="panel panel-default">
                             <header class="panel-heading"> Books</header>
-                            <div class="row wrapper">
-                                <div class="col-sm-9 m-b-xs">
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="input-group"> <input type="text" class="input-sm form-control" placeholder="Search"> <span class="input-group-btn"></span> </div>
-                                </div>
-                            </div>
                             <div class="table-responsive">
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                         <tr>
-                                            <th class="th-sortable" data-toggle="class" >Id <span class="th-sort"> <i class="fa fa-sort-down text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort-up text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort"></i> </span> </th>
+                                            <th class="th-sortable" data-toggle="class">Id <span class="th-sort"> <i class="fa fa-sort-down text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort-up text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort"></i> </span>                                                </th>
                                             <th class="th-sortable" data-toggle="class">Title <span class="th-sort"> <i class="fa fa-sort-down text-active"></i> <i class="fa fa-sort-up text-active"></i> <i class="fa fa-sort"></i> </span> </th>
                                             <th>Author</th>
                                             <th>Written Date</th>
@@ -29,18 +22,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="book in books | orderBy: idorder ">
-                                                <td>{{book._id}}</td>
-                                                <td>{{book.title}}</td>
-                                                <td>{{book.author.fName}} {{book.author.lName}}</td>
-                                                <td>{{book.date}}</td>
-                                                <td>{{book.genre}}</td>
-                                                <td>{{book.pdfUrl}}</td>
-                                                <td><a href="#" data-toggle="class"><i class="fa fa-cog text text"></i></a>
-                                                <td><a href="#" data-toggle="class"><i class="fa fa-times text-danger text"></i></a>
-                                              </tr>
+                                        <tr ng-repeat="book in books">
+                                            <td>{{book._id}}</td>
+                                            <td>{{book.title}}</td>
+                                            <td>{{book.author.fName}} {{book.author.lName}}</td>
+                                            <td>{{book.date}}</td>
+                                            <td>{{book.genre}}</td>
+                                            <td>{{book.pdfUrl}}</td>
+                                            <td><a href="/admin/book/{{book._id}}" data-toggle="class"><i class="fa fa-cog text text-success"></i></a>
+                                            <td><a href="#" ng-click="removeBook(book._id)" data-toggle="class"><i class="fa fa-times text-danger text"></i></a>
+                                        </tr>
                                     </tbody>
                                 </table>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                    </div>
+                                    <div class="col-sm-2" style="margin-bottom : 8px">
+                                        <a href="book/add" class="btn btn-s-md btn-success btn-rounded">Add new book</a>
+                                    </div>
+                                </div>
+
+
                             </div>
                             <!--array footer
             <footer class="panel-footer">
