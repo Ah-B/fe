@@ -210,21 +210,24 @@ interfaceRouter.route('/auth/signIn')
     });
 
 
-
-    interfaceRouter.route('/admin/users')
-        .get((req, res) => {
-            res.render('admin/users');
+interfaceRouter.route('/admin/comments')
+    .get((req, res) => {
+        res.render('admin/comments');
+    });
+interfaceRouter.route('/admin/users')
+    .get((req, res) => {
+        res.render('admin/users');
+    });
+interfaceRouter.route('/admin/user/add')
+    .get((req, res) => {
+        res.render('admin/addUser');
+    });
+interfaceRouter.route('/admin/user/:id')
+    .get((req, res) => {
+        res.render('admin/updateUser', {
+            userId: req.params.id
         });
-    interfaceRouter.route('/admin/user/add')
-        .get((req, res) => {
-            res.render('admin/addUser');
-        });
-    interfaceRouter.route('/admin/user/:id')
-        .get((req, res) => {
-            res.render('admin/updateUser', {
-                userId: req.params.id
-            });
-        })
+    })
 
 interfaceRouter.route('/admin/authors')
     .get((req, res) => {

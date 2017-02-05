@@ -16,26 +16,26 @@ module.exports = (Book) => {
             res.status(201).send(book);
         })
         .get((req, res) => {
-                /*  //let populateQuery =[{path:'author'}];
-                  let populateQuery = [{
-                      path: 'author'
-                  }, {
-                      path: 'comment.user'
-                  }]; //
-                  // you can use   let query=req.query; see restful ws with node and express jonathan mills
-                  */
+            /*  //let populateQuery =[{path:'author'}];
+              let populateQuery = [{
+                  path: 'author'
+              }, {
+                  path: 'comment.user'
+              }]; //
+              // you can use   let query=req.query; see restful ws with node and express jonathan mills
+              */
 
 
-                Book.find({}).populate(populateQuery).exec(
-                    (err, books) => {
-                        if (err) {
-                            res.status(500).send(err);
-                        } else {
-                            res.json(books);
+            Book.find({}).populate(populateQuery).exec(
+                (err, books) => {
+                    if (err) {
+                        res.status(500).send(err);
+                    } else {
+                        res.json(books);
 
-                        }
-                    });
-            });
+                    }
+                });
+        });
 
     bookRouter.route('/:bookId')
         .get((req, res) => {
@@ -92,40 +92,64 @@ module.exports = (Book) => {
                 }
             });
         });
-        bookRouter.route('/rate/:bookId/:userId')
-            .post((req, res) => {
-                Book.findById(req.params.bookId, (err, book) => {
+
+    bookRouter.route('/comment/:commentId')
+        .delete((req, res) => {
+            Book.find({}).populate(populateQuery).exec(
+                (err, books) => {
                     if (err) {
                         res.status(500).send(err);
                     } else {
-                        let unique = true;
-                        for (ratingData of book.ratings) {
-                            if (ratingData.rater == req.params.userId) {
-                                unique = false;
+                        var comments = [];
+                        for (book of books) {
+                            for (comment of book.comments) {
+                                if (comment._id != req.params.commentId) {
+                                    comments.push(comment);
+                                }
+                                book.comments = [];
+                                book.comments = comments
+                                book.save();
                             }
+
                         }
-                        if (unique === true) {
-                            let ratings = book.ratings;
-                            let newRating = {
-                                "rating": req.body.rating,
-                                "rater": req.params.userId
-                            };
-                            ratings.push(newRating);
-                            book.ratings = ratings;
-                            book.save();
-                            res.json({
-                                "type": "successMessage",
-                                "content": "This book was rated successfully"
-                            });
-                        } else {
-                            res.json({
-                                "type": "errorMessage",
-                                "content": "You can rate a book only once"
-                            });
+                        res.sendStatus(200);
+                    }
+                })
+        })
+    bookRouter.route('/rate/:bookId/:userId')
+        .post((req, res) => {
+            Book.findById(req.params.bookId, (err, book) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    let unique = true;
+                    for (ratingData of book.ratings) {
+                        if (ratingData.rater == req.params.userId) {
+                            unique = false;
                         }
                     }
-                });
+                    if (unique === true) {
+                        let ratings = book.ratings;
+                        let newRating = {
+                            "rating": req.body.rating,
+                            "rater": req.params.userId
+                        };
+                        ratings.push(newRating);
+                        book.ratings = ratings;
+                        book.save();
+                        res.json({
+                            "type": "successMessage",
+                            "content": "This book was rated successfully"
+                        });
+                    } else {
+                        res.json({
+                            "type": "errorMessage",
+                            "content": "You can rate a book only once"
+                        });
+                    }
+                }
             });
+        });
 
     return bookRouter;
 }

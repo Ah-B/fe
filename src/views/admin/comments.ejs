@@ -1,0 +1,35 @@
+<% layout('adminBoilerplate') -%>
+    <section id="content">
+        <section class="hbox stretch" ng-controller="adminCommentsController">
+            <section>
+                <section class="vbox">
+                    <section class="scrollable padder-lg" id="bjax-target">
+                        <br>
+                        <section class="panel panel-default">
+                            <header class="panel-heading">Authors</header>
+                            <div class="table-responsive">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sortable" data-toggle="class">Id <span class="th-sort"> <i class="fa fa-sort-down text-active"></i> <i class="fa fa-sort-up text-active"></i> <i class="fa fa-sort"></i> </span>                                                </th>
+                                            <th>Comment</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="comment in comments">
+                                            <td>{{comment._id}}</td>
+                                            <td>{{comment.text}}</td>
+                                            <td><a href="#" ng-click="removeComment(comment._id)" data-toggle="class"><i class="fa fa-times text-danger text"></i></a>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>

@@ -59,7 +59,7 @@ module.exports = (Author) => {
                             bookList.push(addition);
                           }
                           else {*/
-                        author[p] = req.body[p];
+                          author[p] = req.body[p];
                         //}
                     }
                     author.save();
@@ -67,6 +67,28 @@ module.exports = (Author) => {
                 }
             });
         });
+        authorRouter.route('/comment/:commentId')
+            .delete((req, res) => {
+                Author.find({}).populate(populateQuery).exec(
+                    (err, authors) => {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            var comments = [];
+                            for (author of authors) {
+                                for (comment of author.comments) {
+                                    if (comment._id != req.params.commentId) {
+                                        comments.push(comment);
+                                    }
+                                    author.comments = [];
+                                    author.comments = comments
+                                    author.save();
+                                }
+                            }
+                            res.sendStatus(200);
+                        }
+                    })
+            })
     authorRouter.route('/comment/:authorId/:userId')
         .post((req, res) => {
             Author.findById(req.params.authorId, (err, author) => {
