@@ -1,5 +1,17 @@
 app.controller('authorController', function($scope, $http) {
 
+  $http.get('/api/book/').success(function(data) {
+    var same =[];
+    for (book of data) {
+        if(book.author._id == $scope.authorId)
+        {
+          same.push(book)
+        }
+    };
+    $scope.sameBook = same;
+  });
+
+
     $scope.comment = function() {
         var req = {
             method: 'POST',

@@ -57,7 +57,7 @@ module.exports = (Book) => {
                 }
             });
         })
-        .patch((req, res) => {
+        .post((req, res) => {
             Book.findById(req.params.bookId, (err, book) => {
                 if (err) {
                     res.status(500).send(err);

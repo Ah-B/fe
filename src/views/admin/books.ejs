@@ -16,6 +16,7 @@
                                             <th>Author</th>
                                             <th>Written Date</th>
                                             <th>Genre</th>
+                                            <th>Type</th>
                                             <th>Url</th>
                                             <th>Update</th>
                                             <th>Remove</th>
@@ -28,6 +29,7 @@
                                             <td>{{book.author.fName}} {{book.author.lName}}</td>
                                             <td>{{book.date}}</td>
                                             <td>{{book.genre}}</td>
+                                            <td>{{book.type}}</td>
                                             <td>{{book.pdfUrl}}</td>
                                             <td><a href="/admin/book/{{book._id}}" data-toggle="class"><i class="fa fa-cog text text-success"></i></a>
                                             <td><a href="#" ng-click="removeBook(book._id)" data-toggle="class"><i class="fa fa-times text-danger text"></i></a>

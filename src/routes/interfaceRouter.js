@@ -210,6 +210,38 @@ interfaceRouter.route('/auth/signIn')
     });
 
 
+
+    interfaceRouter.route('/admin/users')
+        .get((req, res) => {
+            res.render('admin/users');
+        });
+    interfaceRouter.route('/admin/user/add')
+        .get((req, res) => {
+            res.render('admin/addUser');
+        });
+    interfaceRouter.route('/admin/user/:id')
+        .get((req, res) => {
+            res.render('admin/updateUser', {
+                userId: req.params.id
+            });
+        })
+
+interfaceRouter.route('/admin/authors')
+    .get((req, res) => {
+        res.render('admin/authors');
+    });
+interfaceRouter.route('/admin/author/add')
+    .get((req, res) => {
+        res.render('admin/addAuthor');
+    });
+interfaceRouter.route('/admin/author/:id')
+    .get((req, res) => {
+        res.render('admin/updateAuthor', {
+            authorId: req.params.id
+        });
+    })
+
+
 interfaceRouter.route('/admin/books')
     .get((req, res) => {
         res.render('admin/books');
@@ -220,9 +252,10 @@ interfaceRouter.route('/admin/book/add')
     });
 interfaceRouter.route('/admin/book/:id')
     .get((req, res) => {
-        res.render('admin/updateBook');
+        res.render('admin/updateBook', {
+            bookId: req.params.id
+        });
     });
-
 
 interfaceRouter.route('/auth/signUp')
     .get((req, res) => {

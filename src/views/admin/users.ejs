@@ -1,0 +1,53 @@
+<% layout('adminBoilerplate') -%>
+    <section id="content">
+        <section class="hbox stretch" ng-controller="adminUsersController">
+            <section>
+                <section class="vbox">
+                    <section class="scrollable padder-lg" id="bjax-target">
+                        <br>
+                        <section class="panel panel-default">
+                            <header class="panel-heading">Authors</header>
+                            <div class="table-responsive">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sortable" data-toggle="class">Id <span class="th-sort"> <i class="fa fa-sort-down text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort-up text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort"></i> </span>                                                </th>
+                                            <th class="th-sortable" data-toggle="class">First Name <span class="th-sort"> <i class="fa fa-sort-down text-active"></i> <i class="fa fa-sort-up text-active"></i> <i class="fa fa-sort"></i> </span> </th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Username</th>
+                                            <th>Password</th>
+                                            <th>Account type</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="user in users">
+                                            <td>{{user._id}}</td>
+                                            <td>{{user.fName}}</td>
+                                            <td>{{user.lName}}</td>
+                                            <td>{{user.email}}</td>
+                                            <td>{{user.username}}</td>
+                                            <td>{{user.password}}</td>
+                                            <td>{{user.type}}</td>
+                                            <td><a href="/admin/user/{{user._id}}" data-toggle="class"><i class="fa fa-cog text text-success"></i></a>
+                                            <td><a href="#" ng-click="removeUser(user._id)" data-toggle="class"><i class="fa fa-times text-danger text"></i></a>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                    </div>
+                                    <div class="col-sm-2" style="margin-bottom : 8px">
+                                        <a href="user/add" class="btn btn-s-md btn-success btn-rounded">Add new user</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </section>

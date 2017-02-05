@@ -1,0 +1,62 @@
+<% layout('adminBoilerplate') -%>
+<section id="content">
+	<section class="hbox stretch" ng-controller="adminUsersUpdateController" ng-init="userId='<%-userId%>'">
+		<section>
+			<section class="vbox">
+				<section class="scrollable padder-lg" id="bjax-target">
+					<br>
+					<section class="panel panel-default">
+						<section class="panel panel-default">
+							<header class="panel-heading font-bold"> Update user </header>
+							<div class="panel-body">
+								<form ng-submit="updateUser()" class="form-horizontal" method="get">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">First Name</label>
+										<div class="col-sm-10"> <input ng-model="updatefNameModel" type="text" class="form-control "> </div>
+									</div>
+									<div class="line line-dashed b-b line-lg pull-in"></div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Last Name</label>
+										<div class="col-sm-10"> <input ng-model="updatelNameModel" type="text" class="form-control "> </div>
+									</div>
+									<div class="line line-dashed b-b line-lg pull-in"></div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Username</label>
+										<div class="col-sm-10"> <input ng-model="updateUsernameModel" type="text" class="form-control "> </div>
+									</div>
+									<div class="line line-dashed b-b line-lg pull-in"></div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Password</label>
+										<div class="col-sm-10"> <input ng-model="updatePasswordModel" type="text" class="form-control "> </div>
+									</div>
+                  <div class="line line-dashed b-b line-lg pull-in"></div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10"> <input ng-model="updateEmailModel" type="text" class="form-control "> </div>
+                  </div>
+									<div class="line line-dashed b-b line-lg pull-in"></div>
+                  <div class="form-group">
+										<label class="col-sm-2 control-label">Account type</label>
+										<div class="col-sm-10">
+											<select class="form-control m-b" ng-model="updateTypeModel">
+												<option value="free">Free</option>
+												<option value="premium">Premium</option>
+											</select>
+										</div>
+
+									<div class="row">
+										<div class="col-sm-10">
+										</div>
+										<div class="col-sm-2" style="margin-bottom : 8px">
+											<button type="submit" class="btn btn-s-md btn-success btn-rounded">Update user</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</section>
+					</section>
+				</section>
+			</section>
+		</section>
+	</section>
+</section>

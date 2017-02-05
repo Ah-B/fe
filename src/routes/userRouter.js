@@ -49,11 +49,11 @@ module.exports = (User) => {
                     res.status(500).send(err);
                 } else {
                     user.remove();
-                    res.status(500).send('Removed');
+                    res.sendStatus(200);
                 }
             });
         })
-        .patch((req, res) => {
+        .post((req, res) => {
             User.findById(req.params.userId, (err, user) => {
                 if (err) {
                     res.status(500).send(err);
@@ -62,7 +62,8 @@ module.exports = (User) => {
                         user[p] = req.body[p];
                     }
                     user.save();
-                    res.json(user);
+                    res.sendStatus(200);
+
                 }
             });
         });

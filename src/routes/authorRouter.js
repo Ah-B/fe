@@ -40,11 +40,11 @@ module.exports = (Author) => {
                     res.status(500).send(err);
                 } else {
                     author.remove();
-                    res.status(500).send('Removed');
+                    res.sendStatus(200);
                 }
             });
         })
-        .patch((req, res) => {
+        .post((req, res) => {
             Author.findById(req.params.authorId, (err, author) => {
                 if (err) {
                     res.status(500).send(err);
