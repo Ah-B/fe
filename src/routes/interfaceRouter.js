@@ -91,7 +91,10 @@ interfaceRouter.get('/paypal/success', function(req, res) {
 
 
 interfaceRouter.get('/', (req, res) => {
-    if (req.isAuthenticated()) {
+  if (req.isAuthenticated()&& req.user.type=="admin") {
+    res.render('admin/users');
+  }
+    else if (req.isAuthenticated()) {
         res.render('main', {
             currentUser: req.user._id
         });
@@ -212,8 +215,13 @@ interfaceRouter.route('/auth/signIn')
 
 interfaceRouter.route('/admin/comments')
     .get((req, res) => {
-        res.render('admin/comments');
+      if (req.isAuthenticated() && req.user.type=="admin") {
+          res.render('admin/comments');
+      } else {
+          res.render('homePage');
+      }
     });
+
 interfaceRouter.route('/admin/users')
     .get((req, res) => {
         res.render('admin/users');

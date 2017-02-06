@@ -1,29 +1,32 @@
 app.controller('adminCommentsController', function($scope, $http, $timeout) {
-    var ngComments = [];
 
-    $http.get('/api/author/').success(function(data) {
-        for (author of data) {
-            for (comment of author.comments) {
-                ngComments.push(comment);
+
+    $scope.loadComments = function() {
+        var ngComments = [];
+
+        $http.get('/api/author/').success(function(data) {
+            for (author of data) {
+                for (comment of author.comments) {
+                    ngComments.push(comment);
+                }
             }
-        }
-    });
+        });
 
 
 
-    $http.get('/api/book/').success(function(data) {
-        for (book of data) {
-            for (comment of book.comments) {
-                ngComments.push(comment)
+        $http.get('/api/book/').success(function(data) {
+            for (book of data) {
+                for (comment of book.comments) {
+                    ngComments.push(comment)
+                }
             }
-        }
-    });
+        });
 
-    $scope.comments = ngComments;
+        $scope.comments = ngComments;
+    };
 
-    $scope.loadComments = function(){
+    $scope.loadComments();
 
-    }
     $scope.removeComment = function(id) {
         $http.get('/api/author/').success(function(data) {
             var found = "book";
@@ -38,13 +41,13 @@ app.controller('adminCommentsController', function($scope, $http, $timeout) {
             console.log(found);
             if (found == "book") {
                 //removeBook
-                $http.delete('/api/book/comment/'+id).success(function(data) {
-
+                $http.delete('/api/book/comment/' + id).success(function(data) {
+                    $scope.loadComments();
                 });
             } else if (found == "author") {
                 //removeAuthor
-                $http.delete('/api/author/comment/'+id).success(function(data) {
-
+                $http.delete('/api/author/comment/' + id).success(function(data) {
+                    $scope.loadComments();
                 });
             }
 

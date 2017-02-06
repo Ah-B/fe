@@ -14,7 +14,9 @@ interfaceRouter.route('/signIn')
     .post(passport.authenticate('local', {
         failureRedirect: '/auth/error'
     }), function(req, res) {
+
         res.redirect('/profile');
+
     });
 
 
