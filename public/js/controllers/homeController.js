@@ -13,7 +13,7 @@ app.controller('homeController', function($scope, $http) {
 
             $scope.getTopAuthors();
             $scope.getTopBooks();
-            $scope.getPopularBooks();
+            //$scope.getPopularBooks();
 
 
         });
@@ -27,6 +27,8 @@ app.controller('homeController', function($scope, $http) {
 
             for (book of data) {
                 {
+                  if ((typeof book.ratings !== 'undefined' && book.ratings.length > 0)) {
+
                     for (rating of book.ratings) {
                         count = count + rating.rating;
                         times++;
@@ -36,6 +38,7 @@ app.controller('homeController', function($scope, $http) {
                         book: book,
                         average: avg.toFixed(1)
                     });
+                  }
                 }
             }
             ratings.sort(function(a, b) {
@@ -60,10 +63,15 @@ app.controller('homeController', function($scope, $http) {
                             times++;
                         }
                         var avg = count / times;
+                        // if(isNaN(avg)){
+                          // avg = 0;
+                        // }
+                        // else{
                         ratings.push({
                             author: author,
                             average: avg.toFixed(1)
                         });
+                        // }
                     }
                 }
             }
@@ -83,26 +91,31 @@ app.controller('homeController', function($scope, $http) {
         }
         return unique;
     }
-    $scope.getPopularBooks = function() {
-        $http.get('/api/user').success(function(data) {
-            var myArray = [];
-
-            for (user of data) {
-                for (book of user.library) {
-
-                    var test = unique(myArray, book.book._id)
-                    if (test == true) {
-                        myArray.push({
-                            book: book.book
-                        });
-                    }
-                }
-            };
-
-            $scope.popularBooks = myArray;
-
-        });
-    }
+    // $scope.getPopularBooks = function() {
+    //     $http.get('/api/user').success(function(data) {
+    //         var myArray = [];
+    //
+    //         for (user of data) {
+    //
+    //           if (user.library.lenght>1){
+    //             for (book of user.library) {
+    //                 var test = unique(myArray, book.book._id)
+    //                 if (test == true) {
+    //                     myArray.push({
+    //                         book: book.book
+    //                     });
+    //                     console.log("*******",myArray);
+    //                 }
+    //             }
+    //           }
+    //
+    //
+    //         };
+    //
+    //         $scope.popularBooks = myArray;
+    //
+    //     });
+    // }
 
 
 

@@ -19,6 +19,7 @@
                                             <th>Password</th>
                                             <th>Account type</th>
                                             <th>Update</th>
+                                            <th>Stats</th>
                                             <th>Delete</th>
                                         </tr>
                                     </thead>
@@ -31,6 +32,7 @@
                                             <td>{{user.username}}</td>
                                             <td>{{user.password}}</td>
                                             <td>{{user.type}}</td>
+                                            <td><a href="/admin/user/stats/{{user._id}}" data-toggle="class"><i class="icon-pie-chart text-success"></i></a>
                                             <td><a href="/admin/user/{{user._id}}" data-toggle="class"><i class="fa fa-cog text text-success"></i></a>
                                             <td><a href="#" ng-click="removeUser(user._id)" data-toggle="class"><i class="fa fa-times text-danger text"></i></a>
                                         </tr>
@@ -41,7 +43,7 @@
                                     <div class="col-sm-10">
                                     </div>
                                     <div class="col-sm-2" style="margin-bottom : 8px">
-                                        <a href="user/add" class="btn btn-s-md btn-success btn-rounded">Add new user</a>
+                                        <a href="/admin/user/add" class="btn btn-s-md btn-success btn-rounded">Add new user</a>
                                     </div>
                                 </div>
                             </div>

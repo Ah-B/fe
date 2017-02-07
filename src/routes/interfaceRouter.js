@@ -91,10 +91,9 @@ interfaceRouter.get('/paypal/success', function(req, res) {
 
 
 interfaceRouter.get('/', (req, res) => {
-  if (req.isAuthenticated()&& req.user.type=="admin") {
-    res.render('admin/users');
-  }
-    else if (req.isAuthenticated()) {
+    if (req.isAuthenticated() && req.user.type == "admin") {
+        res.render('admin/users');
+    } else if (req.isAuthenticated()) {
         res.render('main', {
             currentUser: req.user._id
         });
@@ -213,59 +212,108 @@ interfaceRouter.route('/auth/signIn')
     });
 
 
+
 interfaceRouter.route('/admin/comments')
     .get((req, res) => {
-      if (req.isAuthenticated() && req.user.type=="admin") {
-          res.render('admin/comments');
-      } else {
-          res.render('homePage');
-      }
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/comments');
+        } else {
+            res.redirect('/');
+        }
     });
 
 interfaceRouter.route('/admin/users')
     .get((req, res) => {
-        res.render('admin/users');
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/users');
+        } else {
+            res.redirect('/');
+        }
     });
 interfaceRouter.route('/admin/user/add')
     .get((req, res) => {
-        res.render('admin/addUser');
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/addUser');
+        } else {
+            res.redirect('/');
+        }
     });
+
+interfaceRouter.get('/admin/user/stats/:id', (req, res) => {
+    if (req.isAuthenticated() && req.user.type == "admin") {
+        res.render('admin/stats', {
+            currentUser: req.params.id
+        });
+    } else {
+        res.render('/');
+    }
+});
 interfaceRouter.route('/admin/user/:id')
     .get((req, res) => {
-        res.render('admin/updateUser', {
-            userId: req.params.id
-        });
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/updateUser', {
+                userId: req.params.id
+            });
+        } else {
+            res.redirect('/');
+        }
     })
+
+
 
 interfaceRouter.route('/admin/authors')
     .get((req, res) => {
-        res.render('admin/authors');
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/authors');
+        } else {
+            res.redirect('/');
+        }
     });
 interfaceRouter.route('/admin/author/add')
     .get((req, res) => {
-        res.render('admin/addAuthor');
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/addAuthor');
+        } else {
+            res.redirect('/');
+        }
     });
 interfaceRouter.route('/admin/author/:id')
     .get((req, res) => {
-        res.render('admin/updateAuthor', {
-            authorId: req.params.id
-        });
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/updateAuthor', {
+                authorId: req.params.id
+            });
+        } else {
+            res.redirect('/');
+        }
     })
 
 
 interfaceRouter.route('/admin/books')
     .get((req, res) => {
-        res.render('admin/books');
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/books');
+        } else {
+            res.redirect('/');
+        }
     });
 interfaceRouter.route('/admin/book/add')
     .get((req, res) => {
-        res.render('admin/addBook');
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/addBook');
+        } else {
+            res.redirect('/');
+        }
     });
 interfaceRouter.route('/admin/book/:id')
     .get((req, res) => {
-        res.render('admin/updateBook', {
-            bookId: req.params.id
-        });
+        if (req.isAuthenticated() && req.user.type == "admin") {
+            res.render('admin/updateBook', {
+                bookId: req.params.id
+            });
+        } else {
+            res.redirect('/');
+        }
     });
 
 interfaceRouter.route('/auth/signUp')
