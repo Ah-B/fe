@@ -1,5 +1,4 @@
-app.controller('adminBooksController', function($scope, $http, $timeout) {
-
+  app.controller('adminBooksController', function($scope, $http, $timeout) {
   $http.get('/api/author/').success(function(data) {
       $scope.authors = data;
   });

@@ -6,13 +6,18 @@
                     <section class="scrollable padder-lg" id="bjax-target">
                         <br>
                         <section class="panel panel-default">
-                            <header class="panel-heading"> Books</header>
+
+
+                            <header class="panel-heading">Books  </header>
+                            <input ng-model="search" type="text" class="form-control input-sm no-border rounded" placeholder="Find by title, author, date ">
+
+
                             <div class="table-responsive">
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                         <tr>
-                                            <th class="th-sortable" data-toggle="class">Id <span class="th-sort"> <i class="fa fa-sort-down text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort-up text-active" ng-click="idorder = '-idorder'"></i> <i class="fa fa-sort"></i> </span>                                                </th>
-                                            <th class="th-sortable" data-toggle="class">Title <span class="th-sort"> <i class="fa fa-sort-down text-active"></i> <i class="fa fa-sort-up text-active"></i> <i class="fa fa-sort"></i> </span> </th>
+                                            <th class="th-sortable" data-toggle="class">Id</th>
+                                            <th class="th-sortable" data-toggle="class">Title </th>
                                             <th>Author</th>
                                             <th>Written Date</th>
                                             <th>Genre</th>
@@ -23,7 +28,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="book in books">
+                                        <tr ng-repeat="book in books | filter : search  ">
                                             <td>{{book._id}}</td>
                                             <td>{{book.title}}</td>
                                             <td>{{book.author.fName}} {{book.author.lName}}</td>
@@ -38,6 +43,7 @@
                                 </table>
                                 <br>
                                 <div class="row">
+
                                     <div class="col-sm-10">
                                     </div>
                                     <div class="col-sm-2" style="margin-bottom : 8px">
